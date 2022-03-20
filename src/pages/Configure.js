@@ -7,8 +7,9 @@ export default function Configure() {
 
 	msTeams.settings.registerOnSaveHandler(saveEvent => {
 		msTeams.settings.setSettings({
-			contentUrl: window.location.origin,
-			entityId: window.location.origin
+			contentUrl: 'https://lively-sand-02bc7bd10.1.azurestaticapps.net',//window.location.origin,
+			entityId: "Test",
+			websiteUrl: 'https://lively-sand-02bc7bd10.1.azurestaticapps.net/configure'
 		});
 
 	saveEvent.notifySuccess();
