@@ -7,8 +7,10 @@ import * as msTeams from '@microsoft/teams-js';
 msTeams.initialize();
 
 function App() {
-    
-  const [currentTheme, setCurrentTheme] = useState(msTeams.getContext(context => context.theme) || 'default');
+  
+  const initialTheme = msTeams.getContext(context => console.log(context));
+  // console.log(initialTheme);
+  const [currentTheme, setCurrentTheme] = useState('default');
 
   const themes = {
     default: teamsTheme, dark: teamsDarkTheme, contrast: teamsHighContrastTheme
