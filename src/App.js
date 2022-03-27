@@ -8,7 +8,7 @@ msTeams.initialize();
 
 function App() {
     
-  const [currentTheme, setCurrentTheme] = useState('default');
+  const [currentTheme, setCurrentTheme] = useState(msTeams.getContext(context => context.theme) || 'default');
 
   const themes = {
     default: teamsTheme, dark: teamsDarkTheme, contrast: teamsHighContrastTheme
