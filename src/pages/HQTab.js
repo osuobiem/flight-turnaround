@@ -1,6 +1,6 @@
 import React from "react";
 import HQTable from "../helpers/HQTable/HQTable";
-import Filters from "../helpers/HQTable/Filters";
+import Filters from "../helpers/Filters/Filters";
 
 const HQTab = () => {
   return (

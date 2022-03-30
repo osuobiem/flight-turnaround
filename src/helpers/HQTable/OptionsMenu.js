@@ -7,6 +7,7 @@ const OptionsMenu = () => {
             icon: <MoreIcon {...{ outline: true, }}/>,
             "aria-label": "More options",
             indicator: false,
+            key: 1,
             menu: {
                 items: [
                     { key: 1, content: "View Details" },

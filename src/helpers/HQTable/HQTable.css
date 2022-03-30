@@ -1,23 +1,23 @@
-.table {
+.hqt-table {
     background: transparent !important;
 }
 
-.table [role="row"] {
+.hqt-table [role="row"] {
     background: inherit !important;
 }
 
-.header {
+.hqt-header {
     font-weight: 800;
 }
 
-.positive {
+.hqt-positive {
     color: rgb(13, 204, 93);
 }
 
-.negative {
+.hqt-negative {
     color: rgb(233, 23, 76);
 }
 
-.left-padding {
+.hqt-left-padding {
     padding-left: 50px !important;
 }
