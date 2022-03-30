@@ -1,0 +1,15 @@
+.tab-container {
+    padding-left: 50px;
+}
+
+.header {
+    font-weight: 800;
+}
+
+.positive {
+    color: rgb(13, 204, 93);
+}
+
+.negative {
+    color: rgb(233, 23, 76);
+}

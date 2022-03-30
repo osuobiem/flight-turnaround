@@ -13,8 +13,10 @@ function App() {
     default: teamsTheme, dark: teamsDarkTheme, contrast: teamsHighContrastTheme
   };
 
+  // Set current theme
   msTeams.getContext(context => setCurrentTheme(context.theme));
 
+  // Handle theme change
   msTeams.registerOnThemeChangeHandler(theme => {
     setCurrentTheme(theme);
   });
