@@ -54,7 +54,7 @@ const HQTable = () => {
 
   return (
     <div className="tab-container">
-      <Table compact header={header} rows={rows} />
+      <Table compact header={header} rows={rows} className="table" />
     </div>
   );
 };

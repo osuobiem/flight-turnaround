@@ -1,9 +1,13 @@
-import React from 'react';
-import HQTable from '../helpers/HQTable/HQTable';
+import React from "react";
+import HQTable from "../helpers/HQTable/HQTable";
+import Filters from "../helpers/HQTable/Filters";
 
 const HQTab = () => {
   return (
-    <HQTable/>
+    <div>
+      <Filters></Filters>
+      <HQTable />
+    </div>
   );
 };
 

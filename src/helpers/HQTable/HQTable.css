@@ -1,3 +1,11 @@
+.table {
+    background: transparent !important;
+}
+
+.table [role="row"] {
+    background: inherit !important;
+}
+
 .header {
     font-weight: 800;
 }
