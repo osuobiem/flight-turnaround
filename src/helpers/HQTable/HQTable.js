@@ -9,7 +9,7 @@ const HQTable = () => {
   const headerClass = 'header';
   const header = {
     items: [
-      { key: "flight-number", content: "Flight Number", className: headerClass },
+      { key: "flight-number", content: "Flight Number", className: `${headerClass} left-padding` },
       { key: "origin", content: "Origin", className: headerClass },
       { key: "sta", content: "STA", className: headerClass },
       { key: "std", content: "STD", className: headerClass },
@@ -25,7 +25,7 @@ const HQTable = () => {
     {
       key: 1,
       items: [
-        { key: "1-1", content: "EA243", },
+        { key: "1-1", content: "EA243", className: "left-padding" },
         { key: "1-2", content: "Abuja" },
         { key: "1-3", content: "10:00" },
         { key: "1-4", content: "12:00" },
@@ -39,7 +39,7 @@ const HQTable = () => {
     {
       key: 2,
       items: [
-        { key: "2-1", content: "EA243" },
+        { key: "2-1", content: "EA243", className: "left-padding" },
         { key: "2-2", content: "Abuja" },
         { key: "2-3", content: "10:00" },
         { key: "2-4", content: "12:00" },
