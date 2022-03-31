@@ -8,16 +8,14 @@
 .fil-select-l>.ui-dropdown {
     background: #fff;
     padding-left: 10px;
+    border-radius: 4px;
 }
 
-.fil-select-d>.ui-dropdown {
-    background: #141414;
-    padding-left: 10px;
-}
-
+.fil-select-d>.ui-dropdown,
 .fil-select-c>.ui-dropdown {
-    background: #000;
+    background: #292929;
     padding-left: 10px;
+    border-radius: 4px;
 }
 
 .fil-between {
@@ -28,4 +26,28 @@
 .fil-select-d:first-child,
 .fil-select-c:first-child {
     margin-right: 12px;
+}
+
+.fil-date-picker-l [data-aa-class="Input__input"] {
+    background: #fff;
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.fil-date-picker-d [data-aa-class="Input__input"],
+.fil-date-picker-c [data-aa-class="Input__input"] {
+    background: #292929;
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.fil-date-picker-l .ui-button,
+.fil-date-picker-d .ui-button,
+.fil-date-picker-c .ui-button {
+    border: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    box-shadow: unset;
 }

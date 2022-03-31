@@ -1,4 +1,4 @@
-import { Flex, FlexItem, FormDropdown } from "@fluentui/react-northstar";
+import { Flex, FlexItem, FormDropdown, Datepicker } from "@fluentui/react-northstar";
 import { useContext } from "react";
 import { AppContext } from "../../AppContext";
 
@@ -44,6 +44,14 @@ const Filters = () => {
                         items={['All']}
                         defaultValue="All"
                         inline />
+                </FlexItem>
+
+                <FlexItem>
+                    <Datepicker
+                        today={new Date()}
+                        defaultSelectedDate={new Date()}
+                        allowManualInput={false}
+                        className={`fil-date-picker${themeSuffix()}`}/>
                 </FlexItem>
             </Flex>
         </div>
