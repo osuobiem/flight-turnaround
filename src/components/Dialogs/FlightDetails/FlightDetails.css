@@ -1,0 +1,16 @@
+.fld-header-img {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.fld-menu .ui-menu__itemwrapper .ui-menu__item {
+    padding-bottom: 7px;
+}
+
+.fld-menu .ui-menu__itemwrapper .ui-menu__item:hover {
+    border-bottom: solid 2px;
+}
+
+.fld-menu .ui-menu__itemwrapper .ui-menu__item[aria-selected="true"] {
+    border-bottom: solid 2px;
+}

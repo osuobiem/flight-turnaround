@@ -4,6 +4,7 @@
     "private": true,
     "homepage": ".",
     "dependencies": {
+        "@fluentui/docs-components": "^0.61.0",
         "@fluentui/react-northstar": "^0.61.0",
         "@microsoft/teams-js": "^1.11.0",
         "@testing-library/jest-dom": "^5.16.2",

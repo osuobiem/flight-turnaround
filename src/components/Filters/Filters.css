@@ -13,7 +13,7 @@
 
 .fil-select-d>.ui-dropdown,
 .fil-select-c>.ui-dropdown {
-    background: #292929;
+    background: #2d2c2c;
     padding-left: 10px;
     border-radius: 4px;
 }
@@ -35,9 +35,14 @@
     border-bottom-right-radius: 0;
 }
 
-.fil-date-picker-d [data-aa-class="Input__input"],
+.fil-date-picker-d [data-aa-class="Input__input"] {
+    background: #2d2c2c;
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .fil-date-picker-c [data-aa-class="Input__input"] {
-    background: #292929;
     margin-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;

@@ -1,8 +1,10 @@
 import { Table } from "@fluentui/react-northstar";
 
+import FlightDetails from "../../Dialogs/FlightDetails/FlightDetails";
+
 import "./HQTable.css";
 
-import OptionsMenu from "./OptionsMenu";
+import HQTableMenu from "../../Menus/HQTableMenu/HQTableMenu";
 
 const HQTable = () => {
 
@@ -33,7 +35,7 @@ const HQTable = () => {
         { key: "1-6", content: "Lagos" },
         { key: "1-7", content: "In - Time", className: "hqt-positive" },
         { key: "1-8", content: "01:35" },
-        { key: "1-9", content: <OptionsMenu/> },
+        { key: "1-9", content: <HQTableMenu/> },
       ],
     },
     {
@@ -47,7 +49,7 @@ const HQTable = () => {
         { key: "2-6", content: "Lagos" },
         { key: "2-7", content: "Delayed", className: "hqt-negative" },
         { key: "2-8", content: "01:35" },
-        { key: "2-9", content: <OptionsMenu/> },
+        { key: "2-9", content: <HQTableMenu/> },
       ],
     },
   ];
@@ -55,6 +57,7 @@ const HQTable = () => {
   return (
     <div className="tab-container">
       <Table compact header={header} rows={rows} className="hqt-table" />
+      <FlightDetails />
     </div>
   );
 };
