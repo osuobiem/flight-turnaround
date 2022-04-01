@@ -47,7 +47,7 @@
     margin-top: 20px !important;
 }
 
-.vwa-table [data-aa-class="TableRow"] {
+.vwa-table .ui-table__row {
     border: unset !important;
     height: 2rem !important;
 }
