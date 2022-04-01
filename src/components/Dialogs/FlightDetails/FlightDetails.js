@@ -2,11 +2,15 @@ import { Dialog, Avatar, Card, Flex, Text, Menu, tabListBehavior } from '@fluent
 import { CloseIcon } from '@fluentui/react-icons-northstar';
 
 import CurrentStatus from './CurrentStatus';
+import ViewActivity from './ViewActivity';
 
 import './FlightDetails.css';
+import { useState } from 'react';
 
 const FlightDetails = ({open, setOpen}) => {
     
+    const [tab, setTab] = useState('crs');
+
     const topCard = (
         <Card aria-roledescription="card avatar" compact ghost>
             <Card.Header fitted>
@@ -43,14 +47,17 @@ const FlightDetails = ({open, setOpen}) => {
                             <Menu
                                 defaultActiveIndex={0}
                                 items={[
-                                    { key: 'current-status', content: 'Current Status' },
-                                    { key: 'view-activity', content: 'View Activity' }
+                                    { key: 'current-status', content: 'Current Status', onClick: () => setTab('crs') },
+                                    { key: 'view-activity', content: 'View Activity', onClick: () => setTab('vwa') }
                                 ]}
                                 underlined primary accessibility={tabListBehavior}
                                 className="fld-menu"
                             />
 
-                            <CurrentStatus />
+                            <div className="fld-content">
+                                <CurrentStatus tab={tab}/>
+                                <ViewActivity tab={tab}/>
+                            </div>
 
                             <Component {...rest} />
                         </div>

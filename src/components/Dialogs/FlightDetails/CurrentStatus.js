@@ -2,7 +2,7 @@ import { Grid, Flex, Text } from '@fluentui/react-northstar';
 
 import './FlightDetails.css';
 
-const CurrentStatus = () => {
+const CurrentStatus = ({tab}) => {
     
     const content = [
         <Flex column className="crs-item">
@@ -44,7 +44,7 @@ const CurrentStatus = () => {
     ];
 
     return (
-        <Grid content={content} columns={3} />
+        <Grid content={content} columns={3} className={tab !== 'crs' ? 'd-none' : null} />
     )
 };
 

@@ -1,3 +1,7 @@
+.d-none {
+    display: none !important;
+}
+
 .fld-header-img {
     height: 2.5rem;
     width: 2.5rem;
@@ -5,6 +9,13 @@
 
 .fld-menu {
     margin-top: 10px !important;
+    border-bottom: solid 2px transparent !important;
+}
+
+.fld-menu .ui-menu__itemwrapper {
+    padding-bottom: 7px;
+    padding-left: 0;
+    margin-right: 35px;
 }
 
 .fld-menu .ui-menu__itemwrapper .ui-menu__item {
@@ -19,11 +30,28 @@
     border-bottom: solid 2px;
 }
 
+.fld-content {
+    margin-bottom: 40px;
+}
+
 .crs-label {
     margin-bottom: 5px;
 }
 
 .crs-item {
-    margin-top: 30px;
-    margin-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.vwa-table {
+    margin-top: 20px;
+}
+
+.vwa-table [data-aa-class="TableRow"] {
+    border: unset;
+    height: 2rem;
+}
+
+.vwa-table .ui-table__header {
+    font-weight: 800;
 }
