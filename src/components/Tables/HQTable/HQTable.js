@@ -103,7 +103,7 @@ const HQTable = () => {
     ],
   });
   
-  const [rows, setRows] = useState([
+  const [rows] = useState([
     {
       key: 1,
       items: [
