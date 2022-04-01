@@ -1,11 +1,11 @@
 import React from "react";
 import HQTable from "../components/Tables/HQTable/HQTable";
-import Filters from "../components/Filters/Filters";
+import HQTabFilters from "../components/HQTabFilters/HQTabFilters";
 
 const HQTab = () => {
   return (
     <div>
-      <Filters></Filters>
+      <HQTabFilters></HQTabFilters>
       <HQTable />
     </div>
   );

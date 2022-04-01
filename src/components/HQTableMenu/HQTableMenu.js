@@ -1,6 +1,6 @@
 import { Menu } from '@fluentui/react-northstar';
 import { MoreIcon } from '@fluentui/react-icons-northstar'
-import FlightDetails from '../../Dialogs/FlightDetails/FlightDetails';
+import FlightDetails from '../Dialogs/FlightDetails/FlightDetails';
 import { useState } from 'react';
 
 const HQTableMenu = () => {

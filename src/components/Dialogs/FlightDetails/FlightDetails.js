@@ -1,6 +1,8 @@
 import { Dialog, Avatar, Card, Flex, Text, Menu, tabListBehavior } from '@fluentui/react-northstar';
 import { CloseIcon } from '@fluentui/react-icons-northstar';
 
+import CurrentStatus from './CurrentStatus';
+
 import './FlightDetails.css';
 
 const FlightDetails = ({open, setOpen}) => {
@@ -47,6 +49,8 @@ const FlightDetails = ({open, setOpen}) => {
                                 underlined primary accessibility={tabListBehavior}
                                 className="fld-menu"
                             />
+
+                            <CurrentStatus />
 
                             <Component {...rest} />
                         </div>

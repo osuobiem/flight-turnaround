@@ -3,6 +3,10 @@
     width: 2.5rem;
 }
 
+.fld-menu {
+    margin-top: 10px !important;
+}
+
 .fld-menu .ui-menu__itemwrapper .ui-menu__item {
     padding-bottom: 7px;
 }
@@ -13,4 +17,13 @@
 
 .fld-menu .ui-menu__itemwrapper .ui-menu__item[aria-selected="true"] {
     border-bottom: solid 2px;
+}
+
+.crs-label {
+    margin-bottom: 5px;
+}
+
+.crs-item {
+    margin-top: 30px;
+    margin-bottom: 5px;
 }

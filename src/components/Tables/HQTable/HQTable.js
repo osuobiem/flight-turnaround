@@ -4,7 +4,7 @@ import FlightDetails from "../../Dialogs/FlightDetails/FlightDetails";
 
 import "./HQTable.css";
 
-import HQTableMenu from "../../Menus/HQTableMenu/HQTableMenu";
+import HQTableMenu from "../../HQTableMenu/HQTableMenu";
 
 const HQTable = () => {
 

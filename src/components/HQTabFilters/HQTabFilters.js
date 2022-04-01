@@ -2,9 +2,9 @@ import { Flex, FlexItem, FormDropdown, Datepicker } from "@fluentui/react-norths
 import { useContext } from "react";
 import { AppContext } from "../../AppContext";
 
-import './Filters.css';
+import './HQTabFilters.css';
 
-const Filters = () => {
+const HQTabFilters = () => {
     const { currentTheme } = useContext(AppContext);
 
     const themeSuffix = () => {
@@ -58,4 +58,4 @@ const Filters = () => {
     )
 };
 
-export default Filters;
+export default HQTabFilters;
