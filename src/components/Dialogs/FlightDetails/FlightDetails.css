@@ -44,12 +44,12 @@
 }
 
 .vwa-table {
-    margin-top: 20px;
+    margin-top: 20px !important;
 }
 
 .vwa-table [data-aa-class="TableRow"] {
-    border: unset;
-    height: 2rem;
+    border: unset !important;
+    height: 2rem !important;
 }
 
 .vwa-table .ui-table__header {

@@ -29,14 +29,14 @@
 }
 
 .fil-date-picker-l [data-aa-class="Input__input"] {
-    background: #fff;
+    background: #fff !important;
     margin-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 .fil-date-picker-d [data-aa-class="Input__input"] {
-    background: #2d2c2c;
+    background: #2d2c2c !important;
     margin-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
