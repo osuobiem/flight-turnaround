@@ -1,4 +1,5 @@
 export const links = {
     configure: '/configure',
-    tab: '/'
+    hqDash: '/',
+    adminDash: '/admin'
 };

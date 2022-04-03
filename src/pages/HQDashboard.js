@@ -2,7 +2,7 @@ import React from "react";
 import HQTable from "../components/Tables/HQTable/HQTable";
 import HQTabFilters from "../components/HQTabFilters/HQTabFilters";
 
-const HQTab = () => {
+const HQDashboard = () => {
   return (
     <div>
       <HQTabFilters></HQTabFilters>
@@ -11,4 +11,4 @@ const HQTab = () => {
   );
 };
 
-export default HQTab;
+export default HQDashboard;

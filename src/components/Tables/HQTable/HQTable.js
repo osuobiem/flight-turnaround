@@ -1,5 +1,5 @@
-import { Table, Flex, Text, FlexItem } from "@fluentui/react-northstar";
-import { ArrowDownIcon, ArrowUpIcon } from '@fluentui/react-icons-northstar'
+import { Table } from "@fluentui/react-northstar";
+import TableSort from "../../../helpers/TableSort";
 
 import "./HQTable.css";
 
@@ -18,9 +18,9 @@ const HQTable = () => {
         className: `${headerClass} hqt-left-padding`,
         icon: 'arrowUp',
         'aria-sort': undefined,
-        onClick: () => doSort(0),
-        onMouseOver: () => toggleIcon(0),
-        onMouseLeave: () => toggleIcon(0, false)
+        onClick: () => tableSort.doSort(0),
+        onMouseOver: () => tableSort.toggleIcon(0),
+        onMouseLeave: () => tableSort.toggleIcon(0, false)
       },
       {
         key: "origin",
@@ -29,9 +29,9 @@ const HQTable = () => {
         className: headerClass,
         icon: 'arrowUp',
         'aria-sort': undefined,
-        onClick: () => doSort(1),
-        onMouseOver: () => toggleIcon(1),
-        onMouseLeave: () => toggleIcon(1, false)
+        onClick: () => tableSort.doSort(1),
+        onMouseOver: () => tableSort.toggleIcon(1),
+        onMouseLeave: () => tableSort.toggleIcon(1, false)
       },
       {
         key: "sta",
@@ -40,9 +40,9 @@ const HQTable = () => {
         className: headerClass,
         icon: 'arrowUp',
         'aria-sort': undefined,
-        onClick: () => doSort(2),
-        onMouseOver: () => toggleIcon(2),
-        onMouseLeave: () => toggleIcon(2, false)
+        onClick: () => tableSort.doSort(2),
+        onMouseOver: () => tableSort.toggleIcon(2),
+        onMouseLeave: () => tableSort.toggleIcon(2, false)
       },
       {
         key: "std",
@@ -51,9 +51,9 @@ const HQTable = () => {
         className: headerClass,
         icon: 'arrowUp',
         'aria-sort': undefined,
-        onClick: () => doSort(3),
-        onMouseOver: () => toggleIcon(3),
-        onMouseLeave: () => toggleIcon(3, false)
+        onClick: () => tableSort.doSort(3),
+        onMouseOver: () => tableSort.toggleIcon(3),
+        onMouseLeave: () => tableSort.toggleIcon(3, false)
       },
       {
         key: "status",
@@ -62,9 +62,9 @@ const HQTable = () => {
         className: headerClass,
         icon: 'arrowUp',
         'aria-sort': undefined,
-        onClick: () => doSort(4),
-        onMouseOver: () => toggleIcon(4),
-        onMouseLeave: () => toggleIcon(4, false)
+        onClick: () => tableSort.doSort(4),
+        onMouseOver: () => tableSort.toggleIcon(4),
+        onMouseLeave: () => tableSort.toggleIcon(4, false)
       },
       {
         key: "destination",
@@ -73,9 +73,9 @@ const HQTable = () => {
         className: headerClass,
         icon: 'arrowUp',
         'aria-sort': undefined,
-        onClick: () => doSort(5),
-        onMouseOver: () => toggleIcon(5),
-        onMouseLeave: () => toggleIcon(5, false)
+        onClick: () => tableSort.doSort(5),
+        onMouseOver: () => tableSort.toggleIcon(5),
+        onMouseLeave: () => tableSort.toggleIcon(5, false)
       },
       {
         key: "performance",
@@ -84,9 +84,9 @@ const HQTable = () => {
         className: headerClass,
         icon: 'arrowUp',
         'aria-sort': undefined,
-        onClick: () => doSort(6),
-        onMouseOver: () => toggleIcon(6),
-        onMouseLeave: () => toggleIcon(6, false)
+        onClick: () => tableSort.doSort(6),
+        onMouseOver: () => tableSort.toggleIcon(6),
+        onMouseLeave: () => tableSort.toggleIcon(6, false)
       },
       {
         key: "time-on-ground",
@@ -95,9 +95,9 @@ const HQTable = () => {
         className: headerClass,
         icon: 'arrowUp',
         'aria-sort': undefined,
-        onClick: () => doSort(7),
-        onMouseOver: () => toggleIcon(7),
-        onMouseLeave: () => toggleIcon(7, false)
+        onClick: () => tableSort.doSort(7),
+        onMouseOver: () => tableSort.toggleIcon(7),
+        onMouseLeave: () => tableSort.toggleIcon(7, false)
       },
       { key: "more options", "aria-label": "options", className: headerClass },
     ],
@@ -134,68 +134,7 @@ const HQTable = () => {
     },
   ]);
 
-  // Compare sort values
-  const compare = (key, order) => {
-    return (a, b) => {
-      if (order === 'asc') {
-        if (a.items[key].content < b.items[key].content) return -1;
-        if (a.items[key].content > b.items[key].content) return 1;
-      }
-      else {
-        if (a.items[key].content > b.items[key].content) return -1;
-        if (a.items[key].content < b.items[key].content) return 1;
-      }
-  
-      return 0;
-    }
-  }
-
-  // Custom sort item content
-  const doSort = (key) => {
-    let newHeader = { ...header };
-    let order = newHeader.items[key]['aria-sort'] ?? 'asc';
-
-    rows.sort(compare(key, order));
-
-    order = order === 'asc' ? 'desc' : 'asc';
-
-    newHeader.items[key].icon = order === 'asc' ? 'arrowDown' : 'arrowUp';
-    newHeader.items[key]['aria-sort'] = order;
-    
-    setHeader(newHeader);
-    toggleIcon(key);
-  }
-
-  // Toggle header cell icon onMouseOver and onMouseLeave
-  const toggleIcon = (key, show = true) => {
-    let newHeader = { ...header };
-    let title = newHeader.items[key].title;
-
-    if (show) {
-      let icon = newHeader.items[key].icon;
-
-      newHeader.items[key].content = icon === 'arrowUp' ? arrowUp(title) : arrowDown(title);
-    }
-    else {
-      newHeader.items[key].content = title;
-    }
-    
-    setHeader(newHeader);
-  }
-
-  // Add  ArrowUp icon to header cell content
-  const arrowUp = (title) =>
-    <Flex gap="gap.small">
-      <FlexItem><Text content={title} /></FlexItem>
-      <FlexItem><ArrowUpIcon /></FlexItem>
-    </Flex>;
-
-  // Add  ArrowDown icon to header cell content
-  const arrowDown = (title) =>
-    <Flex gap="gap.small">
-      <FlexItem><Text content={title} /></FlexItem>
-      <FlexItem><ArrowDownIcon /></FlexItem>
-    </Flex>;
+  const tableSort = new TableSort(header, rows, setHeader);
 
   return (
     <div className="tab-container">
