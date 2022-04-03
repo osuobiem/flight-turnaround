@@ -1,0 +1,15 @@
+.mgt-table {
+    background: transparent !important;
+}
+
+.mgt-table [role="row"] {
+    background: inherit !important;
+}
+
+.mgt-header {
+    cursor: pointer;
+}
+
+.mgt-header-txt {
+    margin-left: 8px;
+}

@@ -1,1 +1,7 @@
-.mtm-delete {}
+.mtm-delete {
+    color: rgb(233, 23, 76) !important;
+}
+
+.mtm-delete:hover {
+    color: rgb(233, 23, 76) !important;
+}

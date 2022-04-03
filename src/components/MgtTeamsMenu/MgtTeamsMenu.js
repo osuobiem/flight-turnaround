@@ -1,12 +1,14 @@
 import { Menu } from '@fluentui/react-northstar';
 import { MoreIcon } from '@fluentui/react-icons-northstar'
-import CreateTeam from '../Dialogs/CreateTeam/CreateTeam';
+import EditTeam from '../Dialogs/EditTeam/EditTeam';
+import ConfirmAction from '../Dialogs/ConfirmAction/ConfirmAction';
 import { useState } from 'react';
 
 import './MgtTeamsMenu.css';
 
 const MgtTeamsMenu = () => {
-    const [showCreateTeam, setShowCreateTeam] = useState(false);
+    const [showEditTeam, setShowEditTeam] = useState(false);
+    const [showDeleteTeam, setShowDeleteTeam] = useState(false);
 
     const menu = [
         {
@@ -16,8 +18,8 @@ const MgtTeamsMenu = () => {
             key: 1,
             menu: {
                 items: [
-                    { key: 1, content: "Edit Team", onClick: () => setShowCreateTeam(true) },
-                    { key: 2, content: "Delete Team", className: 'mtm-delete' }
+                    { key: 1, content: "Edit Team", onClick: () => setShowEditTeam(true) },
+                    { key: 2, content: "Delete Team", className: 'mtm-delete', onClick: () => setShowDeleteTeam(true) }
                 ],
             },
         },
@@ -26,7 +28,12 @@ const MgtTeamsMenu = () => {
     return (
         <div>
             <Menu items={menu} iconOnly activeIndex={1} />
-            <CreateTeam open={showCreateTeam} setOpen={setShowCreateTeam} />
+            <EditTeam open={showEditTeam} setOpen={showEditTeam} />
+            <ConfirmAction
+                open={showDeleteTeam}
+                setOpen={setShowDeleteTeam}
+                content="Are you sure you want to delete this team?"
+                confirmText="Yes, Delete"/>
         </div>
     );
 };

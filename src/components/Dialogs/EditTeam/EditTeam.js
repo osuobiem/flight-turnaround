@@ -1,7 +1,7 @@
 import { Dialog, CloseIcon } from "@fluentui/react-northstar";
 import TopCard from "../../../helpers/TopCard";
 
-const CreateTeam = ({ open, setOpen }) => {
+const EditTeam = ({ open, setOpen }) => {
 
     return (
         <Dialog
@@ -30,4 +30,4 @@ const CreateTeam = ({ open, setOpen }) => {
     )
 };
 
-export default CreateTeam;
+export default EditTeam;

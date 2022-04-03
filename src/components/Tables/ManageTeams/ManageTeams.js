@@ -1,4 +1,4 @@
-import { Table } from "@fluentui/react-northstar";
+import { LocationIcon, Table, Text, ContactCardIcon } from "@fluentui/react-northstar";
 import TableSort from "../../../helpers/TableSort";
 
 import MgtTeamsMenu from "../../MgtTeamsMenu/MgtTeamsMenu";
@@ -14,8 +14,8 @@ const ManageTeams = () => {
         items: [
             {
                 key: "channel-name",
-                title: "Channel Name",
-                content: "Channel Name",
+                title: <div><ContactCardIcon outline /><Text className="mgt-header-txt" content="Channel Name"/></div>,
+                content: <div><ContactCardIcon outline /><Text className="mgt-header-txt" content="Channel Name"/></div>,
                 className: headerClass,
                 icon: 'arrowUp',
                 'aria-sort': undefined,
@@ -25,8 +25,8 @@ const ManageTeams = () => {
             },
             {
                 key: "airport-location",
-                title: "Airport Location",
-                content: "Airport Location",
+                title: <div><LocationIcon outline /><Text className="mgt-header-txt" content="Airport Location"/></div>,
+                content: <div><LocationIcon outline /><Text className="mgt-header-txt" content="Airport Location"/></div>,
                 className: headerClass,
                 icon: 'arrowUp',
                 'aria-sort': undefined,
@@ -36,8 +36,8 @@ const ManageTeams = () => {
             },
             {
                 key: "zone",
-                title: "Zone",
-                content: "Zone",
+                title: <div><LocationIcon outline /><Text className="mgt-header-txt" content="Zone"/></div>,
+                content: <div><LocationIcon outline /><Text className="mgt-header-txt" content="Zone"/></div>,
                 className: headerClass,
                 icon: 'arrowUp',
                 'aria-sort': undefined,
