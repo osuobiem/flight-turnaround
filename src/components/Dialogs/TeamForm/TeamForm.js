@@ -1,7 +1,10 @@
 import { Dialog, CloseIcon } from "@fluentui/react-northstar";
 import TopCard from "../../../helpers/TopCard";
 
-const EditTeam = ({ open, setOpen }) => {
+const TeamForm = ({
+    title = "Create Team",
+    subTitle = "Green Africa Ramp",
+    avatar = "https://images.unsplash.com/photo-1531642765602-5cae8bbbf285", open, setOpen }) => {
 
     return (
         <Dialog
@@ -9,7 +12,7 @@ const EditTeam = ({ open, setOpen }) => {
             cancelButton="Close"
             onOpen={() => setOpen(true)}
             onCancel={() => setOpen(false)}
-            header={<TopCard title="EA2635" subTitle="Green Africa Ramp" avatar="https://images.unsplash.com/photo-1531642765602-5cae8bbbf285" />}
+            header={<TopCard title={title} subTitle={subTitle} avatar={avatar} />}
             headerAction={{
                 icon: <CloseIcon />,
                 title: 'Close',
@@ -30,4 +33,4 @@ const EditTeam = ({ open, setOpen }) => {
     )
 };
 
-export default EditTeam;
+export default TeamForm;

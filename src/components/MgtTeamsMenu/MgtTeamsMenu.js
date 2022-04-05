@@ -1,12 +1,16 @@
 import { Menu } from '@fluentui/react-northstar';
 import { MoreIcon } from '@fluentui/react-icons-northstar'
-import EditTeam from '../Dialogs/EditTeam/EditTeam';
+import TeamForm from '../Dialogs/TeamForm/TeamForm';
 import ConfirmAction from '../Dialogs/ConfirmAction/ConfirmAction';
 import { useState } from 'react';
 
 import './MgtTeamsMenu.css';
 
-const MgtTeamsMenu = () => {
+const MgtTeamsMenu = ({
+    title,
+    subTitle = "Green Africa Ramp",
+    avatar = "https://images.unsplash.com/photo-1531642765602-5cae8bbbf285" }) => {
+    
     const [showEditTeam, setShowEditTeam] = useState(false);
     const [showDeleteTeam, setShowDeleteTeam] = useState(false);
 
@@ -28,7 +32,7 @@ const MgtTeamsMenu = () => {
     return (
         <div>
             <Menu items={menu} iconOnly activeIndex={1} />
-            <EditTeam open={showEditTeam} setOpen={showEditTeam} />
+            <TeamForm title={title} subTitle={subTitle} avatar={avatar} open={showEditTeam} setOpen={setShowEditTeam} />
             <ConfirmAction
                 open={showDeleteTeam}
                 setOpen={setShowDeleteTeam}
