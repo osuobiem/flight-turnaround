@@ -1,0 +1,21 @@
+.tf-content {
+    margin-top: 25px;
+}
+
+.tf-content label {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.tf-content label::after {
+    content: "";
+}
+
+.tf-content>*>.ui-box,
+.tf-content .ui-form__dropdown {
+    margin-bottom: 18px;
+}
+
+.ui-dialog__footer {
+    margin-top: 25px;
+}

@@ -8,7 +8,7 @@ import './MgtTeamsMenu.css';
 
 const MgtTeamsMenu = ({
     title,
-    subTitle = "Green Africa Ramp",
+    subTitle = "GA Turnaround",
     avatar = "https://images.unsplash.com/photo-1531642765602-5cae8bbbf285" }) => {
     
     const [showEditTeam, setShowEditTeam] = useState(false);

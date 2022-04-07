@@ -56,7 +56,7 @@ const ManageTeams = () => {
                 { key: "1-1", content: "Flight Ops Lagos" },
                 { key: "1-2", content: "Lagos" },
                 { key: "1-3", content: "West" },
-                { key: "1-4", content: <MgtTeamsMenu title="Flight Ops Lagos" />, style: {justifyContent: 'right'} },
+                { key: "1-4", content: <MgtTeamsMenu title="Edit Flight Ops Lagos" />, style: {justifyContent: 'right'} },
             ],
         },
         {
@@ -65,7 +65,7 @@ const ManageTeams = () => {
                 { key: "1-1", content: "Abuja - Flight Ops" },
                 { key: "1-2", content: "Abuja" },
                 { key: "1-3", content: "North" },
-                { key: "1-4", content: <MgtTeamsMenu title="Abuja - Flight Ops" />, style: {justifyContent: 'right'} },
+                { key: "1-4", content: <MgtTeamsMenu title="Edit Abuja - Flight Ops" />, style: {justifyContent: 'right'} },
             ],
         },
     ]);
