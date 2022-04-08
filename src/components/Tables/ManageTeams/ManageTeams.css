@@ -4,6 +4,7 @@
 
 .mgt-table [role="row"] {
     background: inherit !important;
+    padding-left: 12px;
 }
 
 .mgt-header {
