@@ -17,7 +17,7 @@ const AdminHeader = () => {
                 </FlexItem>
 
                 <FlexItem>
-                    <Input placeholder="Find" />
+                    <Input placeholder="Find" inverted />
                 </FlexItem>
             </Flex>
 
