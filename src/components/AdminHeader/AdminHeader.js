@@ -1,4 +1,5 @@
 import { Flex, FlexItem, Button, Input } from "@fluentui/react-northstar";
+import { SearchIcon } from '@fluentui/react-icons-northstar'
 import { useState } from "react";
 
 import TeamForm from "../Dialogs/TeamForm/TeamForm";
@@ -17,7 +18,7 @@ const AdminHeader = () => {
                 </FlexItem>
 
                 <FlexItem>
-                    <Input placeholder="Find" inverted />
+                    <Input placeholder="Find" icon={<SearchIcon />} className="adm-find" inverted />
                 </FlexItem>
             </Flex>
 
