@@ -2,7 +2,7 @@ import { Flex, FlexItem, Button, Input } from "@fluentui/react-northstar";
 import { SearchIcon } from '@fluentui/react-icons-northstar'
 import { useState } from "react";
 
-import TeamForm from "../Dialogs/TeamForm/TeamForm";
+import CreateTeam from "../Dialogs/CreateTeam/CreateTeam";
 
 import './AdminHeader.css';
 
@@ -22,7 +22,7 @@ const AdminHeader = () => {
                 </FlexItem>
             </Flex>
 
-            <TeamForm open={showCreateTeam} setOpen={setShowCreateTeam} />
+            <CreateTeam open={showCreateTeam} setOpen={setShowCreateTeam} />
         </div>
     )
 };

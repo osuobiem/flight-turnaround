@@ -1,0 +1,18 @@
+.ui-alert .ui-alert__body {
+    margin: 0 !important;
+}
+
+.ui-alert {
+    margin-bottom: 18px;
+    transition: all .5s;
+    border-color: #C4314B !important;
+}
+
+.al-hide {
+    min-height: 0 !important;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    border: unset !important;
+}
