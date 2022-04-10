@@ -50,6 +50,8 @@ const CreateTeam = ({ open, setOpen }) => {
             .then(res => {
                 setTeam(res.data);
                 setOpen(false); setOpenD2(true);
+
+                console.log(team);
             })
             .catch(err => {
                 let error = err.message;
