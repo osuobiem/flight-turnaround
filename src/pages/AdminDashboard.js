@@ -9,11 +9,11 @@ import { useEffect } from "react";
 const AdminDashboard = () => {
   const { dispatchAuthEvent } = useContext(AuthContext);
 
-  const accessToken = async () => {
-    dispatchAuthEvent(await serverReq('getToken'));
-  }
-
   useEffect(() => {
+    const accessToken = async () => {
+      dispatchAuthEvent(await serverReq('getToken'));
+    }
+    
     accessToken();
   }, []);
 
