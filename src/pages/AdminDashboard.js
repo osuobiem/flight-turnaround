@@ -13,9 +13,9 @@ const AdminDashboard = () => {
     const accessToken = async () => {
       dispatchAuthEvent(await serverReq('getToken'));
     }
-    
+
     accessToken();
-  }, []);
+  }, [dispatchAuthEvent]);
 
   return (
     <div>
