@@ -3,10 +3,15 @@ import { useState } from "react";
 import TopCard from "../../../helpers/TopCard";
 import { graphApi } from "../../../helpers/GraphHandler";
 import ErrorAlert from "../../AlertsMessage/ErrorAlert";
+import { PeoplePicker } from "@microsoft/mgt-react";
 
 import "./CreateTeam.css";
+import { useContext } from "react";
+import { AuthContext } from "../../../AppContext";
 
 const CreateTeam = ({ open, setOpen }) => {
+
+    const { token } = useContext(AuthContext);
 
     const [openD2, setOpenD2] = useState(false);
     const [teamName, setTeamName] = useState('');
@@ -46,7 +51,7 @@ const CreateTeam = ({ open, setOpen }) => {
             'isFavoriteByDefault': true
         };
 
-        graphApi('createChannel', data)
+        graphApi('createChannel', token, data)
             .then(res => {
                 setTeam(res.data);
                 setOpen(false); setOpenD2(true);
@@ -85,6 +90,8 @@ const CreateTeam = ({ open, setOpen }) => {
                             <div className="tf-content">
 
                                 <ErrorAlert show={showError} setShow={setShowError} message={errorMessage} />
+
+                                <PeoplePicker show-max="4"></PeoplePicker>
 
                                 <Input
                                     label={{ content: "Flight Ops Team Name", htmlFor: "flight-ops-team-name" }}
@@ -132,7 +139,7 @@ const CreateTeam = ({ open, setOpen }) => {
                         const { styles, ...rest } = props;
                         return (
                             <div className="tf-content">
-
+                                
 
                                 <Component {...rest} />
                             </div>

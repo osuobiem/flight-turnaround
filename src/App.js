@@ -3,12 +3,13 @@ import Router from "./routes/Router";
 import { Provider, teamsTheme, teamsDarkTheme, teamsHighContrastTheme  } from "@fluentui/react-northstar";
 import { useState } from "react";
 import * as msTeams from '@microsoft/teams-js';
-import { AppContext } from './AppContext';
+import { AppContext, AuthContext } from './AppContext';
 
 msTeams.initialize();
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState('default');
+  const [token, setToken] = useState('');
 
   const themes = {
     default: teamsTheme, dark: teamsDarkTheme, contrast: teamsHighContrastTheme
@@ -16,6 +17,10 @@ function App() {
 
   const dispatchThemeEvent = (theme) => {
     setCurrentTheme(theme);
+  }
+
+  const dispatchAuthEvent = (token) => {
+    setToken(token);
   }
 
   // Set current theme
@@ -29,9 +34,13 @@ function App() {
   return (
     <Provider theme={themes[currentTheme]}>
       <AppContext.Provider value={{ currentTheme, dispatchThemeEvent }}>
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+        
+        <AuthContext.Provider value={{ token, dispatchAuthEvent }}>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+        </AuthContext.Provider>
+      
       </AppContext.Provider>
     </Provider>
   );

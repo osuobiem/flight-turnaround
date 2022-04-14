@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-const appToken = localStorage.getItem('gatAppToken');
 const graphApiUrl = process.env.REACT_APP_GRAPH_API_URL;
 const teamId = process.env.REACT_APP_TEAM_ID;
 
@@ -13,10 +12,11 @@ const routes = {
 
 const config = {
     baseURL: graphApiUrl,
-    headers: { 'Authorization': `Bearer ${appToken}` }
 }
 
-export const graphApi = async(route, data = {}) => {
+export const graphApi = async(route, appToken, data = {}) => {
+
+    config.headers = { 'Authorization': `Bearer ${appToken}` };
 
     // Make Graph API request
     const r = routes[route];
