@@ -6,7 +6,6 @@ import * as msTeams from '@microsoft/teams-js';
 import CreateTeam from "../Dialogs/CreateTeam/CreateTeam";
 
 import './AdminHeader.css';
-import { useEffect } from "react";
 
 msTeams.initialize();
 
