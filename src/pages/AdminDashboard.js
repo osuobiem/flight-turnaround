@@ -11,6 +11,10 @@ import { useState } from "react";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { graphApi } from "../helpers/GraphHandler";
 import { useCallback } from "react";
+import * as msTeams from '@microsoft/teams-js';
+
+
+msTeams.initialize(window);
 
 const AdminDashboard = () => {
 
@@ -26,7 +30,18 @@ const AdminDashboard = () => {
       msalInstance.setActiveAccount(accounts[0]);
     }
     else {
-      msalInstance.loginPopup();
+      msTeams.authentication.authenticate({
+        url: window.location.origin + "/#teamsauthpopup",
+        width: 600,
+        height: 535,
+        successCallback: (response) => {
+            console.log(response)
+        },
+        failureCallback: (reason) => {
+            console.log(reason);
+        }
+    });
+      // msalInstance.loginPopup();
     }
 
     msalInstance.addEventCallback((event) => {
