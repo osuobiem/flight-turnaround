@@ -9,7 +9,7 @@ msTeams.initialize();
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState('default');
-  const [token, setToken] = useState('');
+  const [auth, setAuthClient] = useState();
 
   const themes = {
     default: teamsTheme, dark: teamsDarkTheme, contrast: teamsHighContrastTheme
@@ -19,8 +19,8 @@ function App() {
     setCurrentTheme(theme);
   }
 
-  const dispatchAuthEvent = (token) => {
-    setToken(token);
+  const dispatchAuthEvent = (auth) => {
+    setAuthClient(auth);
   }
 
   // Set current theme
@@ -35,7 +35,7 @@ function App() {
     <Provider theme={themes[currentTheme]}>
       <AppContext.Provider value={{ currentTheme, dispatchThemeEvent }}>
         
-        <AuthContext.Provider value={{ token, dispatchAuthEvent }}>
+        <AuthContext.Provider value={{ auth, dispatchAuthEvent }}>
           <BrowserRouter>
             <Router />
           </BrowserRouter>

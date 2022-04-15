@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-const graphApiUrl = process.env.REACT_APP_GRAPH_API_URL;
 const teamId = process.env.REACT_APP_TEAM_ID;
 
 const routes = {
@@ -14,18 +13,10 @@ const routes = {
     }
 };
 
-const config = {
-    baseURL: graphApiUrl,
-}
-
-export const graphApi = async(route, appToken, data = {}) => {
-
-    config.headers = { 'Authorization': `Bearer ${appToken}` };
+export const graphApi = async(route, client, data = {}) => {
 
     // Make Graph API request
     const r = routes[route];
-    console.log(config)
 
-    return await axios[r.method](graphApiUrl + r.url, data, config);
-
+    return await r.method === 'get' ? client.api(r.url).get() : client.api(r.url).post(data);
 }

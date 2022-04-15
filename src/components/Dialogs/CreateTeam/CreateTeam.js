@@ -1,17 +1,12 @@
 import { Dialog, CloseIcon, Input, FormDropdown } from "@fluentui/react-northstar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TopCard from "../../../helpers/TopCard";
 import { graphApi } from "../../../helpers/GraphHandler";
 import ErrorAlert from "../../AlertsMessage/ErrorAlert";
 
 import "./CreateTeam.css";
-import { useContext } from "react";
-import { AuthContext } from "../../../AppContext";
-import msalInstance from "../../../config/msalInstance";
 
-const CreateTeam = ({ open, setOpen }) => {
-
-    const { token } = useContext(AuthContext);
+const CreateTeam = ({ open, setOpen, people, graphClient }) => {
 
     const [openD2, setOpenD2] = useState(false);
     const [teamName, setTeamName] = useState('');
@@ -20,7 +15,7 @@ const CreateTeam = ({ open, setOpen }) => {
     const [team, setTeam] = useState({});
 
     const [tcoMembers, setTcoMembers] = useState([]);
-    const [tcoManagers, setManagers] = useState([]);
+    const [dutyManagers, setManagers] = useState([]);
 
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -48,61 +43,42 @@ const CreateTeam = ({ open, setOpen }) => {
 
     // Create channel in Teams and Node Server
     const createChannel = async () => {
-        setOpen(false); setOpenD2(true);
-        
-        msalInstance.loginPopup({
-            redirectUri: "http://localhost:3000/admin"
-        });
 
-        // let data = {
-        //     'description': `${teamName} | ${apLocation} | ${zone}`,
-        //     'displayName': teamName,
-        //     'isFavoriteByDefault': true
-        // };
-
-        // graphApi('createChannel', token, data)
-        //     .then(res => {
-        //         setTeam(res.data);
-        //         setOpen(false); setOpenD2(true);
-
-        //         console.log(team);
-        //     })
-        //     .catch(err => {
-        //         let error = err.message;
-
-        //         if (err.response) error = err.response.data.error.message;
-        //         else if (err.request) error = err.request;
-
-        //         console.log(error);
-        //         errorAlert(true, error);
-        //     });
+        if (Object.entries(team).length > 0) {
+            setOpen(false); setOpenD2(true);
+        }
+        else {
+            let data = {
+                'description': `${teamName} | ${apLocation} | ${zone}`,
+                'displayName': teamName,
+                'isFavoriteByDefault': true
+            };
+            
+            graphApi('createChannel', graphClient, data)
+                .then(res => {
+                    setTeam(res.data);
+                    setOpen(false); setOpenD2(true);
+                })
+                .catch(err => {
+                    let error = err.message;
+    
+                    if (err.response) error = err.response.data.error.message;
+                    else if (err.request) error = err.request;
+    
+                    console.log(error);
+                    errorAlert(true, error);
+                });
+        }
     }
 
-    // Fetch People using GrapAPI
-    const getPeople = async () => {
-        graphApi('getPeople', token)
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                let error = err.message;
-
-                if (err.response) error = err.response.data.error.message;
-                else if (err.request) error = err.request;
-
-                console.log(error);
-                errorAlert(true, error);
-            });
-    }
-
-    const pickMembers = (value, type) => {
+    // Pick people from dropdown
+    const pickPeople = (value, type) => {
         if (type === 'member') setTcoMembers(value);
         else setManagers(value);
-    }
 
-    const people = [
-        'Jeff', 'Moses', 'Patrick', 'Wisdom', 'Shrek', 'Eddie', 'Justin', 'Peter'
-    ];
+        console.log(dutyManagers);
+        console.log(tcoMembers);
+    }
 
     return (
         <div>
@@ -189,7 +165,7 @@ const CreateTeam = ({ open, setOpen }) => {
                                     placeholder="Start typing a name"
                                     noResultsMessage="We did't find any matches."
                                     a11ySelectedItemsMessage="Press Delete or Backspace to remove"
-                                    onChange={(ev, op) => pickMembers(op.value, 'member')}
+                                    onChange={(ev, op) => pickPeople(op.value, 'member')}
                                     className="tf-people"/>
                                 
                                 <FormDropdown
@@ -199,7 +175,7 @@ const CreateTeam = ({ open, setOpen }) => {
                                     placeholder="Start typing a name"
                                     noResultsMessage="We did't find any matches."
                                     a11ySelectedItemsMessage="Press Delete or Backspace to remove"
-                                    onChange={(ev, op) => pickMembers(op.value, 'manager')}
+                                    onChange={(ev, op) => pickPeople(op.value, 'manager')}
                                     className="tf-people tf-dm"/>
 
                                 <Component {...rest} />
