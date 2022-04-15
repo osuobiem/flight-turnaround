@@ -7,7 +7,7 @@ import "./ManageTeams.css";
 
 import { useState } from "react";
 
-const ManageTeams = ({people, graphClient}) => {
+const ManageTeams = () => {
 
     const headerClass = 'mgt-header';
     const [header, setHeader] = useState({
@@ -56,7 +56,7 @@ const ManageTeams = ({people, graphClient}) => {
                 { key: "1-1", content: "Flight Ops Lagos" },
                 { key: "1-2", content: "Lagos" },
                 { key: "1-3", content: "West" },
-                { key: "1-4", content: <MgtTeamsMenu title="Edit Flight Ops Lagos" people={people} graphClient={graphClient} />, style: {justifyContent: 'right'} },
+                { key: "1-4", content: <MgtTeamsMenu title="Edit Flight Ops Lagos" />, style: {justifyContent: 'right'} },
             ],
         },
         {
@@ -65,7 +65,7 @@ const ManageTeams = ({people, graphClient}) => {
                 { key: "2-1", content: "Abuja - Flight Ops" },
                 { key: "2-2", content: "Abuja" },
                 { key: "2-3", content: "North" },
-                { key: "2-4", content: <MgtTeamsMenu title="Edit Abuja - Flight Ops" people={people} graphClient={graphClient} />, style: {justifyContent: 'right'} },
+                { key: "2-4", content: <MgtTeamsMenu title="Edit Abuja - Flight Ops" />, style: {justifyContent: 'right'} },
             ],
         },
         {
@@ -74,7 +74,7 @@ const ManageTeams = ({people, graphClient}) => {
                 { key: "3-1", content: "Ilorin - Flight Ops" },
                 { key: "3-2", content: "Ilorin" },
                 { key: "3-3", content: "West" },
-                { key: "3-4", content: <MgtTeamsMenu title="Edit Ilorin - Flight Ops" people={people} graphClient={graphClient}/>, style: {justifyContent: 'right'} },
+                { key: "3-4", content: <MgtTeamsMenu title="Edit Ilorin - Flight Ops" />, style: {justifyContent: 'right'} },
             ],
         },
         {
@@ -83,7 +83,7 @@ const ManageTeams = ({people, graphClient}) => {
                 { key: "4-1", content: "Benin - Flight Ops" },
                 { key: "4-2", content: "Benin" },
                 { key: "4-3", content: "South" },
-                { key: "4-4", content: <MgtTeamsMenu title="Edit Benin - Flight Ops" people={people} graphClient={graphClient} />, style: {justifyContent: 'right'} },
+                { key: "4-4", content: <MgtTeamsMenu title="Edit Benin - Flight Ops" />, style: {justifyContent: 'right'} },
             ],
         },
         {
@@ -92,7 +92,7 @@ const ManageTeams = ({people, graphClient}) => {
                 { key: "5-1", content: "Akure - Flight Ops" },
                 { key: "5-2", content: "Akure" },
                 { key: "5-3", content: "West" },
-                { key: "5-4", content: <MgtTeamsMenu title="Edit Akure - Flight Ops" people={people} graphClient={graphClient} />, style: {justifyContent: 'right'} },
+                { key: "5-4", content: <MgtTeamsMenu title="Edit Akure - Flight Ops" />, style: {justifyContent: 'right'} },
             ],
         },
     ]);

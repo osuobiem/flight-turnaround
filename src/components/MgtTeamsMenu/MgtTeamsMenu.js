@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import './MgtTeamsMenu.css';
 
-const MgtTeamsMenu = ({ title, people, graphClient }) => {
+const MgtTeamsMenu = ({ title }) => {
     
     const [showEditTeam, setShowEditTeam] = useState(false);
     const [showDeleteTeam, setShowDeleteTeam] = useState(false);
@@ -29,7 +29,7 @@ const MgtTeamsMenu = ({ title, people, graphClient }) => {
     return (
         <div>
             <Menu items={menu} iconOnly activeIndex={1} />
-            <EditTeam title={title} open={showEditTeam} setOpen={setShowEditTeam} people={people} graphClient={graphClient} />
+            <EditTeam title={title} open={showEditTeam} setOpen={setShowEditTeam} />
             <ConfirmAction
                 open={showDeleteTeam}
                 setOpen={setShowDeleteTeam}
