@@ -14,7 +14,7 @@ import { useCallback } from "react";
 import * as msTeams from '@microsoft/teams-js';
 
 
-msTeams.initialize(window);
+msTeams.initialize();
 
 const AdminDashboard = () => {
 
@@ -33,10 +33,10 @@ const AdminDashboard = () => {
       // msalInstance.loginPopup();
       msTeams.authentication.getAuthToken({
         successCallback: (response) => {
-          console.log(response);
+          alert(response);
         },
         failureCallback: (reason) => {
-          console.log(reason);
+          alert(reason);
         }
       });
     }
