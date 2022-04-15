@@ -30,10 +30,7 @@ const AdminDashboard = () => {
       msalInstance.setActiveAccount(accounts[0]);
     }
     else {
-      msTeams.authentication.authenticate({
-        url: window.location.origin + '/configure',
-        width: 600,
-        height: 535,
+      msTeams.authentication.getAuthToken({
         successCallback: (response) => {
             console.log(response)
         },
