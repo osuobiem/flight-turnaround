@@ -30,14 +30,15 @@ const AdminDashboard = () => {
       msalInstance.setActiveAccount(accounts[0]);
     }
     else {
+      // msalInstance.loginPopup();
       msTeams.authentication.getAuthToken({
         successCallback: (response) => {
-            alert(response)
+          console.log(response);
         },
         failureCallback: (reason) => {
-            alert(reason);
+          console.log(reason);
         }
-    });
+      });
     }
 
     msalInstance.addEventCallback((event) => {
