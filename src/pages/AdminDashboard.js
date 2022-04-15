@@ -31,7 +31,7 @@ const AdminDashboard = () => {
     }
     else {
       msTeams.authentication.authenticate({
-        url: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=9d7b0900-3c58-4fda-8156-34b3635d25d0&scope=openid%20profile%20offline_access&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fadmin&client-request-id=1d67e4ed-7174-464f-92c1-8197b6c2824a&response_mode=fragment&response_type=code&x-client-SKU=msal.js.browser&x-client-VER=2.23.0&client_info=1&code_challenge=KruefcTSaPQUNp5TDMjPCh5sFy3CVK7cfmoMrQZmOI8&code_challenge_method=S256&nonce=bc8cc567-24d9-4b15-8060-1c703f255b9a&state=eyJpZCI6ImMzODQ0MjAyLTgwMjktNGUzMy04OWJkLTlhMWZjYmZhZWExMCIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoicG9wdXAifX0%3D",
+        url: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=9d7b0900-3c58-4fda-8156-34b3635d25d0&scope=openid%20profile%20offline_access&redirect_uri=https://main--vibrant-bhabha-de25ce.netlify.app/admin&client-request-id=1d67e4ed-7174-464f-92c1-8197b6c2824a&response_mode=fragment&response_type=code&x-client-SKU=msal.js.browser&x-client-VER=2.23.0&client_info=1&code_challenge=KruefcTSaPQUNp5TDMjPCh5sFy3CVK7cfmoMrQZmOI8&code_challenge_method=S256&nonce=bc8cc567-24d9-4b15-8060-1c703f255b9a&state=eyJpZCI6ImMzODQ0MjAyLTgwMjktNGUzMy04OWJkLTlhMWZjYmZhZWExMCIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoicG9wdXAifX0%3D",
         width: 600,
         height: 535,
         successCallback: (response) => {
