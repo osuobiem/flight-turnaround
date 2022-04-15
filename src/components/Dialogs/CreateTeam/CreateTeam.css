@@ -19,3 +19,11 @@
 .ui-dialog__footer {
     margin-top: 18px;
 }
+
+.tf-dm {
+    margin-bottom: 20% !important;
+}
+
+.tf-people .ui-list {
+    max-height: 10rem !important;
+}

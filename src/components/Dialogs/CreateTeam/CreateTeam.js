@@ -1,13 +1,13 @@
 import { Dialog, CloseIcon, Input, FormDropdown } from "@fluentui/react-northstar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TopCard from "../../../helpers/TopCard";
 import { graphApi } from "../../../helpers/GraphHandler";
 import ErrorAlert from "../../AlertsMessage/ErrorAlert";
-import { PeoplePicker } from "@microsoft/mgt-react";
 
 import "./CreateTeam.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../AppContext";
+import msalInstance from "../../../config/msalInstance";
 
 const CreateTeam = ({ open, setOpen }) => {
 
@@ -18,6 +18,9 @@ const CreateTeam = ({ open, setOpen }) => {
     const [apLocation, setApLocation] = useState('Abuja');
     const [zone, setZone] = useState('North');
     const [team, setTeam] = useState({});
+
+    const [tcoMembers, setTcoMembers] = useState([]);
+    const [tcoManagers, setManagers] = useState([]);
 
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -43,20 +46,43 @@ const CreateTeam = ({ open, setOpen }) => {
         }, 5000);
     }
 
+    // Create channel in Teams and Node Server
     const createChannel = async () => {
+        setOpen(false); setOpenD2(true);
+        
+        msalInstance.loginPopup({
+            redirectUri: "http://localhost:3000/admin"
+        });
 
-        let data = {
-            'description': `${teamName} | ${apLocation} | ${zone}`,
-            'displayName': teamName,
-            'isFavoriteByDefault': true
-        };
+        // let data = {
+        //     'description': `${teamName} | ${apLocation} | ${zone}`,
+        //     'displayName': teamName,
+        //     'isFavoriteByDefault': true
+        // };
 
-        graphApi('createChannel', token, data)
+        // graphApi('createChannel', token, data)
+        //     .then(res => {
+        //         setTeam(res.data);
+        //         setOpen(false); setOpenD2(true);
+
+        //         console.log(team);
+        //     })
+        //     .catch(err => {
+        //         let error = err.message;
+
+        //         if (err.response) error = err.response.data.error.message;
+        //         else if (err.request) error = err.request;
+
+        //         console.log(error);
+        //         errorAlert(true, error);
+        //     });
+    }
+
+    // Fetch People using GrapAPI
+    const getPeople = async () => {
+        graphApi('getPeople', token)
             .then(res => {
-                setTeam(res.data);
-                setOpen(false); setOpenD2(true);
-
-                console.log(team);
+                console.log(res);
             })
             .catch(err => {
                 let error = err.message;
@@ -69,8 +95,18 @@ const CreateTeam = ({ open, setOpen }) => {
             });
     }
 
+    const pickMembers = (value, type) => {
+        if (type === 'member') setTcoMembers(value);
+        else setManagers(value);
+    }
+
+    const people = [
+        'Jeff', 'Moses', 'Patrick', 'Wisdom', 'Shrek', 'Eddie', 'Justin', 'Peter'
+    ];
+
     return (
         <div>
+            {/* First Page */}
             <Dialog
                 open={open}
                 cancelButton="Close"
@@ -89,9 +125,7 @@ const CreateTeam = ({ open, setOpen }) => {
                         return (
                             <div className="tf-content">
 
-                                <ErrorAlert show={showError} setShow={setShowError} message={errorMessage} />
-
-                                <PeoplePicker show-max="4"></PeoplePicker>
+                                <ErrorAlert show={showError} message={errorMessage} />
 
                                 <Input
                                     label={{ content: "Flight Ops Team Name", htmlFor: "flight-ops-team-name" }}
@@ -127,6 +161,7 @@ const CreateTeam = ({ open, setOpen }) => {
                 }}
             />
 
+            {/* Second Page */}
             <Dialog
                 open={openD2}
                 cancelButton="Back"
@@ -134,12 +169,38 @@ const CreateTeam = ({ open, setOpen }) => {
                 onCancel={() => { setOpenD2(false); setOpen(true); }}
                 onConfirm={() => setOpenD2(false)}
                 header={<TopCard title={title} subTitle={subTitle} avatar={avatar} />}
+                headerAction={{
+                    icon: <CloseIcon />,
+                    title: 'Close',
+                    onClick: () => setOpen(false),
+                }}
                 footer={{
                     children: (Component, props) => {
                         const { styles, ...rest } = props;
                         return (
                             <div className="tf-content">
                                 
+                                <ErrorAlert show={showError} message={errorMessage} />
+
+                                <FormDropdown
+                                    search multiple
+                                    label="Choose TCO members"
+                                    items={people} fluid
+                                    placeholder="Start typing a name"
+                                    noResultsMessage="We did't find any matches."
+                                    a11ySelectedItemsMessage="Press Delete or Backspace to remove"
+                                    onChange={(ev, op) => pickMembers(op.value, 'member')}
+                                    className="tf-people"/>
+                                
+                                <FormDropdown
+                                    search multiple
+                                    label="Choose Duty managers"
+                                    items={people} fluid
+                                    placeholder="Start typing a name"
+                                    noResultsMessage="We did't find any matches."
+                                    a11ySelectedItemsMessage="Press Delete or Backspace to remove"
+                                    onChange={(ev, op) => pickMembers(op.value, 'manager')}
+                                    className="tf-people tf-dm"/>
 
                                 <Component {...rest} />
                             </div>

@@ -10,12 +10,12 @@ const AdminDashboard = () => {
   const { dispatchAuthEvent } = useContext(AuthContext);
 
   useEffect(() => {
-    const accessToken = async () => {
-      dispatchAuthEvent(await serverReq('getToken'));
-    }
-
     accessToken();
-  }, [dispatchAuthEvent]);
+  }, []);
+
+  const accessToken = async () => {
+    dispatchAuthEvent(await serverReq('getToken'));
+  }
 
   return (
     <div>

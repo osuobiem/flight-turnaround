@@ -7,6 +7,10 @@ const routes = {
     createChannel: {
         url: `/teams/${teamId}/channels`,
         method: 'post'
+    },
+    getPeople: {
+        url: `/me/people`,
+        method: 'get'
     }
 };
 
@@ -20,7 +24,8 @@ export const graphApi = async(route, appToken, data = {}) => {
 
     // Make Graph API request
     const r = routes[route];
+    console.log(config)
 
-    return await axios[r.method](r.url, data, config);
+    return await axios[r.method](graphApiUrl + r.url, data, config);
 
 }
