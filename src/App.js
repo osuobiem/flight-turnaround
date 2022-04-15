@@ -4,6 +4,7 @@ import { Provider, teamsTheme, teamsDarkTheme, teamsHighContrastTheme  } from "@
 import { useState } from "react";
 import * as msTeams from '@microsoft/teams-js';
 import { AppContext, AuthContext } from './AppContext';
+import { useCallback } from "react";
 
 msTeams.initialize();
 
@@ -19,9 +20,9 @@ function App() {
     setCurrentTheme(theme);
   }
 
-  const dispatchAuthEvent = (auth) => {
+  const dispatchAuthEvent = useCallback((auth) => {
     setAuthClient(auth);
-  }
+  }, [])
 
   // Set current theme
   msTeams.getContext(context => setCurrentTheme(context.theme));

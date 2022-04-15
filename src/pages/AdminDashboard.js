@@ -6,33 +6,22 @@ import { AuthContext } from "../AppContext";
 import { useEffect } from "react";
 import msalInstance from "../config/msalInstance";
 import { EventType, InteractionType } from "@azure/msal-browser";
-import { AuthCodeMSALBrowserAuthenticationProvider } from '@microsoft/microsoft-graph-client/authProviders/authCodeMsalBrowser'
+import { AuthCodeMSALBrowserAuthenticationProvider } from '@microsoft/microsoft-graph-client/authProviders/authCodeMsalBrowser';
 import { useState } from "react";
 import { Client } from "@microsoft/microsoft-graph-client";
 import { graphApi } from "../helpers/GraphHandler";
+import { useCallback } from "react";
 
 const AdminDashboard = () => {
 
-  const [dummy] = useState(false);
   const { auth, dispatchAuthEvent } = useContext(AuthContext);
   const [graphClient, setGraphClient] = useState({});
   const [people, setPeople] = useState([]);
 
-  useEffect(() => {
-    checkForAccount();
-  }, [dummy]);
-
-  useEffect(() => {
-    if(auth) setClient();
-  }, [auth]);
-
-  useEffect(() => {
-    if (Object.entries(graphClient).length > 0) getPeople();
-}, [graphClient])
-
-  const checkForAccount = async () => {
+  // Check if user account exists in session storage
+  const checkForAccount = useCallback(async () => {
     const accounts = msalInstance.getAllAccounts();
-    
+
     if (accounts && accounts.length > 0) {
       msalInstance.setActiveAccount(accounts[0]);
     }
@@ -65,28 +54,39 @@ const AdminDashboard = () => {
         interactionType: InteractionType.Popup
       }
     ));
-  }
+  }, [dispatchAuthEvent]);
 
-  const setClient = () => {
-      let client = Client.initWithMiddleware({ authProvider: auth });
-      setGraphClient(client);
-  }
 
   // Fetch People using GrapAPI
-  const getPeople = async () => {
+  const getPeople = useCallback(async () => {
     const p = await graphApi('getPeople', graphClient);
 
     let newPeople = p.value.map(person => {
-        return { id: person.id, name: person.displayName, content: person.jobTitle, header: person.displayName };
+      return { id: person.id, name: person.displayName, content: person.jobTitle, header: person.displayName };
     });
 
     setPeople(newPeople);
-}
+  }, [graphClient]);
+
+  useEffect(() => {
+    checkForAccount();
+  }, [checkForAccount]);
+
+  useEffect(() => {
+    if (auth) {
+      let client = Client.initWithMiddleware({ authProvider: auth });
+      setGraphClient(client);
+    }
+  }, [auth]);
+
+  useEffect(() => {
+    if (Object.entries(graphClient).length > 0) getPeople();
+  }, [graphClient, getPeople]);
 
   return (
     <div>
-        <AdminHeader people={people} graphClient={graphClient} />
-        <ManageTeams people={people} graphClient={graphClient} />
+      <AdminHeader people={people} graphClient={graphClient} />
+      <ManageTeams people={people} graphClient={graphClient} />
     </div>
   );
 };

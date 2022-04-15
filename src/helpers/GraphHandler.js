@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const teamId = process.env.REACT_APP_TEAM_ID;
 
 const routes = {
