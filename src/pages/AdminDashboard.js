@@ -32,10 +32,10 @@ const AdminDashboard = () => {
     else {
       msTeams.authentication.getAuthToken({
         successCallback: (response) => {
-            console.log(response)
+            alert(response)
         },
         failureCallback: (reason) => {
-            console.log(reason);
+            alert(reason);
         }
     });
     }
