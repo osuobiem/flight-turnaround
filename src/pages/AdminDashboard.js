@@ -29,16 +29,7 @@ const AdminDashboard = () => {
       msalInstance.setActiveAccount(accounts[0]);
     }
     else {
-      msTeams.authentication.authenticate({
-        url: 'https://facebook.com',
-        width: 600,
-        height: 535,
-        successCallback: ((res) => {
-          alert(res);
-            console.log(res);
-        }),
-        failureCallback: (err => console.error(err))
-      });
+      
       // msalInstance.loginPopup();
     }
 
@@ -104,8 +95,22 @@ const AdminDashboard = () => {
     if (Object.entries(graphClient).length > 0) getPeople();
   }, [graphClient, getPeople]);
 
+  function popUp() {
+    msTeams.authentication.authenticate({
+      url: 'https://facebook.com',
+      width: 600,
+      height: 535,
+      successCallback: ((res) => {
+        alert(res);
+          console.log(res);
+      }),
+      failureCallback: (err => console.error(err))
+    });
+  }
+
   return (
     <div>
+      <button onClick={() => popUp()}>Authorize Application</button>
       <AdminHeader people={people} graphClient={graphClient} />
       <ManageTeams people={people} graphClient={graphClient} />
     </div>
