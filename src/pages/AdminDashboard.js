@@ -97,7 +97,7 @@ const AdminDashboard = () => {
 
   const popUp = async () => {
     await msTeams.authentication.authenticate({
-      url: 'admin',
+      url: 'test',
       width: 600,
       height: 535,
       successCallback: ((res) => {
