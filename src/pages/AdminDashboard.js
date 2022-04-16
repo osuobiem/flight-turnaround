@@ -12,6 +12,9 @@ import { Client } from "@microsoft/microsoft-graph-client";
 import { graphApi } from "../helpers/GraphHandler";
 import { useCallback } from "react";
 
+import * as msTeams from "@microsoft/teams-js";
+msTeams.initialize();
+
 const AdminDashboard = () => {
 
   const { auth, dispatchAuthEvent } = useContext(AuthContext);
@@ -26,7 +29,17 @@ const AdminDashboard = () => {
       msalInstance.setActiveAccount(accounts[0]);
     }
     else {
-      msalInstance.acquireTokenRedirect();
+      msTeams.authentication.authenticate({
+        url: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=9d7b0900-3c58-4fda-8156-34b3635d25d0&scope=openid%20profile%20offline_access&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fadmin&client-request-id=5a5d83b6-b4a7-4cea-8f2e-a88c5b9ace66&response_mode=fragment&response_type=code&x-client-SKU=msal.js.browser&x-client-VER=2.23.0&client_info=1&code_challenge=PiTTUxHVLnEdpHbD5DLLfsy4KLrd0ZfP6dymgLJ2n7Y&code_challenge_method=S256&nonce=112974af-4f31-415a-a61b-fc454a88f64e&state=eyJpZCI6ImZhMGNiYzUwLTNhZjItNDVkNC05Y2VmLTg0MmY3MmM3MzZjOSIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoicG9wdXAifX0%3D',
+        width: 600,
+        height: 535,
+        successCallback: ((res) => {
+          alert(res);
+            console.log(res);
+        }),
+        failureCallback: (err => console.error(err))
+      });
+      // msalInstance.loginPopup();
     }
 
     msalInstance.handleRedirectPromise().then((tokenResponse) => {
