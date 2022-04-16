@@ -29,7 +29,17 @@ const AdminDashboard = () => {
       msalInstance.setActiveAccount(accounts[0]);
     }
     else {
-      msalInstance.loginPopup();
+      msTeams.authentication.authenticate({
+        url: 'https://facebook.com',
+        width: 600,
+        height: 535,
+        successCallback: ((res) => {
+          alert(res);
+            console.log(res);
+        }),
+        failureCallback: (err => console.error(err))
+      });
+      // msalInstance.loginPopup();
     }
 
     msalInstance.handleRedirectPromise().then((tokenResponse) => {
