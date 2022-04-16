@@ -10,7 +10,11 @@ const Test = () => {
 
   // Check if user account exists in session storage
   const checkForAccount = useCallback(async () => {
-    msalInstance.loginPopup();
+      msalInstance.loginPopup();
+      msalInstance.addEventCallback((event) => {
+          console.log(event);
+          alert(event.eventType);
+      });
   }, []);
 
   useEffect(() => {
