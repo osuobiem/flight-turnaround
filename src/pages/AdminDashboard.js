@@ -5,7 +5,7 @@ import AdminHeader from "../components/AdminHeader/AdminHeader";
 import { AuthContext } from "../AppContext";
 import { useEffect } from "react";
 import msalInstance from "../config/msalInstance";
-import { InteractionType } from "@azure/msal-browser";
+import { InteractionType, EventType } from "@azure/msal-browser";
 import { AuthCodeMSALBrowserAuthenticationProvider } from '@microsoft/microsoft-graph-client/authProviders/authCodeMsalBrowser';
 import { useState } from "react";
 import { Client } from "@microsoft/microsoft-graph-client";
@@ -26,7 +26,7 @@ const AdminDashboard = () => {
       msalInstance.setActiveAccount(accounts[0]);
     }
     else {
-      msalInstance.loginRedirect();
+      msalInstance.acquireTokenRedirect();
     }
 
     msalInstance.handleRedirectPromise().then((tokenResponse) => {
@@ -37,12 +37,12 @@ const AdminDashboard = () => {
       console.error(error);
     });
 
-    // msalInstance.addEventCallback((event) => {
-    //   if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
-    //     const authResult = event.payload;
-    //     msalInstance.setActiveAccount(authResult.account);
-    //   }
-    // });
+    msalInstance.addEventCallback((event) => {
+      if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
+        const authResult = event.payload;
+        msalInstance.setActiveAccount(authResult.account);
+      }
+    });
 
     dispatchAuthEvent(new AuthCodeMSALBrowserAuthenticationProvider(
       msalInstance,
