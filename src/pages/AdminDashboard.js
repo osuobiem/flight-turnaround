@@ -95,9 +95,9 @@ const AdminDashboard = () => {
     if (Object.entries(graphClient).length > 0) getPeople();
   }, [graphClient, getPeople]);
 
-  function popUp() {
-    msTeams.authentication.authenticate({
-      url: 'admin',
+  const popUp = async () => {
+    await msTeams.authentication.authenticate({
+      url: 'https://facebook.com',
       width: 600,
       height: 535,
       successCallback: ((res) => {
