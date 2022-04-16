@@ -97,7 +97,7 @@ const AdminDashboard = () => {
 
   function popUp() {
     msTeams.authentication.authenticate({
-      url: 'https://facebook.com',
+      url: 'admin',
       width: 600,
       height: 535,
       successCallback: ((res) => {
