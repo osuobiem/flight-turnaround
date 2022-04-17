@@ -9,7 +9,7 @@ import './AdminHeader.css';
 
 msTeams.initialize();
 
-const AdminHeader = ({people, graphClient}) => {
+const AdminHeader = () => {
 
     const [showCreateTeam, setShowCreateTeam] = useState(false);
 
@@ -25,7 +25,7 @@ const AdminHeader = ({people, graphClient}) => {
                 </FlexItem>
             </Flex>
 
-            <CreateTeam open={showCreateTeam} setOpen={setShowCreateTeam} people={people} graphClient={graphClient} />
+            <CreateTeam open={showCreateTeam} setOpen={setShowCreateTeam} />
         </div>
     )
 };
