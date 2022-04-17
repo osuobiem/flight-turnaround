@@ -6,16 +6,16 @@ import * as msTeams from '@microsoft/teams-js';
 
 const AdminDashboard = () => {
 
-  const popWindow = async () => {
-    await msTeams.authentication.authenticate({
-      url: window.location.origin + "/consent-popup-start.html",
-      width: 600,
-      height: 535,
-      successCallback: (() => {
-        console.log('Got success callback');
-      })
-    });
-  }
+  // const popWindow = async () => {
+  //   await msTeams.authentication.authenticate({
+  //     url: window.location.origin + "/consent-popup-start.html",
+  //     width: 600,
+  //     height: 535,
+  //     successCallback: (() => {
+  //       console.log('Got success callback');
+  //     })
+  //   });
+  // }
 
   // Get a client side token from Teams
   const getClientSideToken = async () => {
