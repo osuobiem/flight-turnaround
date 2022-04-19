@@ -5,6 +5,7 @@ import { AppContext } from "../../AppContext";
 import './HQTabFilters.css';
 
 const HQTabFilters = ({filters, setFilters, downloadLink}) => {
+    
     const { currentTheme } = useContext(AppContext);
 
     const themeSuffix = () => {
@@ -54,7 +55,7 @@ const HQTabFilters = ({filters, setFilters, downloadLink}) => {
                         <FormDropdown
                             className={`fil-select${themeSuffix()}`}
                             items={terminals}
-                            defaultValue={terminals[1]}
+                            defaultValue={terminals[0]}
                             onChange={(ev, op) => updateFilters('destination', op.value)}
                             inline />
 
