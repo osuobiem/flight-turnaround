@@ -8,7 +8,7 @@ import TopCard from '../../../helpers/TopCard';
 import './FlightDetails.css';
 import { useState } from 'react';
 
-const FlightDetails = ({open, setOpen}) => {
+const FlightDetails = ({open, setOpen, flight}) => {
     
     const [tab, setTab] = useState('crs');
 
@@ -18,7 +18,7 @@ const FlightDetails = ({open, setOpen}) => {
             cancelButton="Close"
             onOpen={() => setOpen(true)}
             onCancel={() => setOpen(false)}
-            header={<TopCard title="EA2635" subTitle="Green Africa Ramp" avatar="https://images.unsplash.com/photo-1531642765602-5cae8bbbf285" />}
+            header={<TopCard title={flight.FlightNumber} subTitle="Green Africa Ramp" avatar="https://images.unsplash.com/photo-1531642765602-5cae8bbbf285" />}
             headerAction={{
                 icon: <CloseIcon />,
                 title: 'Close',
@@ -40,7 +40,7 @@ const FlightDetails = ({open, setOpen}) => {
                             />
 
                             <div className="fld-content">
-                                <CurrentStatus tab={tab}/>
+                                <CurrentStatus tab={tab} flight={flight}/>
                                 <ViewActivity tab={tab}/>
                             </div>
 

@@ -3,7 +3,7 @@ import { MoreIcon } from '@fluentui/react-icons-northstar'
 import FlightDetails from '../Dialogs/FlightDetails/FlightDetails';
 import { useState } from 'react';
 
-const HQTableMenu = () => {
+const HQTableMenu = ({flight}) => {
     const [showFlightDetails, setShowFlightDetails] = useState(false);
 
     const menu = [
@@ -24,7 +24,7 @@ const HQTableMenu = () => {
     return (
         <div>
             <Menu items={menu} iconOnly activeIndex={1} />
-            <FlightDetails open={showFlightDetails} setOpen={setShowFlightDetails} />
+            <FlightDetails flight={flight} open={showFlightDetails} setOpen={setShowFlightDetails} />
         </div>
     );
 };

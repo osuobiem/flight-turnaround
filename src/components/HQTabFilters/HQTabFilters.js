@@ -1,10 +1,10 @@
-import { Flex, FlexItem, FormDropdown, Datepicker } from "@fluentui/react-northstar";
+import { Flex, FlexItem, FormDropdown, Datepicker, Button } from "@fluentui/react-northstar";
 import { useContext } from "react";
 import { AppContext } from "../../AppContext";
 
 import './HQTabFilters.css';
 
-const HQTabFilters = () => {
+const HQTabFilters = ({filters, setFilters, downloadLink}) => {
     const { currentTheme } = useContext(AppContext);
 
     const themeSuffix = () => {
@@ -15,11 +15,32 @@ const HQTabFilters = () => {
         }
     }
 
-    const terminals = ['Abuja', 'Lagos', 'Jos', 'Port Harcourt', 'Uyo']
+    const terminals = [
+        {header: 'All', content: ''},
+        {header: 'Abuja', content: 'ABV'},
+        {header: 'Lagos', content: 'LOS'},
+        {header: 'Jos', content: 'JOS'},
+        {header: 'Port Harcourt', content: 'PHC'},
+        {header: 'Uyo', content: 'QUO'}
+    ];
+
+    const updateFilters = (key, value) => {
+        let newFilters = {...filters};
+
+        if(key === 'sta') {
+            let date = new Date(value);
+            newFilters[key] = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+        }
+        else {
+            newFilters[key] = value.content;
+        }
+
+        setFilters(newFilters);
+    }
 
     return (
         <div className="filters-container">
-            <Flex gap="gap.large">
+            <Flex gap="gap.large" space="between">
                 <FlexItem>
                     <div className="fil-between">
                         <FormDropdown
@@ -27,32 +48,29 @@ const HQTabFilters = () => {
                             className={`fil-select${themeSuffix()}`}
                             items={terminals}
                             defaultValue={terminals[0]}
+                            onChange={(ev, op) => updateFilters('origin', op.value)}
                             inline />
                         
                         <FormDropdown
                             className={`fil-select${themeSuffix()}`}
                             items={terminals}
                             defaultValue={terminals[1]}
+                            onChange={(ev, op) => updateFilters('destination', op.value)}
                             inline />
+
+                        <Datepicker
+                            today={new Date()}
+                            defaultSelectedDate={new Date()}
+                            allowManualInput={false}
+                            onDateChange={(ev, op) => updateFilters('sta', op.value)}
+                            className={`fil-date-picker${themeSuffix()}`}/>
                     </div>
                 </FlexItem>
 
                 <FlexItem>
-                    <FormDropdown
-                        label="Flight #"
-                        className={`fil-select${themeSuffix()}`}
-                        items={['All']}
-                        defaultValue="All"
-                        inline />
+                    <Button content="Export CSV" primary onClick={() => window.open(downloadLink)} style={{ marginRight: '12px' }}/>
                 </FlexItem>
-
-                <FlexItem>
-                    <Datepicker
-                        today={new Date()}
-                        defaultSelectedDate={new Date()}
-                        allowManualInput={false}
-                        className={`fil-date-picker${themeSuffix()}`}/>
-                </FlexItem>
+                
             </Flex>
         </div>
     )

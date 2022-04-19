@@ -5,8 +5,30 @@ import "./HQTable.css";
 
 import HQTableMenu from "../../HQTableMenu/HQTableMenu";
 import { useState } from "react";
+import {useEffect} from "react";
 
-const HQTable = () => {
+const HQTable = ({flights}) => {
+
+  useEffect(() => {
+    
+    setRows(flights.map((flight, i) => {
+      return {
+        key: i,
+        items: [
+          { key: `${i}-1`, content: flight.FlightNumber, className: "hqt-left-padding" },
+          { key: `${i}-2`, content: flight.Origin },
+          { key: `${i}-3`, content: `${(new Date(flight.STA)).getHours()}:${(new Date(flight.STA)).getMinutes()}` },
+          { key: `${i}-4`, content: `${(new Date(flight.STD)).getHours()}:${(new Date(flight.STD)).getMinutes()}` },
+          { key: `${i}-5`, content: flight.Status, className: statusColor(flight.Status) },
+          { key: `${i}-6`, content: flight.Destination },
+          { key: `${i}-7`, content: flight.Performance, className: statusColor(flight.Performance) },
+          { key: `${i}-8`, content: flight.TimeOnGround },
+          { key: `${i}-9`, content: <HQTableMenu flight={flight}/> }
+        ]
+      }
+    }));
+
+  }, [flights]);
 
   const headerClass = 'hqt-header';
   const [header, setHeader] = useState({
@@ -102,37 +124,22 @@ const HQTable = () => {
       { key: "more options", "aria-label": "options", className: headerClass },
     ],
   });
+
+  const statusColor = status => {
+    let positive = ['Departed', 'In - Time'];
+    let negative = ['Delayed'];
+
+    if(positive.includes(status)) {
+      return 'hqt-positive'; 
+    }
+    else if(negative.includes(status)) {
+      return 'hqt-negartive';
+    };
+
+    return '';
+  };
   
-  const [rows] = useState([
-    {
-      key: 1,
-      items: [
-        { key: "1-1", content: "EC143", className: "hqt-left-padding" },
-        { key: "1-2", content: "Abuja" },
-        { key: "1-3", content: "10:00" },
-        { key: "1-4", content: "12:00" },
-        { key: "1-5", content: "Departed", className: "hqt-positive" },
-        { key: "1-6", content: "Lagos" },
-        { key: "1-7", content: "In - Time", className: "hqt-positive" },
-        { key: "1-8", content: "01:35" },
-        { key: "1-9", content: <HQTableMenu/> },
-      ],
-    },
-    {
-      key: 2,
-      items: [
-        { key: "2-1", content: "EA243", className: "hqt-left-padding" },
-        { key: "2-2", content: "Lagos" },
-        { key: "2-3", content: "01:40" },
-        { key: "2-4", content: "12:00" },
-        { key: "2-5", content: "Arrived" },
-        { key: "2-6", content: "Abuja" },
-        { key: "2-7", content: "Delayed", className: "hqt-negative" },
-        { key: "2-8", content: "01:35" },
-        { key: "2-9", content: <HQTableMenu/> },
-      ],
-    },
-  ]);
+  const [rows, setRows] = useState([]);
 
   const tableSort = new TableSort(header, rows, setHeader);
 

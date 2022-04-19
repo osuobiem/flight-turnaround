@@ -2,7 +2,7 @@ import React from "react";
 import ManageTeams from "../components/Tables/ManageTeams/ManageTeams";
 import AdminHeader from "../components/AdminHeader/AdminHeader";
 
-import * as msTeams from '@microsoft/teams-js';
+// import * as msTeams from '@microsoft/teams-js';
 
 const AdminDashboard = () => {
 
@@ -18,20 +18,19 @@ const AdminDashboard = () => {
   // }
 
   // Get a client side token from Teams
-  const getClientSideToken = async () => {
+  // const getTokenFromTeams = async () => {
 
-    msTeams.initialize();
-    return new Promise((resolve, reject) => {
-        msTeams.authentication.getAuthToken({
-          successCallback: (result) => { alert(result); console.log(result); resolve(result); },
-            failureCallback: (error) => { alert(error); console.error(error); reject(error); }
-        });
-    });
-  }
+  //   msTeams.initialize();
+  //   return new Promise((resolve, reject) => {
+  //       msTeams.authentication.getAuthToken({
+  //         successCallback: (result) => { alert(result); console.log(result); resolve(result); },
+  //           failureCallback: (error) => { alert(error); console.error(error); reject(error); }
+  //       });
+  //   });
+  // }
 
   return (
     <div>
-      <button onClick={() => getClientSideToken()}>Click Me</button>
       <AdminHeader />
       <ManageTeams />
     </div>

@@ -1,7 +1,6 @@
 import { Dialog, CloseIcon, Input, FormDropdown } from "@fluentui/react-northstar";
 import { useState } from "react";
 import TopCard from "../../../helpers/TopCard";
-import { graphApi } from "../../../helpers/GraphHandler";
 import ErrorAlert from "../../AlertsMessage/ErrorAlert";
 
 import "./CreateTeam.css";
@@ -54,20 +53,20 @@ const CreateTeam = ({ open, setOpen, people, graphClient }) => {
                 'isFavoriteByDefault': true
             };
             
-            graphApi('createChannel', graphClient, data)
-                .then(res => {
-                    setTeam(res.data);
-                    setOpen(false); setOpenD2(true);
-                })
-                .catch(err => {
-                    let error = err.message;
+            // graphApi('createChannel', graphClient, data)
+            //     .then(res => {
+            //         setTeam(res.data);
+            //         setOpen(false); setOpenD2(true);
+            //     })
+            //     .catch(err => {
+            //         let error = err.message;
     
-                    if (err.response) error = err.response.data.error.message;
-                    else if (err.request) error = err.request;
+            //         if (err.response) error = err.response.data.error.message;
+            //         else if (err.request) error = err.request;
     
-                    console.log(error);
-                    errorAlert(true, error);
-                });
+            //         console.log(error);
+            //         errorAlert(true, error);
+            //     });
         }
     }
 
