@@ -22,7 +22,8 @@ const HQTabFilters = ({filters, setFilters, downloadLink}) => {
         {header: 'Lagos', content: 'LOS'},
         {header: 'Jos', content: 'JOS'},
         {header: 'Port Harcourt', content: 'PHC'},
-        {header: 'Uyo', content: 'QUO'}
+        {header: 'Uyo', content: 'QUO'},
+        {header: 'Owerri', content: 'QOW'}
     ];
 
     const updateFilters = (key, value) => {
