@@ -1,33 +1,29 @@
-import React from "react";
+import React, {useState, useCallback} from "react";
 import ManageTeams from "../components/Tables/ManageTeams/ManageTeams";
 import AdminHeader from "../components/AdminHeader/AdminHeader";
 
-// import * as msTeams from '@microsoft/teams-js';
+import * as msTeams from '@microsoft/teams-js';
+import {useEffect} from "react";
+msTeams.initialize();
 
 const AdminDashboard = () => {
 
-  // const popWindow = async () => {
-  //   await msTeams.authentication.authenticate({
-  //     url: window.location.origin + "/consent-popup-start.html",
-  //     width: 600,
-  //     height: 535,
-  //     successCallback: (() => {
-  //       console.log('Got success callback');
-  //     })
-  //   });
-  // }
+  const [tokenExpired] = useState(true);
+    
+  const getToken = useCallback(async () => {
+    return await new Promise((resolve, reject) => {
+        msTeams.authentication.getAuthToken({
+          successCallback: (result) => { console.log(result); resolve(result); },
+            failureCallback: (error) => { reject(error); }
+        });
+    });
+  }, []);
 
-  // Get a client side token from Teams
-  // const getTokenFromTeams = async () => {
-
-  //   msTeams.initialize();
-  //   return new Promise((resolve, reject) => {
-  //       msTeams.authentication.getAuthToken({
-  //         successCallback: (result) => { alert(result); console.log(result); resolve(result); },
-  //           failureCallback: (error) => { alert(error); console.error(error); reject(error); }
-  //       });
-  //   });
-  // }
+  useEffect(() => {
+    if(tokenExpired) {
+      getToken();
+    }
+  }, [tokenExpired, getToken]);
 
   return (
     <div>
