@@ -1,23 +1,24 @@
 import { Dialog, CloseIcon, Input, FormDropdown } from "@fluentui/react-northstar";
 import { useState } from "react";
+import {graphApi} from "../../../helpers/ApiHandler";
 import TopCard from "../../../helpers/TopCard";
 import ErrorAlert from "../../AlertsMessage/ErrorAlert";
 
 import "./CreateTeam.css";
 
-const CreateTeam = ({ open, setOpen, people, graphClient }) => {
+const CreateTeam = ({ open, setOpen }) => {
 
     const [openD2, setOpenD2] = useState(false);
     const [teamName, setTeamName] = useState('');
     const [apLocation, setApLocation] = useState('Abuja');
     const [zone, setZone] = useState('North');
-    const [team] = useState({});
+    const [team, setTeam] = useState({});
 
     const [tcoMembers, setTcoMembers] = useState([]);
     const [dutyManagers, setManagers] = useState([]);
 
-    const [showError] = useState(false);
-    const [errorMessage] = useState('');
+    const [showError, setShowError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const title = "Create New Airport Flight Ops Team"
     const subTitle = "GA Turnaround";
@@ -26,19 +27,19 @@ const CreateTeam = ({ open, setOpen, people, graphClient }) => {
     const terminals = ['Abuja', 'Lagos', 'Jos', 'Port Harcourt', 'Uyo'];
     const zones = ['West', 'North', 'South', 'East'];
 
-    // const errorAlert = (show, message) => {
-    //     message = message.replaceAll('Channel.DisplayName', 'Team Name');
-    //     message = message.replaceAll('channel.displayName', 'Team Name');
-    //     message = message.replaceAll('Channel name', 'Team Name');
-    //     message = message.replaceAll('channel name', 'Team Name');
+    const errorAlert = (show, message) => {
+        message = message.replaceAll('Channel.DisplayName', 'Team Name');
+        message = message.replaceAll('channel.displayName', 'Team Name');
+        message = message.replaceAll('Channel name', 'Team Name');
+        message = message.replaceAll('channel name', 'Team Name');
 
-    //     setErrorMessage(message);
-    //     setShowError(show);
+        setErrorMessage(message);
+        setShowError(show);
         
-    //     setTimeout(() => {
-    //         setShowError(false);
-    //     }, 5000);
-    // }
+        setTimeout(() => {
+            setShowError(false);
+        }, 5000);
+    }
 
     // Create channel in Teams and Node Server
     const createChannel = async () => {
@@ -47,28 +48,30 @@ const CreateTeam = ({ open, setOpen, people, graphClient }) => {
             setOpen(false); setOpenD2(true);
         }
         else {
-            // let data = {
-            //     'description': `${teamName} | ${apLocation} | ${zone}`,
-            //     'displayName': teamName,
-            //     'isFavoriteByDefault': true
-            // };
+            let data = {
+                'description': `${teamName} | ${apLocation} | ${zone}`,
+                'displayName': teamName,
+                'isFavoriteByDefault': true
+            };
             
-            // graphApi('createChannel', graphClient, data)
-            //     .then(res => {
-            //         setTeam(res.data);
-            //         setOpen(false); setOpenD2(true);
-            //     })
-            //     .catch(err => {
-            //         let error = err.message;
+            graphApi('createChannel', {}, data)
+                .then(res => {
+                    setTeam(res.data);
+                    setOpen(false); setOpenD2(true);
+                })
+                .catch(err => {
+                    let error = err.message;
     
-            //         if (err.response) error = err.response.data.error.message;
-            //         else if (err.request) error = err.request;
+                    if (err.response) error = err.response.data.error.message;
+                    else if (err.request) error = err.request;
     
-            //         console.log(error);
-            //         errorAlert(true, error);
-            //     });
+                    console.log(error);
+                    errorAlert(true, error);
+                });
         }
     }
+    
+    const people = ['James Uche', 'Martina Olowo', 'Terry Agim'];
 
     // Pick people from dropdown
     const pickPeople = (value, type) => {

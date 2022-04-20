@@ -8,13 +8,21 @@ const routes = {
         url: `flights`,
         method: 'get'
     },
+    getTeams: {
+        url: '/graph/channels',
+        method: 'get'
+    },
     switchTokens: {
         url: 'auth/switch-tokens',
         method: 'post'
     },
-    createTeam: {
+    createChannel: {
         url: 'graph/channels',
         method: 'post'
+    },
+    getPeople: {
+        url: 'graph/people',
+        method: 'get'
     }
 };
 
@@ -32,7 +40,7 @@ export const api = async(route, params = {}, data = {}) => {
     return await axios(config);
 }
 
-export const otherApi = async(route, params = {}, data = {}) => {
+export const graphApi = async(route, params = {}, data = {}) => {
 
     const r = routes[route];
 
