@@ -4,7 +4,7 @@ import AdminHeader from "../components/AdminHeader/AdminHeader";
 
 import * as msTeams from '@microsoft/teams-js';
 import {useEffect} from "react";
-import {graphApi} from "../helpers/ApiHandler";
+import {api, graphApi} from "../helpers/ApiHandler";
 msTeams.initialize();
 
 const AdminDashboard = () => {
@@ -14,12 +14,11 @@ const AdminDashboard = () => {
   let tokenExpire = parseInt(localStorage.getItem('gatTokenExp')) ?? (new Date().getTime()) + 3600;
     
   const fetchTeams = useCallback(async () => {
-    await graphApi('getTeams').then(res => {
-      setTeams(res.data.data.value);
+    await api('getTeams').then(res => {
+      setTeams(res.data.data);
     });
-    console.log(teams);
-  }, [teams]);
-  
+  }, [setTeams]);
+
   const getToken = useCallback(async () => {
     let token = await new Promise((resolve, reject) => {
         msTeams.authentication.getAuthToken({
@@ -29,19 +28,19 @@ const AdminDashboard = () => {
     });
 
     await graphApi('switchToken', {}, {access_token: token}).then(() => localStorage.setItem('gatTokenExp', tokenExpire.toString()));
-    await fetchTeams();
-  }, [tokenExpire, fetchTeams]);
+  }, [tokenExpire]);
 
   useEffect(() => {
     if(tokenExpire < new Date().getTime()) {
       getToken();
     }
-  }, [tokenExpire, getToken]);
+    fetchTeams();
+  }, [tokenExpire, getToken, fetchTeams]);
 
   return (
     <div>
       <AdminHeader />
-      <ManageTeams />
+      <ManageTeams teams={teams} />
     </div>
   );
 };

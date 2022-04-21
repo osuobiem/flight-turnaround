@@ -9,7 +9,7 @@ const routes = {
         method: 'get'
     },
     getTeams: {
-        url: '/graph/channels',
+        url: 'airport-teams',
         method: 'get'
     },
     switchTokens: {
