@@ -27,7 +27,7 @@ const AdminDashboard = () => {
 
     let tokenExpire = (new Date().getTime()) + 3600;
 
-    await graphApi('switchToken', {}, {access_token: token}).then(() => localStorage.setItem('gatTokenExp', tokenExpire.toString()));
+    await graphApi('switchTokens', {}, {access_token: token}).then(() => localStorage.setItem('gatTokenExp', tokenExpire.toString()));
   }, []);
 
   useEffect(() => {
