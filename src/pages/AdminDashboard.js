@@ -25,7 +25,7 @@ const AdminDashboard = () => {
         });
     });
 
-    let tokenExpire = (new Date().getTime()) + 3600;
+    let tokenExpire = new Date().getTime() + 3600;
     console.log(`Current Time - ${new Date().getTime()} - ${new Date()}`)
     console.log(`Expiry Time - ${tokenExpire} - ${new Date(tokenExpire)}`)
 
