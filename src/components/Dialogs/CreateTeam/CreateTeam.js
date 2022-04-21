@@ -51,22 +51,22 @@ const CreateTeam = ({ open, setOpen }) => {
             let data = {
                 'description': `${teamName} | ${apLocation} | ${zone}`,
                 'displayName': teamName,
-                'isFavoriteByDefault': true
+                'membershipType': 'private'
             };
             
-            graphApi('createChannel', {}, data)
+            await graphApi('createChannel', {}, data)
                 .then(res => {
+                    console.log(res.data);
                     setTeam(res.data);
                     setOpen(false); setOpenD2(true);
                 })
                 .catch(err => {
-                    let error = err.message;
+                    let error = err?.message;
+
+                    if (err.response) error = err.response?.data?.message?.error?.message;
+                    else if (err.request) error = err?.request;
     
-                    if (err.response) error = err.response.data.error.message;
-                    else if (err.request) error = err.request;
-    
-                    console.log(error);
-                    errorAlert(true, error);
+                    errorAlert(true, error.length > 0 ? error : 'An unknown error occured!');
                 });
         }
     }

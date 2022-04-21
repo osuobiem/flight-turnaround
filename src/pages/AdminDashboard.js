@@ -10,8 +10,6 @@ msTeams.initialize();
 const AdminDashboard = () => {
 
   const [teams, setTeams] = useState([]);
-
-  let tokenExpire = parseInt(localStorage.getItem('gatTokenExp')) ?? (new Date().getTime()) + 3600;
     
   const fetchTeams = useCallback(async () => {
     await api('getTeams').then(res => {
@@ -27,15 +25,19 @@ const AdminDashboard = () => {
         });
     });
 
+    let tokenExpire = (new Date().getTime()) + 3600;
+
     await graphApi('switchToken', {}, {access_token: token}).then(() => localStorage.setItem('gatTokenExp', tokenExpire.toString()));
-  }, [tokenExpire]);
+  }, []);
 
   useEffect(() => {
+    let tokenExpire = localStorage.getItem('gatTokenExp') ?? 0;
+
     if(tokenExpire < new Date().getTime()) {
       getToken();
     }
     fetchTeams();
-  }, [tokenExpire, getToken, fetchTeams]);
+  }, [getToken, fetchTeams]);
 
   return (
     <div>
