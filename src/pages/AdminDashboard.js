@@ -10,12 +10,21 @@ msTeams.initialize();
 const AdminDashboard = () => {
 
   const [teams, setTeams] = useState([]);
+  const [people, setPeople] = useState([]);
     
+  // Fetch Teams
   const fetchTeams = useCallback(async () => {
     await api('getTeams').then(res => {
       setTeams(res.data.data);
     });
   }, [setTeams]);
+
+  // Fetch People
+  const fetchPeople = useCallback(async () => {
+    await graphApi('getPeople').then(res => {
+      setPeople(res.data.data.value);
+    });
+  }, [setPeople]);
 
   const getToken = useCallback(async () => {
     let token = await new Promise((resolve, reject) => {
@@ -26,8 +35,6 @@ const AdminDashboard = () => {
     });
 
     let tokenExpire = (new Date().getTime()) + 3600000;
-    console.log(`Current Time - ${new Date().getTime()} - ${new Date()}`)
-    console.log(`Expiry Time - ${tokenExpire} - ${new Date(tokenExpire)}`)
 
     await graphApi('switchTokens', {}, {access_token: token}).then(() => localStorage.setItem('gatTokenExp', tokenExpire.toString()));
   }, []);
@@ -39,12 +46,13 @@ const AdminDashboard = () => {
       getToken();
     }
     fetchTeams();
-  }, [getToken, fetchTeams]);
+    fetchPeople();
+  }, [getToken, fetchTeams, fetchPeople]);
 
   return (
     <div>
-      <AdminHeader />
-      <ManageTeams teams={teams} />
+      <AdminHeader people={people} fetchTeams={fetchTeams} />
+      <ManageTeams teams={teams} fetchTeams={fetchTeams} />
     </div>
   );
 };

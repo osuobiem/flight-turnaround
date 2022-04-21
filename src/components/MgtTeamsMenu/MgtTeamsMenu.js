@@ -5,8 +5,9 @@ import ConfirmAction from '../Dialogs/ConfirmAction/ConfirmAction';
 import { useState } from 'react';
 
 import './MgtTeamsMenu.css';
+import {api, graphApi} from '../../helpers/ApiHandler';
 
-const MgtTeamsMenu = ({ title }) => {
+const MgtTeamsMenu = ({ title, team, fetchTeams }) => {
     
     const [showEditTeam, setShowEditTeam] = useState(false);
     const [showDeleteTeam, setShowDeleteTeam] = useState(false);
@@ -26,6 +27,19 @@ const MgtTeamsMenu = ({ title }) => {
         },
     ];
 
+    const deleteTeam = async () => {
+        await graphApi({
+            url: `graph/channels/${team?.ChannelID}`,
+            method: 'delete'
+        }).then(async () => {
+            await api({
+                url: `airport-teams/${team.RowKey}`,
+                method: 'delete'
+            });
+            await fetchTeams();
+        })
+    }
+
     return (
         <div>
             <Menu items={menu} iconOnly activeIndex={1} />
@@ -34,7 +48,7 @@ const MgtTeamsMenu = ({ title }) => {
                 open={showDeleteTeam}
                 setOpen={setShowDeleteTeam}
                 content="Are you sure you want to delete this team?"
-                confirmText="Yes, Delete"/>
+                confirmText="Yes, Delete" action={deleteTeam}/>
         </div>
     );
 };

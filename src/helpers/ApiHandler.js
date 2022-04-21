@@ -12,6 +12,12 @@ const routes = {
         url: 'airport-teams',
         method: 'get'
     },
+    createTeam: {
+        url: 'airport-teams',
+        method: 'post'
+    },
+
+    // Graph Related Endpoints
     switchTokens: {
         url: 'auth/switch-tokens',
         method: 'post'
@@ -28,7 +34,7 @@ const routes = {
 
 export const api = async(route, params = {}, data = {}) => {
 
-    const r = routes[route];
+    const r = (typeof route === 'string') ? routes[route] : route;
 
     let config = {
         url: `${apiBaseUrl}/${r.url}`,
@@ -42,7 +48,7 @@ export const api = async(route, params = {}, data = {}) => {
 
 export const graphApi = async(route, params = {}, data = {}) => {
 
-    const r = routes[route];
+    const r = (typeof route === 'string') ? routes[route] : route;
 
     let config = {
         url: `${api2BaseUrl}/${r.url}`,

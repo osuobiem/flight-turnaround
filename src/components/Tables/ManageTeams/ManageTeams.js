@@ -7,7 +7,7 @@ import "./ManageTeams.css";
 
 import { useState, useEffect } from "react";
 
-const ManageTeams = ({teams}) => {
+const ManageTeams = ({teams, fetchTeams}) => {
 
     useEffect(() => {
         let tRows = teams.map((team, i) => {
@@ -17,13 +17,13 @@ const ManageTeams = ({teams}) => {
                   { key: `${i}-1`, content: team.TeamName },
                   { key: `${i}-2`, content: team.Location },
                   { key: `${i}-3`, content: team.Zone },
-                  { key: `${i}-4`, content: <MgtTeamsMenu title={`Edit ${team.name}`} />, style: {justifyContent: 'right'} }
+                  { key: `${i}-4`, content: <MgtTeamsMenu title={`Edit ${team.name}`} team={team} fetchTeams={fetchTeams} />, style: {justifyContent: 'right'} }
                 ]
             }
         });
 
         setRows(tRows);
-    }, [teams]);
+    }, [teams, fetchTeams]);
 
     const headerClass = 'mgt-header';
     const [header, setHeader] = useState({
