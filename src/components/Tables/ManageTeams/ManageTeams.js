@@ -5,25 +5,9 @@ import MgtTeamsMenu from "../../MgtTeamsMenu/MgtTeamsMenu";
 
 import "./ManageTeams.css";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 const ManageTeams = ({teams, fetchTeams}) => {
-
-    useEffect(() => {
-        let tRows = teams.map((team, i) => {
-            return {
-                key: i,
-                items: [
-                  { key: `${i}-1`, content: team.TeamName },
-                  { key: `${i}-2`, content: team.Location },
-                  { key: `${i}-3`, content: team.Zone },
-                  { key: `${i}-4`, content: <MgtTeamsMenu title={`Edit ${team.name}`} team={team} fetchTeams={fetchTeams} />, style: {justifyContent: 'right'} }
-                ]
-            }
-        });
-
-        setRows(tRows);
-    }, [teams, fetchTeams]);
 
     const headerClass = 'mgt-header';
     const [header, setHeader] = useState({
@@ -65,9 +49,28 @@ const ManageTeams = ({teams, fetchTeams}) => {
         ],
     });
 
+    const tableSort = useMemo(() => new TableSort(header, setHeader), [header]);
     const [rows, setRows] = useState([]);
-    
-    const tableSort = new TableSort(header, rows, setHeader);
+
+    useEffect(() => {
+        let tRows = teams.map((team, i) => {
+            return {
+                key: i,
+                items: [
+                  { key: `${i}-1`, content: team.TeamName },
+                  { key: `${i}-2`, content: team.Location },
+                  { key: `${i}-3`, content: team.Zone },
+                  { key: `${i}-4`, content: <MgtTeamsMenu team={team} fetchTeams={fetchTeams} />, style: {justifyContent: 'right'} }
+                ]
+            }
+        });
+
+        setRows(tRows);
+    }, [teams, fetchTeams]);
+
+    useEffect(() => {
+        tableSort.setRows(rows);
+    }, [rows, tableSort]);
 
     return (
         <div className="tab-container">

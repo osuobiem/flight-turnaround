@@ -3,11 +3,15 @@ import { ArrowDownIcon, ArrowUpIcon } from '@fluentui/react-icons-northstar';
 
 class TableSort {
 
-    constructor (header, rows, setHeader) {
+    rows;
+
+    constructor (header, setHeader) {
         this.header = header;
-        this.rows = rows;
         this.setHeader = setHeader;
     }
+
+    // Set rows
+    setRows = (rows) => this.rows = rows;
 
     // Compare sort values
     compare = (key, order) => {

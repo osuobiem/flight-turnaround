@@ -139,7 +139,7 @@ const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
     }
     
     const peopleList = people.map(p => {
-        return {header: p.displayName, content: p.jobTitle, id: p.id}
+        return {header: p.displayName, content: p.jobTitle, id: p.userId}
     });
 
     // Pick people from dropdown

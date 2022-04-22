@@ -7,7 +7,7 @@ import { useState } from 'react';
 import './MgtTeamsMenu.css';
 import {api, graphApi} from '../../helpers/ApiHandler';
 
-const MgtTeamsMenu = ({ title, team, fetchTeams }) => {
+const MgtTeamsMenu = ({ team, fetchTeams }) => {
     
     const [showEditTeam, setShowEditTeam] = useState(false);
     const [showDeleteTeam, setShowDeleteTeam] = useState(false);
@@ -43,7 +43,7 @@ const MgtTeamsMenu = ({ title, team, fetchTeams }) => {
     return (
         <div>
             <Menu items={menu} iconOnly activeIndex={1} />
-            <EditTeam title={title} open={showEditTeam} setOpen={setShowEditTeam} />
+            <EditTeam open={showEditTeam} setOpen={setShowEditTeam} team={team} />
             <ConfirmAction
                 open={showDeleteTeam}
                 setOpen={setShowDeleteTeam}
