@@ -28,6 +28,12 @@
     margin-right: 12px;
 }
 
+.fil-date-picker-l,
+.fil-date-picker-d,
+.fil-date-picker-c {
+    margin-left: 15px;
+}
+
 .fil-date-picker-l .ui-input__input {
     background: #fff !important;
     margin-right: 0;

@@ -63,7 +63,6 @@ const HQTabFilters = ({filters, setFilters, downloadLink}) => {
                         <Datepicker
                             today={new Date()}
                             defaultSelectedDate={new Date()}
-                            allowManualInput={false}
                             onDateChange={(ev, op) => updateFilters('sta', op.value)}
                             className={`fil-date-picker${themeSuffix()}`}/>
                     </div>

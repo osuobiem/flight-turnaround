@@ -120,6 +120,8 @@ const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
 
             setManagers([]);
             setTcoMembers([]);
+            setTeam({});
+            setTeamName('');
         })
         .catch(async err => {
             await graphApi({
