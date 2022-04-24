@@ -4,7 +4,7 @@
 
 .hqt-table [role="row"] {
     background: inherit !important;
-    padding: 20px 0;
+    height: 55px;
 }
 
 .hqt-header {
@@ -22,4 +22,27 @@
 
 .hqt-left-padding {
     padding-left: 50px !important;
+}
+
+.hqt-table .ui-table__row .ui-table__cell:nth-child(1) {
+    max-width: 15%;
+}
+
+.hqt-table .ui-table__row .ui-table__cell:nth-child(2),
+.hqt-table .ui-table__row .ui-table__cell:nth-child(6) {
+    min-width: 18%;
+    max-width: 18%;
+}
+
+.hqt-table .ui-table__row .ui-table__cell:nth-child(8) {
+    max-width: 8%;
+}
+
+.hqt-table .ui-table__row .ui-table__cell:nth-child(9) {
+    max-width: 8%;
+}
+
+.hqt-table .ui-table__row .ui-table__cell:nth-child(3),
+.hqt-table .ui-table__row .ui-table__cell:nth-child(4) {
+    max-width: 5%;
 }
