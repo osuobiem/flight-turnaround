@@ -3,22 +3,57 @@ import { CloseIcon } from '@fluentui/react-icons-northstar';
 
 import CurrentStatus from './CurrentStatus';
 import ViewActivity from './ViewActivity';
-import TopCard from '../../../helpers/TopCard';
+import TopCard from '../../TopCard';
 
 import './FlightDetails.css';
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
-const FlightDetails = ({open, setOpen, flight}) => {
+import logo from '../../../galogo.png';
+import {api} from '../../../helpers/ApiHandler';
+
+const FlightDetails = ({open, setOpen, flight, stations}) => {
     
     const [tab, setTab] = useState('crs');
+
+    const getFlightDetails = useCallback(async (flightNumber) => {
+        await api({
+                url: 'flight-summary/'+flightNumber,
+                method: 'get'
+            })
+            .then(res => setFlightDetails(res.data.data))
+            .catch(err => {
+                console.log(err);
+                setOpen(false);
+            });
+    }, [setOpen]);
+
+    const getFlightActivities = useCallback(async (flightNumber) => {
+        await api({
+                url: 'done-airport-activities/flight/'+flightNumber,
+                method: 'get'
+            })
+            .then(res => setFlightActivities(res.data.data))
+            .catch(err => {
+                console.log(err);
+                setOpen(false);
+            });
+    }, []);
+
+    const [flightDetails, setFlightDetails] = useState({});
+    const [flightActivities, setFlightActivities] = useState([]);
+
+    useEffect(() => {
+        getFlightDetails(flight.FlightNumber);
+        getFlightActivities(flight.FlightNumber);
+    }, [flight, setFlightDetails, getFlightDetails, getFlightActivities]);
 
     return (
         <Dialog
             open={open}
             cancelButton="Close"
             onOpen={() => setOpen(true)}
-            onCancel={() => setOpen(false)}
-            header={<TopCard title={flight.FlightNumber} subTitle="Green Africa Ramp" avatar="https://images.unsplash.com/photo-1531642765602-5cae8bbbf285" />}
+            onCancel={() => {setTab('crs'); setOpen(false);}}
+            header={<TopCard title={flight.FlightNumber} subTitle="Green Africa Ramp" avatar={logo} />}
             headerAction={{
                 icon: <CloseIcon />,
                 title: 'Close',
@@ -40,8 +75,8 @@ const FlightDetails = ({open, setOpen, flight}) => {
                             />
 
                             <div className="fld-content">
-                                <CurrentStatus tab={tab} flight={flight}/>
-                                <ViewActivity tab={tab}/>
+                                <CurrentStatus tab={tab} flight={flight} stations={stations} flightDetails={flightDetails} />
+                                <ViewActivity tab={tab} flightActivities={flightActivities}/>
                             </div>
 
                             <Component {...rest} />

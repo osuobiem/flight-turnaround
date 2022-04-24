@@ -1,6 +1,6 @@
 import { Dialog, CloseIcon, Input, FormDropdown } from "@fluentui/react-northstar";
 import { useState } from "react";
-import TopCard from "../../../helpers/TopCard";
+import TopCard from "../../TopCard";
 
 import "./EditTeam.css";
 

@@ -3,9 +3,19 @@ import TableSort from "../../../helpers/TableSort";
 import FlightDetails from '../../Dialogs/FlightDetails/FlightDetails';
 
 import "./HQTable.css";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useContext } from "react";
+import {StationsContext} from "../../../AppContext";
+
+import moment from "moment";
 
 const HQTable = ({flights}) => {
+  const {stations} = useContext(StationsContext);
+  const [flightStations, setFlightStations] = useState({});
+
+  useEffect(() => {
+    setFlightStations(stations);
+  }, [stations]);
+
   const [showFlightDetails, setShowFlightDetails] = useState(false);
   const [activeFlight, setActiveFlight] = useState({});
 
@@ -114,11 +124,11 @@ const HQTable = ({flights}) => {
         key: i,
         items: [
           { key: `${i}-1`, content: flight.FlightNumber, className: "hqt-left-padding" },
-          { key: `${i}-2`, content: flight.Origin },
-          { key: `${i}-3`, content: `${(new Date(flight.STA)).getHours()}:${(new Date(flight.STA)).getMinutes()}` },
-          { key: `${i}-4`, content: `${(new Date(flight.STD)).getHours()}:${(new Date(flight.STD)).getMinutes()}` },
+          { key: `${i}-2`, content: `${flight.Origin} - ${flightStations[flight.Origin]}`},
+          { key: `${i}-3`, content: `${moment(flight.STA).format('HH:mm')}` },
+          { key: `${i}-4`, content: `${moment(flight.STD).format('HH:mm')}` },
           { key: `${i}-5`, content: flight.Status, className: statusColor(flight.Status) },
-          { key: `${i}-6`, content: flight.Destination },
+          { key: `${i}-6`, content: `${flight.Destination} - ${flightStations[flight.Destination]}` },
           { key: `${i}-7`, content: flight.Performance, className: statusColor(flight.Performance) },
           { key: `${i}-8`, content: flight.TimeOnGround },
           { key: `${i}-9`, content: <Button content="View" tinted size="small" onClick={() => {setActiveFlight(flight); setShowFlightDetails(true)}} /> }
@@ -127,7 +137,7 @@ const HQTable = ({flights}) => {
     });
 
     setRows(tRows);
-  }, [flights]);
+  }, [flights, flightStations]);
 
   useEffect(() => {
     tableSort.setRows(rows);
@@ -151,7 +161,7 @@ const HQTable = ({flights}) => {
     <div className="tab-container">
       <Table compact header={header} rows={rows} className="hqt-table" />
 
-      <FlightDetails flight={activeFlight} open={showFlightDetails} setOpen={setShowFlightDetails} />
+      <FlightDetails flight={activeFlight} open={showFlightDetails} setOpen={setShowFlightDetails} stations={flightStations} />
     </div>
   );
 };

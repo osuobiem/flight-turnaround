@@ -12,9 +12,13 @@ const routes = {
         url: 'airport-teams',
         method: 'get'
     },
-    createTeam: {
+    createAirportTeam: {
         url: 'airport-teams',
         method: 'post'
+    },
+    getStations: {
+        url: 'flight/stations',
+        method: 'get'
     },
 
     // Graph Related Endpoints
@@ -22,12 +26,12 @@ const routes = {
         url: 'auth/switch-tokens',
         method: 'post'
     },
-    createChannel: {
-        url: 'graph/channels',
+    createTeam: {
+        url: 'graph/teams',
         method: 'post'
     },
-    getPeople: {
-        url: 'graph/people',
+    getUsers: {
+        url: 'graph/users',
         method: 'get'
     }
 };

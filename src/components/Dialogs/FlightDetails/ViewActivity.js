@@ -1,39 +1,24 @@
 import { Table } from '@fluentui/react-northstar';
+import moment from 'moment';
 
 import './FlightDetails.css';
 
-const CurrentStatus = ({ tab }) => {
+const CurrentStatus = ({ tab, flightActivities }) => {
 
   const header = {
     items: ['Task', 'Completed at', 'Updated by']
   };
 
-  const rows = [
-    {
-      key: 1,
-      items: ['ON Ground', '12:00', 'Joseph'],
-    },
-    {
-      key: 2,
-      items: ['INTO Gate', '14:34', 'Olayinka'],
-    },
-    {
-      key: 3,
-      items: ['GPU/ACU Couple', '16:10', 'Chioma'],
-    },
-    {
-      key: 4,
-      items: ['ON Ground', '12:00', 'Joseph'],
-    },
-    {
-      key: 5,
-      items: ['INTO Gate', '14:34', 'Olayinka'],
-    },
-    {
-      key: 6,
-      items: ['GPU/ACU Couple', '16:10', 'Chioma'],
+  let rows = flightActivities.map((activity, i) => {
+    return {
+      key: i+1,
+      items: [activity.Task, moment(activity.Timestamp).format('HH:mm'), activity.DoneBy]
     }
-  ];
+  });
+
+  if(rows.length < 1) {
+    rows = [{key: 1, items: ['No Task done yet']}]
+  }
 
   return (
     <Table header={header} rows={rows} className={tab !== 'vwa' ? 'd-none' : 'vwa-table'}/>

@@ -47,6 +47,14 @@
     height: 2rem !important;
 }
 
+.vwa-table .ui-table__row .ui-table__cell:first-child {
+    min-width: 40%;
+}
+
+.vwa-table .ui-table__row .ui-table__cell:nth-child(2) {
+    max-width: 20%;
+}
+
 .vwa-table .ui-table__header {
     font-weight: 800;
 }

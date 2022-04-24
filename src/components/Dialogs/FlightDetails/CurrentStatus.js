@@ -1,45 +1,49 @@
 import { Grid, Flex, Text } from '@fluentui/react-northstar';
 
+import moment from 'moment';
 import './FlightDetails.css';
 
-const CurrentStatus = ({tab, flight}) => {
+const CurrentStatus = ({tab, flight, stations, flightDetails}) => {
     
     const content = [
-        <Flex column className="crs-item">
+        <Flex column className="crs-item" key="0">
             <Text content="Flight Date" weight="bold" size="small" className="crs-label" />
-            <Text content={flight.Timestamp.split('T')[0]} size="medium" weight="light" />
+            <Text content={moment(flightDetails.flight_date).format('YYYY-MM-D')} size="medium" weight="light" />
         </Flex>,
-        <Flex column className="crs-item">
+        <Flex column className="crs-item" key="1">
             <Text content="Flight Number" weight="bold" size="small" className="crs-label" />
             <Text content={flight.FlightNumber} size="medium" weight="light" />
         </Flex>,
-        <Flex column className="crs-item">
+        <Flex column className="crs-item" key="2">
             <Text content="Arriving From" weight="bold" size="small" className="crs-label" />
-            <Text content={flight.Origin} size="medium" weight="light" />
+            <Text content={`${flight.Origin} - ${stations[flight.Origin]}`} size="medium" weight="light" />
         </Flex>,
-        <Flex column className="crs-item">
+        <Flex column className="crs-item" key="3">
             <Text content="Departing To" weight="bold" size="small" className="crs-label" />
-            <Text content={flight.Destination} size="medium" weight="light" />
+            <Text content={`${flight.Destination} - ${stations[flight.Destination]}`} size="medium" weight="light" />
         </Flex>,
-        <Flex column className="crs-item">
+        <Flex column className="crs-item" key="4">
             <Text content="STA" weight="bold" size="small" className="crs-label" />
-            <Text content={`${(new Date(flight.STA)).getHours()}:${(new Date(flight.STA)).getMinutes()}`} size="medium" weight="light" />
+            <Text content={moment(flight.STA).format('HH:mm')} size="medium" weight="light" />
         </Flex>,
-        <Flex column className="crs-item">
+        <Flex column className="crs-item" key="5">
             <Text content="STD" weight="bold" size="small" className="crs-label" />
-            <Text content={`${(new Date(flight.STD)).getHours()}:${(new Date(flight.STD)).getMinutes()}`} size="medium" weight="light" />
+            <Text content={moment(flight.STD).format('HH:mm')} size="medium" weight="light" />
         </Flex>,
-        <Flex column className="crs-item">
+        <Flex column className="crs-item" key="6">
             <Text content="Status" weight="bold" size="small" className="crs-label" />
-            <Text content={flight.Status} size="medium" weight="light" />
+            <Text content={flightDetails.stage} size="medium" weight="light" />
         </Flex>,
-        <Flex column className="crs-item">
+        <Flex column className="crs-item" key="7">
             <Text content="Last Updated" weight="bold" size="small" className="crs-label" />
-            <Text content={flight.Timestamp.split('T')[0]} size="medium" weight="light" />
+            <Text content={
+                flightDetails.lastUpdateAt === 'N/A' ? 'N/A' :
+                moment(flightDetails.lastUpdateAt).format('YYYY-MM-D [at] HH:mm')
+                } size="medium" weight="light" />
         </Flex>,
-        <Flex column className="crs-item">
+        <Flex column className="crs-item" key="8">
             <Text content="Updated by" weight="bold" size="small" className="crs-label" />
-            <Text content="Tolu Adeniran" size="medium" weight="light" />
+            <Text content={flightDetails.lastUpdatedBy} size="medium" weight="light" />
         </Flex>
     ];
 

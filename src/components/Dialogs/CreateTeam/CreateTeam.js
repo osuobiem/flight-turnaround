@@ -1,7 +1,7 @@
 import { Dialog, CloseIcon, Input, FormDropdown } from "@fluentui/react-northstar";
 import { useState } from "react";
 import {api, graphApi} from "../../../helpers/ApiHandler";
-import TopCard from "../../../helpers/TopCard";
+import TopCard from "../../TopCard";
 import ErrorAlert from "../../AlertsMessage/ErrorAlert";
 
 import "./CreateTeam.css";

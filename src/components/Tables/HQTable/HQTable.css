@@ -4,6 +4,7 @@
 
 .hqt-table [role="row"] {
     background: inherit !important;
+    padding: 20px 0;
 }
 
 .hqt-header {
