@@ -4,7 +4,7 @@ import { AppContext } from "../../AppContext";
 
 import './HQTabFilters.css';
 
-const HQTabFilters = ({filters, setFilters, downloadLink}) => {
+const HQTabFilters = ({filters, setFilters, downloadLink, flightStations}) => {
     
     const { currentTheme } = useContext(AppContext);
 
@@ -16,15 +16,13 @@ const HQTabFilters = ({filters, setFilters, downloadLink}) => {
         }
     }
 
-    const terminals = [
-        {header: 'All', content: ''},
-        {header: 'Abuja', content: 'ABV'},
-        {header: 'Lagos', content: 'LOS'},
-        {header: 'Jos', content: 'JOS'},
-        {header: 'Port Harcourt', content: 'PHC'},
-        {header: 'Uyo', content: 'QUO'},
-        {header: 'Owerri', content: 'QOW'}
+    let terminals = [
+        {header: 'All Stations', content: ''}
     ];
+
+    for (const key in flightStations) {
+        terminals.push({header: flightStations[key], content: key});
+    }
 
     const updateFilters = (key, value) => {
         let newFilters = {...filters};

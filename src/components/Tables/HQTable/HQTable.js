@@ -3,19 +3,11 @@ import TableSort from "../../../helpers/TableSort";
 import FlightDetails from '../../Dialogs/FlightDetails/FlightDetails';
 
 import "./HQTable.css";
-import { useMemo, useState, useEffect, useContext } from "react";
-import {StationsContext} from "../../../AppContext";
+import { useMemo, useState, useEffect } from "react";
 
 import moment from "moment";
 
-const HQTable = ({flights}) => {
-  const {stations} = useContext(StationsContext);
-  const [flightStations, setFlightStations] = useState({});
-
-  useEffect(() => {
-    setFlightStations(stations);
-  }, [stations]);
-
+const HQTable = ({flights, flightStations}) => {
   const [showFlightDetails, setShowFlightDetails] = useState(false);
   const [activeFlight, setActiveFlight] = useState({});
 

@@ -62,3 +62,7 @@
     border-bottom-left-radius: 0;
     box-shadow: unset;
 }
+
+.fil-between .ui-dropdown .ui-dropdown__container {
+    min-width: 180px;
+}

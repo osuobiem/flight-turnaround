@@ -16,7 +16,8 @@ const FlightDetails = ({open, setOpen, flight, stations}) => {
     const [tab, setTab] = useState('crs');
 
     const getFlightDetails = useCallback(async (flightNumber) => {
-        await api({
+        if(flightNumber !== undefined) {
+            await api({
                 url: 'flight-summary/'+flightNumber,
                 method: 'get'
             })
@@ -25,10 +26,12 @@ const FlightDetails = ({open, setOpen, flight, stations}) => {
                 console.log(err);
                 setOpen(false);
             });
+        }
     }, [setOpen]);
 
     const getFlightActivities = useCallback(async (flightNumber) => {
-        await api({
+        if(flightNumber !== undefined) {
+            await api({
                 url: 'done-airport-activities/flight/'+flightNumber,
                 method: 'get'
             })
@@ -37,7 +40,8 @@ const FlightDetails = ({open, setOpen, flight, stations}) => {
                 console.log(err);
                 setOpen(false);
             });
-    }, []);
+        }
+    }, [setOpen]);
 
     const [flightDetails, setFlightDetails] = useState({});
     const [flightActivities, setFlightActivities] = useState([]);

@@ -3,9 +3,17 @@ import HQTable from "../components/Tables/HQTable/HQTable";
 import HQTabFilters from "../components/HQTabFilters/HQTabFilters";
 import {useCallback} from "react";
 import {api} from "../helpers/ApiHandler";
-import {useEffect} from "react";
+import {useEffect, useContext} from "react";
+import {StationsContext} from "../AppContext";
 
 const HQDashboard = () => {
+  const {stations} = useContext(StationsContext);
+  const [flightStations, setFlightStations] = useState({});
+
+  useEffect(() => {
+    setFlightStations(stations);
+  }, [stations]);
+
   const [flights, setFlights] = useState([]);
   const [downloadLink, setDownloadLink] = useState('');
   const [filters, setFilters] = useState({
@@ -27,8 +35,8 @@ const HQDashboard = () => {
 
   return (
     <div>
-      <HQTabFilters filters={filters} setFilters={setFilters} downloadLink={downloadLink}></HQTabFilters>
-      <HQTable flights={flights} />
+      <HQTabFilters filters={filters} setFilters={setFilters} downloadLink={downloadLink} flightStations={flightStations}/>
+      <HQTable flights={flights} flightStations={flightStations} />
     </div>
   );
 };
