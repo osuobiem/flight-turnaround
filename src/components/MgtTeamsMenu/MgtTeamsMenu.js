@@ -7,7 +7,7 @@ import { useState } from 'react';
 import './MgtTeamsMenu.css';
 import {api, graphApi} from '../../helpers/ApiHandler';
 
-const MgtTeamsMenu = ({ team, fetchTeams }) => {
+const MgtTeamsMenu = ({ team, fetchTeams, stations, users }) => {
     
     const [showEditTeam, setShowEditTeam] = useState(false);
     const [showDeleteTeam, setShowDeleteTeam] = useState(false);
@@ -29,7 +29,7 @@ const MgtTeamsMenu = ({ team, fetchTeams }) => {
 
     const deleteTeam = async () => {
         await graphApi({
-            url: `graph/channels/${team?.ChannelID}`,
+            url: `graph/groups/${team.TeamID}`,
             method: 'delete'
         }).then(async () => {
             await api({
@@ -43,7 +43,7 @@ const MgtTeamsMenu = ({ team, fetchTeams }) => {
     return (
         <div>
             <Menu items={menu} iconOnly activeIndex={1} />
-            <EditTeam open={showEditTeam} setOpen={setShowEditTeam} team={team} />
+            <EditTeam open={showEditTeam} setOpen={setShowEditTeam} fetchTeams={fetchTeams} team={team} stations={stations} users={users} />
             <ConfirmAction
                 open={showDeleteTeam}
                 setOpen={setShowDeleteTeam}

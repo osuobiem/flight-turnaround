@@ -7,7 +7,7 @@ import "./ManageTeams.css";
 
 import { useState, useEffect, useMemo } from "react";
 
-const ManageTeams = ({teams, fetchTeams}) => {
+const ManageTeams = ({teams, fetchTeams, stations, users}) => {
 
     const headerClass = 'mgt-header';
     const [header, setHeader] = useState({
@@ -60,13 +60,13 @@ const ManageTeams = ({teams, fetchTeams}) => {
                   { key: `${i}-1`, content: team.TeamName },
                   { key: `${i}-2`, content: team.Location },
                   { key: `${i}-3`, content: team.Zone },
-                  { key: `${i}-4`, content: <MgtTeamsMenu team={team} fetchTeams={fetchTeams} />, style: {justifyContent: 'right'} }
+                  { key: `${i}-4`, content: <MgtTeamsMenu team={team} fetchTeams={fetchTeams} stations={stations} users={users} />, style: {justifyContent: 'right'} }
                 ]
             }
         });
 
         setRows(tRows);
-    }, [teams, fetchTeams]);
+    }, [teams, fetchTeams, stations, users]);
 
     useEffect(() => {
         tableSort.setRows(rows);

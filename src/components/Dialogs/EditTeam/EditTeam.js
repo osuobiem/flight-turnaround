@@ -10,7 +10,7 @@ import "./EditTeam.css";
 import {LoaderContext} from "../../../AppContext";
 import {useEffect, useCallback} from "react";
 
-const CreateTeam = ({ title, team, open, setOpen, users, fetchTeams, stations }) => {
+const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
 
     const {dispatchLoaderEvent} = useContext(LoaderContext)
 
@@ -95,38 +95,32 @@ const CreateTeam = ({ title, team, open, setOpen, users, fetchTeams, stations })
 
     // Update team in Teams and Node Server
     const updateTeam = async () => {
+        dispatchLoaderEvent(true);
 
-        if (Object.entries(team).length > 0) {
-            setOpen(false); setOpenD2(true);
-        }
-        else {
-            dispatchLoaderEvent(true);
+        let data = {
+            description: `${teamName} | ${apLocation.header} | ${zone}`,
+            displayName: teamName
+        };
+        setOpen(false); setOpenD2(true);
+        
+        await await graphApi({
+            url: `graph/teams/${team.TeamID}`,
+            method: 'patch'
+        }, {}, data)
+            .then(res => {
+                setOpen(false); setOpenD2(true);
+                dispatchLoaderEvent(false);
+            })
+            .catch(err => {
+                let error = err?.message;
 
-            let data = {
-                description: `${teamName} | ${apLocation.header} | ${zone}`,
-                displayName: teamName
-            };
-            setOpen(false); setOpenD2(true);
-            
-            await await graphApi({
-                url: `graph/teams/${team.TeamID}`,
-                method: 'patch'
-            }, {}, data)
-                .then(res => {
-                    setOpen(false); setOpenD2(true);
-                    dispatchLoaderEvent(false);
-                })
-                .catch(err => {
-                    let error = err?.message;
+                if (err.response) error = err.response?.data?.message?.error?.message;
+                else if (err.request) error = err?.request;
 
-                    if (err.response) error = err.response?.data?.message?.error?.message;
-                    else if (err.request) error = err?.request;
+                dispatchLoaderEvent(false);
 
-                    dispatchLoaderEvent(false);
-    
-                    errorAlert(true, error.length > 0 ? error : 'An unknown error occured!');
-                });
-        }
+                errorAlert(true, error.length > 0 ? error : 'An unknown error occured!');
+            });
     }
 
     const saveTeam = async () => {
@@ -218,7 +212,7 @@ const CreateTeam = ({ title, team, open, setOpen, users, fetchTeams, stations })
                 confirmButton="Next"
                 onConfirm={() => updateTeam() }
                 onCancel={() => setOpen(false)}
-                header={<TopCard title={title} subTitle={subTitle} avatar={avatar} />}
+                header={<TopCard title={teamName} subTitle={subTitle} avatar={avatar} />}
                 headerAction={{
                     icon: <CloseIcon />,
                     title: 'Close',
@@ -273,7 +267,7 @@ const CreateTeam = ({ title, team, open, setOpen, users, fetchTeams, stations })
                 confirmButton="Save"
                 onCancel={() => { setOpenD2(false); setOpen(true); }}
                 onConfirm={() => saveTeam()}
-                header={<TopCard title={title} subTitle={subTitle} avatar={avatar} />}
+                header={<TopCard title={teamName} subTitle={subTitle} avatar={avatar} />}
                 headerAction={{
                     icon: <CloseIcon className="d2-icon" />,
                     title: 'Close',
