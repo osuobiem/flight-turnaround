@@ -1,15 +1,12 @@
 import { Flex, FlexItem, Button, Input } from "@fluentui/react-northstar";
 import { SearchIcon } from '@fluentui/react-icons-northstar'
 import { useState } from "react";
-import * as msTeams from '@microsoft/teams-js';
 
 import CreateTeam from "../Dialogs/CreateTeam/CreateTeam";
 
 import './AdminHeader.css';
 
-msTeams.initialize();
-
-const AdminHeader = ({people, fetchTeams}) => {
+const AdminHeader = ({users, fetchTeams, stations}) => {
 
     const [showCreateTeam, setShowCreateTeam] = useState(false);
 
@@ -25,7 +22,7 @@ const AdminHeader = ({people, fetchTeams}) => {
                 </FlexItem>
             </Flex>
 
-            <CreateTeam people={people} open={showCreateTeam} setOpen={setShowCreateTeam} fetchTeams={fetchTeams} />
+            <CreateTeam users={users} open={showCreateTeam} setOpen={setShowCreateTeam} fetchTeams={fetchTeams} stations={stations} />
         </div>
     )
 };

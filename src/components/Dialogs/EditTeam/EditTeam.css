@@ -17,5 +17,17 @@
 }
 
 .ui-dialog__footer {
-    margin-top: 25px;
+    margin-top: 18px;
+}
+
+.tf-dm {
+    margin-bottom: 20% !important;
+}
+
+.tf-people .ui-list {
+    max-height: 10rem !important;
+}
+
+.d2-icon {
+    opacity: 0;
 }

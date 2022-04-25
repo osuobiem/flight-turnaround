@@ -1,16 +1,21 @@
 import { Dialog, CloseIcon, Input, FormDropdown } from "@fluentui/react-northstar";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {api, graphApi} from "../../../helpers/ApiHandler";
 import TopCard from "../../TopCard";
 import ErrorAlert from "../../AlertsMessage/ErrorAlert";
 
-import "./CreateTeam.css";
+import avatar from '../../../galogo.png';
 
-const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
+import "./CreateTeam.css";
+import {LoaderContext} from "../../../AppContext";
+
+const CreateTeam = ({ open, setOpen, users, fetchTeams, stations }) => {
+
+    const {dispatchLoaderEvent} = useContext(LoaderContext)
 
     const [openD2, setOpenD2] = useState(false);
     const [teamName, setTeamName] = useState('');
-    const [apLocation, setApLocation] = useState({header: 'Abuja', content: 'ABV'});
+    const [apLocation, setApLocation] = useState({header: 'Abuja International Airport', content: 'ABV'});
     const [zone, setZone] = useState('North');
     const [team, setTeam] = useState({});
 
@@ -22,17 +27,13 @@ const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
 
     const title = "Create New Airport Flight Ops Team"
     const subTitle = "GA Turnaround";
-    const avatar = "https://images.unsplash.com/photo-1531642765602-5cae8bbbf285";
 
-    const terminals = [
-        {header: 'Abuja', content: 'ABV'},
-        {header: 'Lagos', content: 'LOS'},
-        {header: 'Jos', content: 'JOS'},
-        {header: 'Port Harcourt', content: 'PHC'},
-        {header: 'Uyo', content: 'QUO'},
-        {header: 'Owerri', content: 'QOW'}
-    ];
-    const zones = ['West', 'North', 'South', 'East'];
+    let terminals = [];
+
+    for (const key in stations) {
+        terminals.push({header: stations[key], content: key});
+    }
+    const zones = ['East', 'North', 'South', 'West'];
 
     const errorAlert = (show, message) => {
         message = message.replaceAll('Channel.DisplayName', 'Team Name');
@@ -48,40 +49,48 @@ const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
         }, 5000);
     }
 
-    // Create channel in Teams and Node Server
-    const createChannel = async () => {
+    // Create team in Teams and Node Server
+    const createTeam = async () => {
 
         if (Object.entries(team).length > 0) {
             setOpen(false); setOpenD2(true);
         }
         else {
+            dispatchLoaderEvent(true);
+
             let data = {
-                'description': `${teamName} | ${apLocation.header} | ${zone}`,
-                'displayName': teamName,
-                'membershipType': 'private'
+                "template@odata.bind": "https://graph.microsoft.com/v1.0/teamsTemplates('standard')",
+                description: `${teamName} | ${apLocation.header} | ${zone}`,
+                displayName: teamName,
+                visibility: 0
             };
             setOpen(false); setOpenD2(true);
             
-            await graphApi('createChannel', {}, data)
+            await graphApi('createTeam', {}, data)
                 .then(res => {
                     setTeam(res.data.data);
                     setOpen(false); setOpenD2(true);
+                    dispatchLoaderEvent(false);
                 })
                 .catch(err => {
                     let error = err?.message;
 
                     if (err.response) error = err.response?.data?.message?.error?.message;
                     else if (err.request) error = err?.request;
+
+                    dispatchLoaderEvent(false);
     
                     errorAlert(true, error.length > 0 ? error : 'An unknown error occured!');
                 });
         }
     }
 
-    const saveChannel = async () => {
+    const saveTeam = async () => {
+        dispatchLoaderEvent(true);
+
         // Add People to Channel
         await graphApi({
-            url: `graph/channels/${team?.id}/members`,
+            url: `graph/teams/${team.teamId}/members`,
             method: 'post'
         }, {}, {
             add: [
@@ -96,23 +105,27 @@ const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
             if (err.response) error = err.response?.data?.message?.error?.message;
             else if (err.request) error = err?.request;
 
+            dispatchLoaderEvent(true);
+
             errorAlert(true, error.length > 0 ? error : 'An unknown error occured!');
         });
     }
 
     // Save team to DB
     const saveTeamToDb = async () => {
+
         let data = {
             name: teamName,
             location: apLocation.header,
             location_short: apLocation.content,
             zone: zone,
-            channel_id: team?.id,
+            channel_id: team.channelId,
+            TeamID: team.teamId,
             tcos: [...tcoMembers.map(m => m.id)],
             duty_mgs: [...dutyManagers.map(m => m.id)]
         };
 
-        await api('createTeam', {}, data)
+        await api('createAirportTeam', {}, data)
         .then(async () => {
             await fetchTeams();
 
@@ -122,10 +135,12 @@ const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
             setTcoMembers([]);
             setTeam({});
             setTeamName('');
+
+            dispatchLoaderEvent(false);
         })
         .catch(async err => {
             await graphApi({
-                url: `graph/channels/${team?.id}`,
+                url: `graph/groups/${team.teamId}`,
                 method: 'delete'
             });
 
@@ -134,12 +149,14 @@ const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
             if (err.response) error = err.response?.data?.message?.error?.message;
             else if (err.request) error = err?.request;
 
+            dispatchLoaderEvent(false);
+
             errorAlert(true, error.length > 0 ? error : 'An unknown error occured!');
         });
     }
     
-    const peopleList = people.map(p => {
-        return {header: p.displayName, content: p.jobTitle, id: p.userId}
+    const peopleList = users.map(p => {
+        return {header: p.displayName, content: p.jobTitle, id: p.id}
     });
 
     // Pick people from dropdown
@@ -155,7 +172,7 @@ const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
                 open={open}
                 cancelButton="Close"
                 confirmButton="Next"
-                onConfirm={() => createChannel() }
+                onConfirm={() => createTeam() }
                 onCancel={() => setOpen(false)}
                 header={<TopCard title={title} subTitle={subTitle} avatar={avatar} />}
                 headerAction={{
@@ -211,7 +228,7 @@ const CreateTeam = ({ open, setOpen, people, fetchTeams }) => {
                 cancelButton="Back"
                 confirmButton="Save"
                 onCancel={() => { setOpenD2(false); setOpen(true); }}
-                onConfirm={() => saveChannel()}
+                onConfirm={() => saveTeam()}
                 header={<TopCard title={title} subTitle={subTitle} avatar={avatar} />}
                 headerAction={{
                     icon: <CloseIcon className="d2-icon" />,
