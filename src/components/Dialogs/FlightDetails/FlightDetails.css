@@ -44,7 +44,7 @@
 
 .vwa-table .ui-table__row {
     border: unset !important;
-    height: 2rem !important;
+    height: 45px !important;
 }
 
 .vwa-table .ui-table__row .ui-table__cell:first-child {

@@ -10,38 +10,53 @@ import { useState, useCallback, useEffect } from 'react';
 
 import logo from '../../../galogo.png';
 import {api} from '../../../helpers/ApiHandler';
+import {useContext} from 'react';
+import {LoaderContext} from '../../../AppContext';
 
 const FlightDetails = ({open, setOpen, flight, stations}) => {
+    const {dispatchLoaderEvent} = useContext(LoaderContext);
     
     const [tab, setTab] = useState('crs');
 
     const getFlightDetails = useCallback(async (flightNumber) => {
         if(flightNumber !== undefined) {
+            dispatchLoaderEvent(true);
+
             await api({
                 url: 'flight-summary/'+flightNumber,
                 method: 'get'
             })
-            .then(res => setFlightDetails(res.data.data))
+            .then(res => {
+                setFlightDetails(res.data.data);
+                dispatchLoaderEvent(false);
+            })
             .catch(err => {
                 console.log(err);
                 setOpen(false);
+                dispatchLoaderEvent(false);
             });
         }
-    }, [setOpen]);
+    }, [setOpen, dispatchLoaderEvent]);
 
     const getFlightActivities = useCallback(async (flightNumber) => {
         if(flightNumber !== undefined) {
+            dispatchLoaderEvent(true);
+
             await api({
                 url: 'done-airport-activities/flight/'+flightNumber,
                 method: 'get'
             })
-            .then(res => setFlightActivities(res.data.data))
+            .then(res => {
+                setFlightActivities(res.data.data);
+                dispatchLoaderEvent(false);
+            })
             .catch(err => {
                 console.log(err);
                 setOpen(false);
+                dispatchLoaderEvent(false);
             });
         }
-    }, [setOpen]);
+    }, [setOpen, dispatchLoaderEvent]);
 
     const [flightDetails, setFlightDetails] = useState({});
     const [flightActivities, setFlightActivities] = useState([]);
@@ -61,7 +76,7 @@ const FlightDetails = ({open, setOpen, flight, stations}) => {
             headerAction={{
                 icon: <CloseIcon />,
                 title: 'Close',
-                onClick: () => setOpen(false),
+                onClick: () => {setTab('crs'); setOpen(false);},
             }}
             footer={{
                 children: (Component, props) => {

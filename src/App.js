@@ -3,8 +3,9 @@ import Router from "./routes/Router";
 import { Provider, teamsTheme, teamsDarkTheme, teamsHighContrastTheme  } from "@fluentui/react-northstar";
 import { useState, useCallback, useEffect } from "react";
 import * as msTeams from '@microsoft/teams-js';
-import { AppContext, AuthContext, StationsContext } from './AppContext';
+import { AppContext, AuthContext, StationsContext, LoaderContext } from './AppContext';
 import {api} from "./helpers/ApiHandler";
+import AppLoader from './components/AppLoader/AppLoader';
 
 msTeams.initialize();
 
@@ -12,6 +13,7 @@ function App() {
   const [currentTheme, setCurrentTheme] = useState('default');
   const [auth, setAuthClient] = useState();
   const [stations, setStations] = useState({});
+  const [showLoader, setShowLoader] = useState(false);
 
   const themes = {
     default: teamsTheme, dark: teamsDarkTheme, contrast: teamsHighContrastTheme
@@ -29,6 +31,10 @@ function App() {
     setStations(stations);
   }, []);
 
+  const dispatchLoaderEvent = useCallback(show => {
+    setShowLoader(show);
+  }, []);
+
   // Set current theme
   msTeams.getContext(context => setCurrentTheme(context.theme));
 
@@ -38,6 +44,8 @@ function App() {
   });
 
   const getStations = useCallback(async () => {
+    setShowLoader(true);
+
     await api('getStations').then(res => {
       let stationsObj = {};
       [...res.data.data].forEach(s => {
@@ -45,6 +53,7 @@ function App() {
       });
 
       setStations(stationsObj);
+      setShowLoader(false);
     })
   }, []);
 
@@ -58,9 +67,14 @@ function App() {
         
       <AuthContext.Provider value={{ auth, dispatchAuthEvent }}>
           <StationsContext.Provider value={{ stations, dispatchStationsEvent }}>
-            <BrowserRouter>
-              <Router />
-            </BrowserRouter>
+            <LoaderContext.Provider value={{ showLoader, dispatchLoaderEvent }}>
+
+              <AppLoader theme={currentTheme} />
+
+              <BrowserRouter>
+                <Router />
+              </BrowserRouter>
+            </LoaderContext.Provider>
           </StationsContext.Provider>
         </AuthContext.Provider>
       

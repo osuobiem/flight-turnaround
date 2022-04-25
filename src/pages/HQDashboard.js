@@ -4,9 +4,11 @@ import HQTabFilters from "../components/HQTabFilters/HQTabFilters";
 import {useCallback} from "react";
 import {api} from "../helpers/ApiHandler";
 import {useEffect, useContext} from "react";
-import {StationsContext} from "../AppContext";
+import {StationsContext, LoaderContext} from "../AppContext";
 
 const HQDashboard = () => {
+  const {dispatchLoaderEvent} = useContext(LoaderContext);
+
   const {stations} = useContext(StationsContext);
   const [flightStations, setFlightStations] = useState({});
 
@@ -22,12 +24,16 @@ const HQDashboard = () => {
   });
 
   const fetchFlights = useCallback(async () => {
+    dispatchLoaderEvent(true);
+
     await api('getFlights', filters)
     .then(res => {
       setFlights(res.data.flights);
       setDownloadLink(res.data.download_link)
+
+      dispatchLoaderEvent(false);
     });
-  }, [filters]);
+  }, [filters, dispatchLoaderEvent]);
 
   useEffect(() => {
     fetchFlights();
