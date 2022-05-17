@@ -16,6 +16,9 @@ export default function Configure() {
   msTeams.settings.setValidityState(true);
 
   return (
-	<h1>Configure</h1>
+	<div>
+		<h1>Green Africa Teams Application</h1>
+		<p>No settings available, click the <strong>Save</strong> button to continue</p>
+	</div>
   );
 }
