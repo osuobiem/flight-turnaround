@@ -21,6 +21,7 @@ const CreateTeam = ({ open, setOpen, users, fetchTeams, stations }) => {
 
     const [tcoMembers, setTcoMembers] = useState([]);
     const [dutyManagers, setManagers] = useState([]);
+    const [dutyOfficers, setOfficers] = useState([]);
 
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -81,6 +82,7 @@ const CreateTeam = ({ open, setOpen, users, fetchTeams, stations }) => {
                     dispatchLoaderEvent(false);
     
                     errorAlert(true, error.length > 0 ? error : 'An unknown error occured!');
+                    setOpenD2(false); setOpen(true);
                 });
         }
     }
@@ -95,7 +97,8 @@ const CreateTeam = ({ open, setOpen, users, fetchTeams, stations }) => {
         }, {}, {
             add: [
                 ...tcoMembers.map(m => { return {id: m.id, role: 'member'}}),
-                ...dutyManagers.map(m => { return {id: m.id, role: 'owner'}})
+                ...dutyManagers.map(m => { return {id: m.id, role: 'owner'}}),
+                ...dutyOfficers.map(m => { return {id: m.id, role: 'member'}})
             ]
         })
         .then(() => saveTeamToDb())
@@ -119,10 +122,11 @@ const CreateTeam = ({ open, setOpen, users, fetchTeams, stations }) => {
             location: apLocation.header,
             location_short: apLocation.content,
             zone: zone,
-            channel_id: team.channelId,
+            ChannelID: team.channelId,
             TeamID: team.teamId,
             tcos: [...tcoMembers.map(m => m.id)],
-            duty_mgs: [...dutyManagers.map(m => m.id)]
+            duty_mgs: [...dutyManagers.map(m => m.id)],
+            duty_officers: [...dutyOfficers.map(m => m.id)]
         };
 
         await api('createAirportTeam', {}, data)
@@ -133,6 +137,7 @@ const CreateTeam = ({ open, setOpen, users, fetchTeams, stations }) => {
 
             setManagers([]);
             setTcoMembers([]);
+            setOfficers([]);
             setTeam({});
             setTeamName('');
 
@@ -162,6 +167,7 @@ const CreateTeam = ({ open, setOpen, users, fetchTeams, stations }) => {
     // Pick people from dropdown
     const pickPeople = (value, type) => {
         if (type === 'member') setTcoMembers(value);
+        else if(type === 'officer') setOfficers(value);
         else setManagers(value);
     }
 
@@ -252,6 +258,17 @@ const CreateTeam = ({ open, setOpen, users, fetchTeams, stations }) => {
                                     noResultsMessage="We did't find any matches."
                                     a11ySelectedItemsMessage="Press Delete or Backspace to remove"
                                     onChange={(ev, op) => pickPeople(op.value, 'member')}
+                                    className="tf-people"/>
+
+                                <FormDropdown
+                                    search multiple
+                                    label="Choose Duty officers"
+                                    items={peopleList} fluid
+                                    defaultValue={dutyOfficers}
+                                    placeholder="Start typing a name"
+                                    noResultsMessage="We did't find any matches."
+                                    a11ySelectedItemsMessage="Press Delete or Backspace to remove"
+                                    onChange={(ev, op) => pickPeople(op.value, 'officer')}
                                     className="tf-people"/>
                                 
                                 <FormDropdown

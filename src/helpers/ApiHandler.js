@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
-const api2BaseUrl = process.env.REACT_APP_API2_BASE_URL;
 
 const routes = {
     getFlights: {
@@ -41,7 +40,7 @@ export const api = async(route, params = {}, data = {}) => {
     const r = (typeof route === 'string') ? routes[route] : route;
 
     let config = {
-        url: `${apiBaseUrl}/${r.url}`,
+        url: `${apiBaseUrl}/api/${r.url}`,
         method: r.method,
         params,
         data
@@ -55,7 +54,7 @@ export const graphApi = async(route, params = {}, data = {}) => {
     const r = (typeof route === 'string') ? routes[route] : route;
 
     let config = {
-        url: `${api2BaseUrl}/${r.url}`,
+        url: `${apiBaseUrl}/${r.url}`,
         method: r.method,
         params,
         data

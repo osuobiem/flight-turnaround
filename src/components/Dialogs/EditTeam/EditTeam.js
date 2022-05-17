@@ -23,6 +23,7 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
     const [removeUsers, setRemoveUsers] = useState([]);
     const [tcoMembers, setTcoMembers] = useState([]);
     const [dutyManagers, setManagers] = useState([]);
+    const [dutyOfficers, setOfficers] = useState([]);
 
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -39,18 +40,25 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
 
             let managers = [];
             let members = [];
+            let officers = [];
 
-            [...res.data.data].forEach(tm => {
+            [...res.data.data.value].forEach(tm => {
                 if(tm.roles.length > 0 && tm.roles.includes('owner')) {
-                    managers.push(tm.userId);
+                    managers.push({header: tm.displayName, content: tm.displayName, id: tm.userId});
                 }
                 else {
-                    members.push(tm.userId);
+                    if(team.duty_officers.includes(tm.userId)) {
+                        officers.push({header: tm.displayName, content: tm.displayName, id: tm.userId})
+                    }
+                    else {
+                        members.push({header: tm.displayName, content: tm.displayName, id: tm.userId});
+                    }
                 }
             });
 
             setTcoMembers(members);
             setManagers(managers);
+            setOfficers(officers);
 
             dispatchLoaderEvent(false);
         })
@@ -67,6 +75,7 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
     }, [dispatchLoaderEvent, team]);
 
     useEffect(()=>{
+        // console.log(team)
         fetchTeamUsers();
     }, [fetchTeamUsers]);
 
@@ -120,6 +129,7 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
                 dispatchLoaderEvent(false);
 
                 errorAlert(true, error.length > 0 ? error : 'An unknown error occured!');
+                setOpenD2(false); setOpen(true);
             });
     }
 
@@ -128,12 +138,13 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
 
         // Add People to Channel
         await graphApi({
-            url: `graph/teams/${team.teamId}/members`,
+            url: `graph/teams/${team.TeamID}/members`,
             method: 'post'
         }, {}, {
             add: [
                 ...tcoMembers.map(m => { return {id: m.id, role: 'member'}}),
-                ...dutyManagers.map(m => { return {id: m.id, role: 'owner'}})
+                ...dutyManagers.map(m => { return {id: m.id, role: 'owner'}}),
+                ...dutyOfficers.map(m => { return {id: m.id, role: 'member'}})
             ],
             remove: [...removeUsers]
         })
@@ -158,25 +169,21 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
             location: apLocation.header,
             location_short: apLocation.content,
             zone: zone,
-            channel_id: team.channelId,
-            TeamID: team.teamId,
+            channel_id: team.ChannelID,
+            TeamID: team.TeamID,
             tcos: [...tcoMembers.map(m => m.id)],
-            duty_mgs: [...dutyManagers.map(m => m.id)]
+            duty_mgs: [...dutyManagers.map(m => m.id)],
+            duty_officers: [...dutyOfficers.map(m => m.id)]
         };
 
         await api({
-            url: 'airport-teams/'+team.RowKey
+            url: 'airport-teams/'+team.RowKey,
+            method: 'PUT'
         }, {}, data)
         .then(async () => {
             await fetchTeams();
 
             setOpenD2(false);
-
-            setManagers([]);
-            setTcoMembers([]);
-            setTeamMembers([]);
-            setRemoveUsers([]);
-            setTeamName('');
 
             dispatchLoaderEvent(false);
         })
@@ -198,9 +205,20 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
 
     // Pick people from dropdown
     const pickPeople = (value, type) => {
-        console.log(teamMembers);
         if (type === 'member') setTcoMembers(value);
+        else if(type === 'officer') setOfficers(value);
         else setManagers(value);
+    }
+
+    const closeEditModal = () => {
+        setManagers([]);
+        setTcoMembers([]);
+        setOfficers([]);
+        setTeamMembers([]);
+        setRemoveUsers([]);
+        setTeamName('');
+
+        setOpen(false);
     }
 
     return (
@@ -271,7 +289,7 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
                 headerAction={{
                     icon: <CloseIcon className="d2-icon" />,
                     title: 'Close',
-                    onClick: () => setOpen(false),
+                    onClick: () => closeEditModal(),
                 }}
                 footer={{
                     children: (Component, props) => {
@@ -290,6 +308,17 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
                                     noResultsMessage="We did't find any matches."
                                     a11ySelectedItemsMessage="Press Delete or Backspace to remove"
                                     onChange={(ev, op) => pickPeople(op.value, 'member')}
+                                    className="tf-people"/>
+
+                                <FormDropdown
+                                    search multiple
+                                    label="Choose Duty officers"
+                                    items={peopleList} fluid
+                                    defaultValue={dutyOfficers}
+                                    placeholder="Start typing a name"
+                                    noResultsMessage="We did't find any matches."
+                                    a11ySelectedItemsMessage="Press Delete or Backspace to remove"
+                                    onChange={(ev, op) => pickPeople(op.value, 'officer')}
                                     className="tf-people"/>
                                 
                                 <FormDropdown
