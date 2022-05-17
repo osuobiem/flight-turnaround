@@ -68,7 +68,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <AdminHeader users={users} fetchTeams={fetchTeams} stations={flightStations} />
+      <AdminHeader users={users} fetchTeams={fetchTeams} stations={flightStations} teams={teams} setTeams={setTeams}/>
       <ManageTeams teams={teams} users={users} fetchTeams={fetchTeams} stations={flightStations} />
     </div>
   );

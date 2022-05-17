@@ -18,7 +18,6 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
     const [teamName, setTeamName] = useState(team.TeamName);
     const [apLocation, setApLocation] = useState({header: team.Location, content: team.LocationShort});
     const [zone, setZone] = useState(team.Zone);
-    const [teamMembers, setTeamMembers] = useState([]);
 
     const [removeUsers, setRemoveUsers] = useState([]);
     const [tcoMembers, setTcoMembers] = useState([]);
@@ -36,7 +35,6 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
             method: 'get'
         })
         .then(res => {
-            setTeamMembers(res.data.data);
 
             let managers = [];
             let members = [];
@@ -214,7 +212,6 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
         setManagers([]);
         setTcoMembers([]);
         setOfficers([]);
-        setTeamMembers([]);
         setRemoveUsers([]);
         setTeamName('');
 

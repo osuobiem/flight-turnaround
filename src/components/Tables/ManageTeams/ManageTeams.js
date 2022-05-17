@@ -14,8 +14,8 @@ const ManageTeams = ({teams, fetchTeams, stations, users}) => {
         items: [
             {
                 key: "channel-name",
-                title: <div><ContactCardIcon outline /><Text className="mgt-header-txt" content="Channel Name"/></div>,
-                content: <div><ContactCardIcon outline /><Text className="mgt-header-txt" content="Channel Name"/></div>,
+                title: <div><ContactCardIcon outline /><Text className="mgt-header-txt" content="Team Name"/></div>,
+                content: <div><ContactCardIcon outline /><Text className="mgt-header-txt" content="Team Name"/></div>,
                 className: headerClass,
                 icon: 'arrowUp',
                 'aria-sort': undefined,
