@@ -17,7 +17,7 @@ export default function Configure() {
 
   return (
 	<div>
-		<h1>Green Africa Teams Application</h1>
+		<h1>Green Africa Turnaround Teams Application</h1>
 		<p>No settings available, click the <strong>Save</strong> button to continue</p>
 	</div>
   );
