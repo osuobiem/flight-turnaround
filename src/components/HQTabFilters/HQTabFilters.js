@@ -1,5 +1,5 @@
 import { Flex, FlexItem, FormDropdown, Datepicker, Button } from "@fluentui/react-northstar";
-import { useContext } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { AppContext } from "../../AppContext";
 
 import './HQTabFilters.css';
@@ -8,20 +8,42 @@ const HQTabFilters = ({filters, setFilters, downloadLink, flightStations}) => {
     
     const { currentTheme } = useContext(AppContext);
 
+    const setTerminals = useCallback(
+        (exempt = '') => {
+
+            let t = [
+                {header: 'All Stations', content: ''}
+            ]
+    
+            for (const key in flightStations) {
+                if(exempt === '' || exempt !== key) {
+                    t.push({header: flightStations[key], content: key});
+                }
+            }
+    
+            return t;
+        },
+      [flightStations],
+    )
+    
+
+    const [dTerminals, setDTerminals] = useState([{header: 'All Stations', content: ''}]);
+    const [oTerminals, setOTerminals] = useState([{header: 'All Stations', content: ''}]);
+
+    useEffect(() => {
+
+        setDTerminals(setTerminals());
+        setOTerminals(setTerminals());
+        
+    }, [flightStations, setDTerminals, setOTerminals, setTerminals])
+    
+
     const themeSuffix = () => {
         switch (currentTheme) {
             case 'dark': return '-d';
             case 'contrast': return '-c';
             default: return '-l';
         }
-    }
-
-    let terminals = [
-        {header: 'All Stations', content: ''}
-    ];
-
-    for (const key in flightStations) {
-        terminals.push({header: flightStations[key], content: key});
     }
 
     const updateFilters = (key, value) => {
@@ -33,6 +55,13 @@ const HQTabFilters = ({filters, setFilters, downloadLink, flightStations}) => {
         }
         else {
             newFilters[key] = value.content;
+
+            if(key === 'origin') {
+                setDTerminals(setTerminals(value.content));
+            }
+            else {
+                setOTerminals(setTerminals(value.content));
+            }
         }
 
         setFilters(newFilters);
@@ -46,15 +75,15 @@ const HQTabFilters = ({filters, setFilters, downloadLink, flightStations}) => {
                         <FormDropdown
                             label="Flight between"
                             className={`fil-select${themeSuffix()}`}
-                            items={terminals}
-                            defaultValue={terminals[0]}
+                            items={oTerminals}
+                            defaultValue={oTerminals[0]}
                             onChange={(ev, op) => updateFilters('origin', op.value)}
                             inline />
                         
                         <FormDropdown
                             className={`fil-select${themeSuffix()}`}
-                            items={terminals}
-                            defaultValue={terminals[0]}
+                            items={dTerminals}
+                            defaultValue={dTerminals[0]}
                             onChange={(ev, op) => updateFilters('destination', op.value)}
                             inline />
 
