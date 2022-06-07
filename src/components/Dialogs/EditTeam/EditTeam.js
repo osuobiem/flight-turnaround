@@ -10,7 +10,7 @@ import "./EditTeam.css";
 import {LoaderContext} from "../../../AppContext";
 import {useEffect, useCallback} from "react";
 
-const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
+const EditTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
 
     const {dispatchLoaderEvent} = useContext(LoaderContext)
 
@@ -42,14 +42,14 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
 
             [...res.data.data.value].forEach(tm => {
                 if(tm.roles.length > 0 && tm.roles.includes('owner')) {
-                    managers.push({header: tm.displayName, content: tm.displayName, id: tm.userId});
+                    managers.push({header: tm.displayName, content: tm.displayName, id: tm.userId, memberShipId: tm.id});
                 }
                 else {
                     if(team.duty_officers.includes(tm.userId)) {
-                        officers.push({header: tm.displayName, content: tm.displayName, id: tm.userId})
+                        officers.push({header: tm.displayName, content: tm.displayName, id: tm.userId, memberShipId: tm.id})
                     }
                     else {
-                        members.push({header: tm.displayName, content: tm.displayName, id: tm.userId});
+                        members.push({header: tm.displayName, content: tm.displayName, id: tm.userId, memberShipId: tm.id});
                     }
                 }
             });
@@ -198,14 +198,37 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
     }
     
     const peopleList = users.map(p => {
-        return {header: p.displayName, content: p.jobTitle, id: p.id}
+        return {header: p.displayName, content: p.jobTitle, id: p.id, memberShipId: ''}
     });
 
     // Pick people from dropdown
     const pickPeople = (value, type) => {
-        if (type === 'member') setTcoMembers(value);
-        else if(type === 'officer') setOfficers(value);
-        else setManagers(value);
+        if (type === 'member')  {
+            populateRemove(tcoMembers, value);
+            setTcoMembers(value);
+        }
+        else if(type === 'officer') {
+            populateRemove(dutyOfficers, value);
+            setOfficers(value);
+        }
+        else {
+            populateRemove(dutyManagers, value);
+            setManagers(value);
+        }
+    }
+
+    const populateRemove = (originalList, value) => {
+        let removeList = [];
+
+        [...originalList].forEach(m => {
+            if(!value.find(v => v.id == m.id)) {
+                if(m.memberShipId.length > 0) {
+                    removeList.push(m.memberShipId);
+                }
+            }
+        });
+
+        setRemoveUsers(removeList);
     }
 
     const closeEditModal = () => {
@@ -339,4 +362,4 @@ const CreateTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
     );
 };
 
-export default CreateTeam;
+export default EditTeam;
