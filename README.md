@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+---
+page_type: sample
+languages:
+- HTML, CSS, JavaScript/ReactJS
+products:
+- office-teams
+description: Green Africa Airways has operations of its passenger flights around Nigeria. For any flight that is landing in an airport, there are different items that need to be tracked centrally to then measure time spent on ground & efficiency of procedures, and to ensure all the necessary procedures are completed.
+Today this procedure is done over pen & paper, it is being manually updated for historical records. This will be a complete digitization of Flight Ops.
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Flight Turnaround
+| [Documentation](https://github.com/OfficeDev/microsoft-teams-apps-timetally/wiki) | [Deployment guide](https://github.com/OfficeDev/microsoft-teams-apps-timetally/wiki/Deployment-Guide) | [Architecture](https://github.com/OfficeDev/microsoft-teams-apps-timetally/wiki/Solution-Overview) |
+| ---- | ---- | ---- |
 
-In the project directory, you can run:
+Green Africa Airways has operations of its passenger flights around Nigeria. For any flight that is landing in an airport, there are different items that need to be tracked centrally to then measure time spent on ground & efficiency of procedures, and to ensure all the necessary procedures are completed.
+Today this procedure is done over pen & paper, it is being manually updated for historical records. This will be a complete digitization of Flight Ops.
 
-### `npm start`
+## Key Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The app can be used in the following ways:-
+- Turnaround Admin can create, edit airport teams and add users to the team.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Manager creating airport](public/create-team.png)
 
-### `npm test`
+![Manager adding tasks & users](https://github.com/OfficeDev/microsoft-teams-apps-timetally/wiki/Images/ManagerAddingTasks&Users.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- End-users to fill timesheet and submit to manager for approval.
 
-### `npm run build`
+![Fill timesheet](https://github.com/OfficeDev/microsoft-teams-apps-timetally/wiki/Images/FillTimesheet.PNG)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Managers to review timesheets.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Manager approval](https://github.com/OfficeDev/microsoft-teams-apps-timetally/wiki/Images/ManagerApproval.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![TimeSheet Request](https://github.com/OfficeDev/microsoft-teams-apps-timetally/wiki/Images/TimeSheetRequest.png)
 
-### `npm run eject`
+- End-users can also duplicate any day's effort to other days for ease of filling timesheet.
+- Managers to view and analyze project utilization with respect to billable and non-billable hours.
+- All users and managers to receive reminder for filling timesheet to achieve timesheet compliance.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Get Started
+Begin with the [Solution overview](https://github.com/OfficeDev/microsoft-teams-apps-timetally/wiki/Solution-Overview) to read what the app does and how it works.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+When you are ready to try 'Time Tally' out, or use it in your own organization, follow the steps in the [Deployment guide](https://github.com/OfficeDev/microsoft-teams-apps-timetally/wiki/Deployment-Guide)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## **Legal notice**
+This app template is provided under the [MIT License](https://github.com/OfficeDev/microsoft-teams-apps-timetally/blob/master/LICENSE) terms. In addition to these terms, by using this app template you agree to the following:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- You, not Microsoft, will license the use of your app to users or organization. 
 
-## Learn More
+- This app template is not intended to substitute your own regulatory due diligence or make you or your app compliant with respect to any applicable regulations, including but not limited to privacy, healthcare, employment, or financial regulations.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- You are responsible for complying with all applicable privacy and security regulations including those related to use, collection and handling of any personal data by your app. This includes complying with all internal privacy and security policies of your organization if your app is developed to be sideloaded internally within your organization. Where applicable, you may be responsible for data related incidents or data subject requests for data collected through your app.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Any trademarks or registered trademarks of Microsoft in the United States and/or other countries and logos included in this repository are the property of Microsoft, and the license for this project does not grant you rights to use any Microsoft names, logos or trademarks outside of this repository. Microsoft’s general trademark guidelines can be found [here](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general.aspx).
 
-### Code Splitting
+- If the app template enables access to any Microsoft Internet-based services (e.g., Office365), use of those services will be subject to the separately-provided terms of use. In such cases, Microsoft may collect telemetry data related to app template usage and operation. Use and handling of telemetry data will be performed in accordance with such terms of use.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Use of this template does not guarantee acceptance of your app to the Teams app store. To make this app available in the Teams app store, you will have to comply with the [submission and validation process](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/appsource/publish), and all associated requirements such as including your own privacy statement and terms of use for your app.
 
-### Analyzing the Bundle Size
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.microsoft.com.
 
-### Making a Progressive Web App
+When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct Time Tally](https://opensource.microsoft.com/codeofconduct/timetally/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
