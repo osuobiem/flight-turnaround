@@ -210,3 +210,7 @@ Create a Teams app package for end-users to install the app in personal.
 	- We recommend using [app permission policies](https://docs.microsoft.com/en-us/microsoftteams/teams-app-permission-policies) to restrict access to this app to the members of the experts team.
 
 3. Install the app (the flight-turnaround.zip package).
+
+
+# Architecture
+![Admin viewing airport teams](public/architecture.png)
