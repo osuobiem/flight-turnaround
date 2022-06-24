@@ -37,9 +37,9 @@ const HQTable = ({flights, flightStations}) => {
         onMouseLeave: () => tableSort.toggleIcon(1, false)
       },
       {
-        key: "sta",
-        title: "STA",
-        content: "STA",
+        key: "std",
+        title: "STD",
+        content: "STD",
         className: headerClass,
         icon: 'arrowUp',
         'aria-sort': undefined,
@@ -48,9 +48,9 @@ const HQTable = ({flights, flightStations}) => {
         onMouseLeave: () => tableSort.toggleIcon(2, false)
       },
       {
-        key: "std",
-        title: "STD",
-        content: "STD",
+        key: "sta",
+        title: "STA",
+        content: "STA",
         className: headerClass,
         icon: 'arrowUp',
         'aria-sort': undefined,
@@ -117,8 +117,8 @@ const HQTable = ({flights, flightStations}) => {
         items: [
           { key: `${i}-1`, content: flight.FlightNumber, className: "hqt-left-padding" },
           { key: `${i}-2`, content: `${flight.Origin} - ${flightStations[flight.Origin]}`},
-          { key: `${i}-3`, content: `${moment(flight.STA).format('HH:mm')}` },
-          { key: `${i}-4`, content: `${moment(flight.STD).format('HH:mm')}` },
+          { key: `${i}-3`, content: `${moment(flight.STD).format('HH:mm')}` },
+          { key: `${i}-4`, content: `${moment(flight.STA).format('HH:mm')}` },
           { key: `${i}-5`, content: flight.Status, className: statusColor(flight.Status) },
           { key: `${i}-6`, content: `${flight.Destination} - ${flightStations[flight.Destination]}` },
           { key: `${i}-7`, content: flight.Performance, className: statusColor(flight.Performance) },
