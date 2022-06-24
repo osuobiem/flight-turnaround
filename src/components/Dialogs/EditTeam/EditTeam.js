@@ -77,7 +77,7 @@ const EditTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
         fetchTeamUsers();
     }, [fetchTeamUsers]);
 
-    const subTitle = "GA Turnaround";
+    const subTitle = "FLight Turnaround";
 
     let terminals = [];
 

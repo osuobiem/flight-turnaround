@@ -27,7 +27,7 @@ const CreateTeam = ({ open, setOpen, users, fetchTeams, stations }) => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const title = "Create New Airport Flight Ops Team"
-    const subTitle = "GA Turnaround";
+    const subTitle = "Flight Turnaround";
 
     let terminals = [];
 
