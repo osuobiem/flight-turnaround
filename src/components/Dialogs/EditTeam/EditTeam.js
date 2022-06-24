@@ -221,7 +221,7 @@ const EditTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
         let removeList = [];
 
         [...originalList].forEach(m => {
-            if(!value.find(v => v.id == m.id)) {
+            if(!value.find(v => v.id === m.id)) {
                 if(m.memberShipId.length > 0) {
                     removeList.push(m.memberShipId);
                 }
