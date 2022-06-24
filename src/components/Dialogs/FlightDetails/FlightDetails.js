@@ -8,7 +8,7 @@ import TopCard from '../../TopCard';
 import './FlightDetails.css';
 import { useState, useCallback, useEffect } from 'react';
 
-import logo from '../../../galogo.png';
+import logo from '../../../ftlogo.png';
 import {api} from '../../../helpers/ApiHandler';
 import {useContext} from 'react';
 import {LoaderContext} from '../../../AppContext';

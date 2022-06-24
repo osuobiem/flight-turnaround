@@ -4,7 +4,7 @@ import {api} from "../../../helpers/ApiHandler";
 import TopCard from "../../TopCard";
 import ErrorAlert from "../../AlertsMessage/ErrorAlert";
 
-import avatar from '../../../galogo.png';
+import avatar from '../../../ftlogo.png';
 
 import "./CreateTeam.css";
 import {LoaderContext} from "../../../AppContext";
