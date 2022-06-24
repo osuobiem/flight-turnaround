@@ -4,19 +4,19 @@ const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 const routes = {
     getFlights: {
-        url: `flights`,
+        url: `api/flights`,
         method: 'get'
     },
     getTeams: {
-        url: 'airport-teams',
+        url: 'api/airport-teams',
         method: 'get'
     },
     createAirportTeam: {
-        url: 'airport-teams',
+        url: 'api/airport-teams',
         method: 'post'
     },
     getStations: {
-        url: 'flight/stations',
+        url: 'api/flight/stations',
         method: 'get'
     },
 
@@ -36,20 +36,6 @@ const routes = {
 };
 
 export const api = async(route, params = {}, data = {}) => {
-
-    const r = (typeof route === 'string') ? routes[route] : route;
-
-    let config = {
-        url: `${apiBaseUrl}/api/${r.url}`,
-        method: r.method,
-        params,
-        data
-    };
-
-    return await axios(config);
-}
-
-export const graphApi = async(route, params = {}, data = {}) => {
 
     const r = (typeof route === 'string') ? routes[route] : route;
 

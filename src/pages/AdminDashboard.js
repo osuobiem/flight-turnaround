@@ -4,7 +4,7 @@ import AdminHeader from "../components/AdminHeader/AdminHeader";
 
 import * as msTeams from '@microsoft/teams-js';
 import {useEffect, useContext} from "react";
-import {api, graphApi} from "../helpers/ApiHandler";
+import {api} from "../helpers/ApiHandler";
 import {StationsContext, LoaderContext} from '../AppContext';
 msTeams.initialize();
 
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
   // Fetch Users
   const fetchUsers = useCallback(async () => {
     dispatchLoaderEvent(true);
-    await graphApi('getUsers').then(res => {
+    await api('getUsers').then(res => {
       setUsers(res.data.data.value);
       dispatchLoaderEvent(false);
     });
@@ -50,7 +50,7 @@ const AdminDashboard = () => {
 
     let tokenExpire = (new Date().getTime()) + 3600000;
 
-    await graphApi('switchTokens', {}, {access_token: token}).then(() => {
+    await api('switchTokens', {}, {access_token: token}).then(() => {
       localStorage.setItem('gatTokenExp', tokenExpire.toString()); 
       dispatchLoaderEvent(true);
     });

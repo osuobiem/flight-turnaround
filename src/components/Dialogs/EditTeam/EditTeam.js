@@ -1,6 +1,6 @@
 import { Dialog, CloseIcon, Input, FormDropdown } from "@fluentui/react-northstar";
 import { useState, useContext } from "react";
-import {api, graphApi} from "../../../helpers/ApiHandler";
+import {api} from "../../../helpers/ApiHandler";
 import TopCard from "../../TopCard";
 import ErrorAlert from "../../AlertsMessage/ErrorAlert";
 
@@ -30,7 +30,7 @@ const EditTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
     const fetchTeamUsers = useCallback(async () => {
         dispatchLoaderEvent(true);
 
-        await graphApi({
+        await api({
             url: `graph/teams/${team.TeamID}/members`,
             method: 'get'
         })
@@ -110,7 +110,7 @@ const EditTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
         };
         setOpen(false); setOpenD2(true);
         
-        await await graphApi({
+        await await api({
             url: `graph/teams/${team.TeamID}`,
             method: 'patch'
         }, {}, data)
@@ -135,7 +135,7 @@ const EditTeam = ({ team, open, setOpen, users, fetchTeams, stations }) => {
         dispatchLoaderEvent(true);
 
         // Add People to Channel
-        await graphApi({
+        await api({
             url: `graph/teams/${team.TeamID}/members`,
             method: 'post'
         }, {}, {

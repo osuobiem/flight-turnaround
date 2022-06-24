@@ -5,7 +5,7 @@ import ConfirmAction from '../Dialogs/ConfirmAction/ConfirmAction';
 import { useState } from 'react';
 
 import './MgtTeamsMenu.css';
-import {api, graphApi} from '../../helpers/ApiHandler';
+import {api} from '../../helpers/ApiHandler';
 
 const MgtTeamsMenu = ({ team, fetchTeams, stations, users }) => {
     
@@ -28,7 +28,7 @@ const MgtTeamsMenu = ({ team, fetchTeams, stations, users }) => {
     ];
 
     const deleteTeam = async () => {
-        await graphApi({
+        await api({
             url: `graph/groups/${team.TeamID}`,
             method: 'delete'
         }).then(async () => {

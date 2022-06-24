@@ -72,7 +72,7 @@ const FlightDetails = ({open, setOpen, flight, stations}) => {
             cancelButton="Close"
             onOpen={() => setOpen(true)}
             onCancel={() => {setTab('crs'); setOpen(false);}}
-            header={<TopCard title={flight.FlightNumber} subTitle="Green Africa Ramp" avatar={logo} />}
+            header={<TopCard title={flight.FlightNumber} subTitle="Flight Turnaround Ramp" avatar={logo} />}
             headerAction={{
                 icon: <CloseIcon />,
                 title: 'Close',
