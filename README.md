@@ -141,6 +141,8 @@ We recommend that you copy these values into a text file, using an application l
 	- profile
 	- Team.Create
 	- Team.ReadBasic.All
+	- TeamMember.Read.All
+	- TeamMember.ReadWrite.All
 	- TeamSettings.Read.All
 	- TeamSettings.ReadWrite.All
 	- TeamsTab.ReadWriteForUser
