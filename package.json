@@ -1,54 +1,40 @@
 {
-    "name": "flight-turnaround",
-    "version": "0.1.0",
-    "private": true,
-    "homepage": ".",
-    "dependencies": {
-        "@azure/msal-browser": "^2.23.0",
-        "@azure/msal-react": "^1.3.2",
-        "@fluentui/docs-components": "^0.61.0",
-        "@fluentui/react-northstar": "^0.61.0",
-        "@microsoft/mgt-react": "^2.4.0",
-        "@microsoft/microsoft-graph-client": "^3.0.2",
-        "@microsoft/teams-js": "^1.11.0",
-        "@testing-library/jest-dom": "^5.16.2",
-        "@testing-library/react": "^12.1.4",
-        "@testing-library/user-event": "^13.5.0",
-        "animate.css": "^4.1.1",
-        "axios": "^0.26.1",
-        "moment": "^2.29.3",
-        "qs": "^6.10.3",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-router-dom": "^6.2.2",
-        "react-scripts": "5.0.0",
-        "web-vitals": "^2.1.4"
-    },
+    "name": "teams-bot",
+    "version": "1.0.0",
+    "description": "Bot Builder v4 Bot Teams sample",
+    "author": "Microsoft",
+    "license": "MIT",
+    "main": "index.js",
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "start": "node ./index.js",
+        "watch": "nodemon ./index.js",
+        "lint": "eslint .",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
     },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
+    "dependencies": {
+        "axios": "^0.26.1",
+        "azure-storage": "^2.10.7",
+        "body-parser": "^1.20.0",
+        "botbuilder": "~4.15.0",
+        "dotenv": "^8.2.0",
+        "json-server": "^0.17.0",
+        "json2csv": "^5.0.7",
+        "node-cron": "^3.0.0",
+        "nodemon": "^2.0.15",
+        "restify": "~8.6.0",
+        "restify-cors-middleware2": "^2.1.2",
+        "uuidv4": "^6.2.13"
     },
     "devDependencies": {
-        "eslint-plugin-react-hooks": "^4.4.0"
+        "eslint": "^7.0.0",
+        "eslint-config-standard": "^14.1.1",
+        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.1"
     }
 }

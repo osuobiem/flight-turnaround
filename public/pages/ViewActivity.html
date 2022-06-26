@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Green Africa Flight Ops - Update Tasks</title>
+    <link rel="stylesheet" href="/css/msteams-16.css" />
+    <link rel="stylesheet" href="/css/Custom.css" />
+    <link rel="stylesheet" href="/css/Site.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.5.2/js/MicrosoftTeams.min.js" asp-append-version="true"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+        #myTab li button.nav-link.active{
+            color: black !important;
+        }
+        #myTab li button.nav-link{
+            color: #5b5fc7 !important;
+        }
+        #updateBtn{
+            background-color: #5b5fc7; 
+            border: 0; 
+            box-shadow: 0 0.2rem 0.4rem -0.075rem rgb(0 0 0 / 25%); 
+            color: white;
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+        }
+        #done-msg{
+            display: none;
+        }
+
+        #null-error-msg{
+            display: none;
+        }
+
+        i {
+            font-style: italic
+        }
+
+        /* .container {
+            margin-top: 100px
+        } */
+
+        /* .card {
+            box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+            border-width: 0;
+            transition: all .2s
+        } */
+
+        .card-header:first-child {
+            border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            border-bottom-width: 1px;
+            padding-top: 0;
+            padding-bottom: 0;
+            padding-right: 0.625rem;
+            height: 3.5rem;
+            background-color: #fff
+        }
+
+        .widget-subheading {
+            color: #858a8e;
+            font-size: 10px
+        }
+
+        .card-header.card-header-tab .card-header-title {
+            display: flex;
+            align-items: center;
+            white-space: nowrap
+        }
+
+        .card-header .header-icon {
+            font-size: 1.65rem;
+            margin-right: 0.625rem
+        }
+
+        .card-header.card-header-tab .card-header-title {
+            display: flex;
+            align-items: center;
+            white-space: nowrap
+        }
+
+        .btn-actions-pane-right {
+            margin-left: auto;
+            white-space: nowrap
+        }
+
+        .text-capitalize {
+            text-transform: capitalize !important
+        }
+
+        .scroll-area-sm {
+            height: 288px;
+            overflow-x: hidden
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: -1px;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.125)
+        }
+
+        .list-group {
+            display: flex;
+            flex-direction: column;
+            padding-left: 0;
+            margin-bottom: 0
+        }
+
+        .todo-indicator {
+            position: absolute;
+            width: 4px;
+            height: 60%;
+            border-radius: 0.3rem;
+            left: 0.625rem;
+            top: 20%;
+            opacity: .6;
+            transition: opacity .2s
+        }
+
+        .bg-warning {
+            background-color: #f7b924 !important
+        }
+
+        .widget-content {
+            padding: 1rem;
+            flex-direction: row;
+            align-items: center
+        }
+
+        .widget-content .widget-content-wrapper {
+            display: flex;
+            flex: 1;
+            position: relative;
+            align-items: center
+        }
+
+        .widget-content .widget-content-right.widget-content-actions {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .2s
+        }
+
+        .widget-content .widget-content-right {
+            margin-left: auto
+        }
+
+        .btn:not(:disabled):not(.disabled) {
+            cursor: pointer
+        }
+
+        .btn {
+            position: relative;
+            transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s
+        }
+
+        .btn-outline-success {
+            color: #3ac47d;
+            border-color: #3ac47d
+        }
+
+        .btn-outline-success:hover {
+            color: #fff;
+            background-color: #3ac47d;
+            border-color: #3ac47d
+        }
+
+        .btn-outline-success:hover {
+            color: #fff;
+            background-color: #3ac47d;
+            border-color: #3ac47d
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #3f6ad8;
+            border-color: #3f6ad8
+        }
+
+        .btn {
+            position: relative;
+            transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+            outline: none !important
+        }
+
+        .card-footer {
+            background-color: #fff
+        }
+
+        .time-area{
+            background-color: #5b5fc7;
+            color: #fff;
+            border-radius: 3px;
+            padding: 2px;
+        }
+        hr {
+            background-color: #fff;
+            padding: 0;
+            /* margin: 50px; */
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+    </style>
+    <title>Green Africa Turnaround - Update Task</title>
+</head>
+<body>
+    <script>
+        microsoftTeams.initialize();
+        function validateForm() {
+            var customerInfo = {
+                name: document.forms["customerForm"]["name"].value,
+                email: document.forms["customerForm"]["email"].value,
+                favoriteBook: document.forms["customerForm"]["favoriteBook"].value
+            }
+            microsoftTeams.tasks.submitTask(customerInfo, "916ce69f-dc88-4093-8bfb-82d45069e272");
+            return true;
+        }
+    </script>
+    <div class="surface theme-light">
+        <div class="panel">
+            <div id="done-msg" class="alert alert-success" role="alert">
+                Task marked as done!
+            </div>
+            <div id="null-error-msg" class="alert alert-danger" role="alert">
+                Please select a stage first
+            </div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Update Task</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">View Activity</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Current Status</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent" style="margin-top: 30px;">
+                <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="form-group form-field-input">
+                        <label for="name">Choose stage: </label>
+                        <select class="form-control" id="stage">
+                            <option value="">-- Select stage --</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-field-input" style="margin-bottom: 10px; margin-top: 10px;">
+                        <label for="name">Comment: </label>
+                        <textarea class="form-control" id="comment" rows="3" placeholder="Any comments on this task?"></textarea>
+                    </div>
+                    <div class="form-group form-field-input" style="margin-top: 20px;">
+                        <input type="submit" value="Update" id="updateBtn">
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="row d-flex container">
+                        <div class="col-md-8">
+                            <div class="card-hover-shadow-2x mb-3 card">
+                                <!-- <div class="card-header-tab card-header">
+                                    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;Task Lists</div>
+                                </div> -->
+                                <div class="scroll-area-sm">
+                                    <perfect-scrollbar class="ps-show-limits">
+                                        <div style="position: static;" class="ps ps--active-y">
+                                            <div class="ps-content">
+                                                <ul class=" list-group list-group-flush" id="doneTasks"></ul>
+                                            </div>
+                                        </div>
+                                    </perfect-scrollbar>
+                                </div>
+                                <!-- <div class="d-block text-right card-footer"><button class="mr-2 btn btn-link btn-sm">Cancel</button><button class="btn btn-primary">Add Task</button></div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="row" id="summary-area"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+
+        $(document).ready(function() {
+            var flightNumber = params.flightNumber;
+            // get all tasks to be done
+            $.ajax({
+                type: 'GET',
+                url: window.location.origin+'/api/airport-activities/'+flightNumber,
+                dataType: "json",
+                async:false,
+                data: {
+                    flightNumber: flightNumber
+                },
+                success: function(data) {
+                    var stage = ('#stage');
+                    console.log(data);
+                    var tasks = data.data;
+                    for (var i = 0; i < tasks.length; i++) {
+                        $(stage).append('<option value=' + tasks[i].RowKey + '>' + tasks[i].Task + '</option>');
+
+                    }
+                }
+            });
+
+            // get all done tasks for this flight
+            $.ajax({
+                type: 'GET',
+                url: window.location.origin+'/api/done-airport-activities/flight/'+flightNumber,
+                dataType: "json",
+                async:false,
+                data: {},
+                success: function(data) {
+                    // console.log(data.data.value);
+                    var stage = ('#doneTasks');
+                    var doneTasks = data.data;
+                    var htmlCode = '';
+                    for (var i = 0; i < doneTasks.length; i++) {
+                        var timeStr = formatAMPM(new Date(doneTasks[i].Timestamp));
+                        var htmlCode = `<li class="list-group-item">
+                                                        <div class="todo-indicator bg-success"></div>
+                                                        <div class="widget-content p-0">
+                                                            <div class="widget-content-wrapper">
+                                                                <div class="widget-content-left mr-2">
+                                                                </div>
+                                                                <div class="widget-content-left flex2">
+                                                                    <div class="widget-heading">${doneTasks[i].Task}</div>
+                                                                    <div class="widget-subheading">By ${doneTasks[i].DoneBy} <span class="time-area"><i class="fa fa-clock-o"></i> ${timeStr}</span></div>
+                                                                </div>
+                                                                <div class="widget-content-right"> <button class="border-0 btn-transition btn btn-outline-success"> <i class="fa fa-check"></i></button> </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>`;
+                        $('#doneTasks').append(htmlCode);
+
+                    }
+                }
+            });
+
+            // get flight summary
+            $.ajax({
+                type: 'GET',
+                url: window.location.origin+'/api/flight-summary/'+flightNumber,
+                dataType: "json",
+                async:false,
+                data: {
+                    flightNumber: flightNumber
+                },
+                success: function(data) {
+                    var summary = data.data;
+                    var htmlCode = `<div class="col-md-6">
+                            <strong>Stage</strong><br>
+                            <span>${summary.stage}</span>
+                        </div>
+                        <div class="col-md-6" style="margin-bottom: 15px;">
+                            <strong>Tasks completed</strong><br>
+                            <span>${summary.tasks_completed}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Flight date</strong><br>
+                            <span>${summary.flight_date}</span>
+                        </div>
+                        <div class="col-md-6" style="margin-bottom: 15px;">
+                            <strong>Flight number</strong><br>
+                            <span>${summary.flight_number}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <hr>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Arriving from</strong><br>
+                            <span>${summary.arrivingFrom}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Departing to</strong><br>
+                            <span>${summary.deptTo}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <strong>STA</strong> <span>${summary.STA}</span><br><br/>
+                            <strong>STD</strong> <span>${summary.STD}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <strong>Last updated</strong><br>
+                            <span>${summary.lastUpdateAt}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <hr>
+                        </div>
+                        <div class="col-md-12">
+                            <strong>Updated by</strong><br>
+                            <span>${summary.lastUpdatedBy}</span>
+                        </div>`;
+                    $('#summary-area').append(htmlCode);
+                }
+            });
+        });
+
+        $( "#updateBtn" ).click(function(e) {
+            e.preventDefault();
+            $('#null-error-msg').fadeOut(100);
+
+            var btn = $(this);
+            $(btn).val("Updating...");
+            var flightNumber = params.flightNumber;
+            var rowKey = $('#stage').val();
+            var comment = $('#comment').val();
+            
+            if (rowKey == '') {
+                $('#null-error-msg').fadeIn(400);
+                $(btn).val("Update");
+                return;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: window.location.origin+'/api/airport-activities/'+rowKey+'/done',
+                dataType: "json",
+                async:false,
+                data: {
+                    flightNumber: flightNumber,
+                    user: 'Tester user',
+                    comment: comment
+                },
+                success: function(data) {
+                    $("#stage option[value='"+rowKey+"']").remove();
+                    $(btn).val('Update');
+                    $( "#done-msg" ).fadeIn( "fast", function() {
+                        $('#done-msg').fadeOut(5500);
+                    });
+                }
+            });
+        });
+
+        function formatAMPM(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            return strTime;
+        }
+    </script>
+</body>
+</html>

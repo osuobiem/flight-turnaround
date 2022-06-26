@@ -12,20 +12,20 @@ Today this procedure is done over pen & paper, it is being manually updated for 
 ## Key Features
 
 The app can be used in the following ways:-
-- Turnaround Admin can view all created airport teams. ![Admin viewing airport teams](public/view-team.png)
+- Turnaround Admin can view all created airport teams. ![Admin viewing airport teams](public/images/view-team.png)
 
 - Admin can create, edit airport teams and add users to the team, this will create/edit teams on Microsoft Teams.
-![Admin creating airport team](public/create-team.png)
-![Admin adding users](public/add-users.png)
+![Admin creating airport team](public/images/create-team.png)
+![Admin adding users](public/images/add-users.png)
 
 - Admin can delete airport teams.
-![Admin deleting airport team](public/delete-team.png)
+![Admin deleting airport team](public/images/delete-team.png)
 
 - The HQ Leadership user can view and filter flights by origin, destination and day.
-![Leadership viewing flights](public/view-flights.png)
+![Leadership viewing flights](public/images/view-flights.png)
 
 - The HQ Leadership user can view the activity of a single flight.
-![Leadership viewing flight details](public/view-activity.png)
+![Leadership viewing flight details](public/images/view-activity.png)
 
 - The HQ Leadership user export lists of flights in CSV format.
 
@@ -57,18 +57,18 @@ Register one Azure AD application in your tenant's directory: for the bot and ta
 4. **Supported account types:** Select "Accounts in any organizational directory"
 
 5. **Redirect URL:** Select *Single-page application (SPA)*, the URL of the ReactJS application hosted as an Azure Static Site, say https://theapp.azure.com/admin. Make sure your append `/admin` to the URL.
-	![Multi-tenant application registration](public/app-reg.png)
+	![Multi-tenant application registration](public/images/app-reg.png)
 
 6. Click on the "Register" button.
 
 7. When the app is registered, you'll be taken to the app's "Overview" page. Copy the **Application (client) ID** and **Directory (tenant) ID**; we will need it later.
 
-	![App registrations page overview](public/app-screen.png)
+	![App registrations page overview](public/images/app-screen.png)
 
 8. On the side rail in the Manage section, navigate to the "Certificates & secrets" section. In the Client secrets section, click on "+ New client secret". Add a description for the secret and select Expires as "24 Months". Click "Add".
 
 	
-	![App secret registration screen](public/authentication.png)
+	![App secret registration screen](public/images/authentication.png)
  
 9. Once the client secret is created, copy its **Value**, please take a note of the secret as it will be required later.
 
@@ -88,7 +88,7 @@ We recommend that you copy these values into a text file, using an application l
 
 3. Under left menu, select **Expose an API** under **Manage**.
 
-	![Expose an API menu section screen](public/expose-api.png)
+	![Expose an API menu section screen](public/images/expose-api.png)
 
 10. Select the **Set** link to generate the Application ID URI in the form of `api://{clientId}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://[baseresourcename].azurefd.net/{clientId}`
 
@@ -215,4 +215,4 @@ Create a Teams app package for end-users to install the app in personal.
 
 
 # Architecture
-![Admin viewing airport teams](public/architecture.png)
+![Admin viewing airport teams](public/images/architecture.png)
