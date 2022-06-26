@@ -32,7 +32,6 @@ const FlightDetails = ({open, setOpen, flight, stations}) => {
             })
             .catch(err => {
                 console.log(err);
-                setOpen(false);
                 dispatchLoaderEvent(false);
             });
         }
@@ -52,7 +51,6 @@ const FlightDetails = ({open, setOpen, flight, stations}) => {
             })
             .catch(err => {
                 console.log(err);
-                setOpen(false);
                 dispatchLoaderEvent(false);
             });
         }
