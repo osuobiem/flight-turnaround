@@ -1,13 +1,14 @@
 | page_type | languages | products | description
 | ---- | ---- | ---- | ---- |
-| sample | HTML, CSS, JavaScript/ReactJS | office-teams | Green Africa Airways has operations of its passenger flights around Nigeria. For any flight that is landing in an airport, there are different items that need to be tracked centrally to then measure time spent on ground & efficiency of procedures, and to ensure all the necessary procedures are completed. Today this procedure is done over pen & paper, it is being manually updated for historical records. This will be a complete digitization of Flight Ops.
+| sample | HTML, CSS, JavaScript/ReactJS | office-teams | The Flight Turnaround application enables airline companies manage their flights, airport teams, and flight tasks.
+Staff can with different roles can interract with the application to complete flight tasks and operations.
 
 # Flight Turnaround
 | [Deployment guide](#deployment-guide) | [Architecture](#architecture) |
 | ---- | ---- |
 
-Green Africa Airways has operations of its passenger flights around Nigeria. For any flight that is landing in an airport, there are different items that need to be tracked centrally to then measure time spent on ground & efficiency of procedures, and to ensure all the necessary procedures are completed.
-Today this procedure is done over pen & paper, it is being manually updated for historical records. This will be a complete digitization of Flight Ops.
+The Flight Turnaround application enables airline companies manage their flights, airport teams, and flight tasks.
+Staff can with different roles can interract with the application to complete flight tasks and operations.
 
 ## Key Features
 
@@ -42,7 +43,7 @@ To begin, you will need:
  	- App Service plan
   	- [ ] Add docs for Turnaround Bot
 
- - A copy of the Turnaround app GitHub [repo](https://github.com/osuobiem/green-africa-teams)
+ - A copy of the Turnaround app GitHub [repo](https://github.com/osuobiem/flight-turnaround)
  
 ## Step 1: Register Azure AD application
 
@@ -56,7 +57,7 @@ Register one Azure AD application in your tenant's directory: for the bot and ta
 
 4. **Supported account types:** Select "Accounts in any organizational directory"
 
-5. **Redirect URL:** Select *Single-page application (SPA)*, the URL of the ReactJS application hosted as an Azure Static Site, say https://theapp.azure.com/admin. Make sure your append `/admin` to the URL.
+5. **Redirect URL:** Select *Single-page application (SPA)*, the URL of the hosted application, say https://theapp.azure.com/admin. Make sure your append `/admin` to the URL.
 	![Multi-tenant application registration](public/images/app-reg.png)
 
 6. Click on the "Register" button.
