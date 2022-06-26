@@ -1,14 +1,14 @@
 | page_type | languages | products | description
 | ---- | ---- | ---- | ---- |
 | sample | HTML, CSS, JavaScript/ReactJS | office-teams | The Flight Turnaround application enables airline companies manage their flights, airport teams, and flight tasks.
-Staff can with different roles can interract with the application to complete flight tasks and operations.
+Staff can with different roles can interact with the application to complete flight tasks and operations.
 
 # Flight Turnaround
 | [Deployment guide](#deployment-guide) | [Architecture](#architecture) |
 | ---- | ---- |
 
 The Flight Turnaround application enables airline companies manage their flights, airport teams, and flight tasks.
-Staff can with different roles can interract with the application to complete flight tasks and operations.
+Staff can with different roles can interact with the application to complete flight tasks and operations.
 
 ## Key Features
 
