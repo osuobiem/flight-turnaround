@@ -15,6 +15,10 @@ const web = {
             "/admin",
             restify.plugins.serveStaticFiles("./pages/web/")
         );
+        server.get(
+            "/configure",
+            restify.plugins.serveStaticFiles("./pages/web/")
+        );
     },
 };
 
