@@ -47,7 +47,7 @@ class GraphController {
 
             let url = req.url.replace('/graph', '')
 
-            url = url.includes('users') ? url+`?$top=999&$filter=endswith(mail,'@greenafrica.com')&accountEnabled eq true&$count=true` : url;
+            url = url.includes('users') ? url+`?$top=999&$filter=endswith(mail,'${process.env.COMPANY_EMAIL_DOMAIN}')&accountEnabled eq true&$count=true` : url;
 
             let config = {
                 method: req.method, url: this.baseUrl+url,
