@@ -30,7 +30,23 @@ The app can be used in the following ways:-
 
 - The HQ Leadership user export lists of flights in CSV format.
 
-- [ ] Add docs for Turnaround Bot
+- The Bot sends notifications for daily scheduled flights to appropriate airport teams/channels
+![New scheduled flight notification](public/images/new-flight.png)
+
+- The Bot also sends notifications for due tasks (Pre Flight, Post Departure, etc) to appropriate airport teams/channels
+![New task notification](public/images/new-task.png)
+
+- Authorized team members can make a task as done, using the CTA button on the post adaptive card.
+![Mark task as done](public/images/done-task.png)
+
+- All done tasks are marked with the user and timestamp to avoid redundant action.
+![Task done already](public/images/already-done-task.png)
+
+- Users can view all task done for a flight, with timestamp and user that marked the task as done.
+![Task activities](public/images/task-activity.png)
+
+- Users can view the current status/summary of a flight on any of the task adaptive cards.
+![Flight summary](public/images/summary.png)
 
 ---
 # Deployment guide
@@ -41,7 +57,7 @@ To begin, you will need:
  - An Azure subscription where you can create the following kind of resources:
  	- App Service 
  	- App Service plan
-  	- [ ] Add docs for Turnaround Bot
+  	- Bot service
 
  - A copy of the Turnaround app GitHub [repo](https://github.com/osuobiem/flight-turnaround)
  
@@ -73,13 +89,47 @@ Register one Azure AD application in your tenant's directory: for the bot and ta
  
 9. Once the client secret is created, copy its **Value**, please take a note of the secret as it will be required later.
 
-[ ] Add docs for Turnaround Bot
-
 We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
 
 ## Step 2: Deploy to your Azure subscription
 
- [ ] Add docs for Turnaround Server
+ 10. Now create an **App Service** for the Bot code. On the seach bar, search for **App Service** and click on it.
+
+![App service](public/images/app-serv.png)
+
+11. From the page displayed, click on Create.
+
+![create service](public/images/create.png)
+
+12. Enter the required (Select **Node 14 LTS** for Runtime stack) info on the create form and click on **Review + create**
+
+![Review and create](public/images/create-btn.png)
+
+13. Click on **Create** on the next screen
+
+14. Wait for validation and the deployment to reach completion.
+
+15. When complete, with no issues, click on **Go to resource** button
+
+![Goto resource](public/images/resource.png).
+
+You can see details of the App service we just created.
+
+16. Next we create a Azure Storage Account (DB) to hold information our app needs.
+Search ***Storage Accounts*** on the azure search bar, and click on it.
+
+17. Click on create and enter the required details on the creation form.
+
+18. After entering all the required details, click on **Review + create**.
+
+19. On the next page, click on **Create** and wait for Azure to validate and deploy the storage account.
+
+20. Click on **Go to resource**
+
+21. On the displayed page, on the left pane, click on **Access keys**, click on **Show keys** on the top bar. Then copy out the : **Storage account name** and **key1**.
+Keep them save for later use.
+
+![Storage account](public/images/storage-acct.png).
 
 ## Step 3: Set up authentication for the app
 
