@@ -131,6 +131,35 @@ Keep them save for later use.
 
 ![Storage account](public/images/storage-acct.png).
 
+## Set up deployment method for the app
+
+Next, we will deploy the app (**using Microsoft Visual Studio Code editor**) to our newly created **App Service** and also connect our it to our newly created **Storage Account**. We will need all our copied out keys from previous steps here.
+1. Clone this repo: [repo](https://github.com/osuobiem/flight-turnaround)
+
+2. Rename .env.example to .env and replace the values with the copied values:
+	MicrosoftAppId: The client ID from **Step 1** point **7**
+	MicrosoftAppPassword: Allow for now
+	MicrosoftAppTenantId: The tenant ID from **Step 1** point **7**
+	BaseUrlTest and BaseUrlProd: Will be the URL for this app after deployemnt
+	AccountName: Refer to **Step 2** point **21** (Storage account name)
+	AccessKey: Refer to **Step 2** point **21** (Key1)
+
+3. You will need to install the Azure Tools for VS code, [here](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack).
+
+4. Once installed, locate the Azure icon in the left-hand toolbar and select it to bring up the Azure Tools for VS Code extension.
+
+5. You will be required to Login to your azure portal.
+
+6. After logion, find the App Service section in the Azure Tools extension and then locate your web app under the correct subscription. Right-click on the web app and then select Deploy to Web App... from the menu.
+
+7. A dialog box will appear at the top of the window to choose the directory to deploy from. Choose the root directory of where the source code is for your application.
+A dialog will prompt you to run build commands on the target server. Answering Yes to this question will improve performance for future deployments.
+
+8. A notification will appear in the bottom right-hand corner of VS Code to inform you the deployment is underway. When deployment is complete, this notification will be replaced by a dialog box allowing you to browse to the website.
+
+9. The application will have a url of the form https://<app name>.azurewebsites.net (**Copy this URL and replace the BaseUrlTest and BaseUrlProd values in your env. file and deploy again**). Browse to this URL to view the application.
+
+10. Viola your app is hosted on Azure.
 ## Step 3: Set up authentication for the app
 
 1. Go back to the "App Registrations" page [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps)
@@ -245,7 +274,10 @@ Create a Teams app package for end-users to install the app in personal.
 
 	- Click the **Add** button under **Add a personal tab**, the Tab Title can be anything but we recommend `Manage Teams`, and `manageTeams` for the Entity ID. The content and website URls should look like this `https://application-hostname.com/admin`, Make sure you add `/configure` at the end.
 
-5. [ ] Add docs for Turnaround Bot
+5. Under Capabilities, click on **Bot**. Click on **Generate Password** and copy out the generated password and replace it with **MicrosoftAppPassword** in your .env file.
+In the Bot endpoint form field, enter the URL for your just hosted web app, adding /api/messages to the end..example:
+**https://flight-ops-test.azurewebsites.net/api/messages** and press enter on uour keyboard.
+![Bot](public/images/bot-endpoint.png)
 
 6. Under Finish in the Domains and permisions section
 	- Paste the `Azure Application (client) ID` you copied earlier in the `AAD App ID` field
