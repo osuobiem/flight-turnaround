@@ -1,14 +1,16 @@
-| page_type | languages | products | description
-| ---- | ---- | ---- | ---- |
-| sample | HTML, CSS, JavaScript/ReactJS | office-teams | The Flight Turnaround application enables airline companies manage their flights, airport teams, and flight tasks.
-Staff can with different roles can interact with the application to complete flight tasks and operations.
-
 # Flight Turnaround
 | [Deployment guide](#deployment-guide) | [Architecture](#architecture) |
 | ---- | ---- |
 
-The Flight Turnaround application enables airline companies manage their flights, airport teams, and flight tasks.
-Staff can with different roles can interact with the application to complete flight tasks and operations.
+
+
+
+### Why is it built?
+This application is built to ease the process of managing and monitoring flights, airport teams, flight tasks, and staff activities for airline companies. 
+
+| App Name | Description | Languages | Products Used
+| ---- | ---- | ---- | ---- |
+| Flight Turnaround | The Flight Turnaround application enables airline companies manage their flights, airport teams, and flight tasks. Staff with different roles can interact with the application to complete flight tasks and operations. | HTML, CSS, JavaScript, ReactJS (Tab Applications), NodeJS (Server and Bot) | GraphAPI, Azure App Service
 
 ## Key Features
 
@@ -172,7 +174,7 @@ A dialog will prompt you to run build commands on the target server. Answering Y
 
 10. Select the **Set** link to generate the Application ID URI in the form of `api://{clientId}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://[baseresourcename].azurefd.net/{clientId}`
 
-	- for e.g.: `api://flight-turnaround.azurefd.net/6b5bcd9e-a88d-4daa-a651-1908bb5e7cf7`.
+	- for e.g.: `api://flight-turnaround.azurefd.net/{clientId}`.
 
 11. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 
@@ -190,7 +192,7 @@ A dialog will prompt you to run build commands on the target server. Answering Y
 15. Select **Add scope**
 
 	- Note: The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end; for example:
-		- `api://flight-turnaround.azurefd.net/6b5bcd9e-a88d-4daa-a651-1908bb5e7cf7/access_as_user`
+		- `api://[baseresourcename].azurefd.net/{clientId}/access_as_user`
 
 
 16. In the same page in below section **Authorized client applications**, you identify the applications that you want to authorize to your app’s web application. Each of the following IDs needs to be entered. Click "+Add a client application" and copy-paste the below id and select checkbox "Authorized scopes". Repeat the step for second GUID.
@@ -276,13 +278,13 @@ Create a Teams app package for end-users to install the app in personal.
 
 5. Under Capabilities, click on **Bot**. Click on **Generate Password** and copy out the generated password and replace it with **MicrosoftAppPassword** in your .env file.
 In the Bot endpoint form field, enter the URL for your just hosted web app, adding /api/messages to the end..example:
-**https://flight-ops-test.azurewebsites.net/api/messages** and press enter on uour keyboard.
+**https://[baseresourcename].azurewebsites.net/api/messages** and press enter on uour keyboard.
 ![Bot](public/images/bot-endpoint.png)
 
 6. Under Finish in the Domains and permisions section
 	- Paste the `Azure Application (client) ID` you copied earlier in the `AAD App ID` field
 
-	- Paste the `Application ID URI` you copied from Azure earlier (that looks like this `api://flight-turnaround.azurefd.net/6b5bcd9e-a88d-4daa-a651-1908bb5e7cf7/access_as_user`) in the `Single-Sign-On` field.
+	- Paste the `Application ID URI` you copied from Azure earlier (that looks like this `api://[baseresourcename].azurefd.net/{clientId}/access_as_user`) in the `Single-Sign-On` field.
 
 7. Go to **Test and Distribute** and click **Download** to download the application in zip format.
 
