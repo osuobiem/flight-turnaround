@@ -1,16 +1,14 @@
 # Flight Turnaround
-| [Deployment guide](#deployment-guide) | [Architecture](#architecture) |
-| ---- | ---- |
+| [Key Features](#key-features) | [Deployment guide](#deployment-guide) | [Architecture](#architecture) |
+| ---- | ---- | ---- |
 
-
-
-
-### Why is it built?
-This application is built to ease the process of managing and monitoring flights, airport teams, flight tasks, and staff activities for airline companies. 
 
 | App Name | Description | Languages | Products Used
 | ---- | ---- | ---- | ---- |
 | Flight Turnaround | The Flight Turnaround application enables airline companies manage their flights, airport teams, and flight tasks. Staff with different roles can interact with the application to complete flight tasks and operations. | HTML, CSS, JavaScript, ReactJS (Tab Applications), NodeJS (Server and Bot) | GraphAPI, Azure App Service
+
+### Why is it built?
+This application is built to ease the process of managing and monitoring flights, airport teams, flight tasks, and staff activities for airline companies. 
 
 ## Key Features
 
